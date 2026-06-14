@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="1500" viewBox="0 0 920 1500" font-family="'Segoe UI',Roboto,Helvetica,Arial,sans-serif">
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="8" refY="4" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#475569"/>
+    </marker>
+    <marker id="loop" markerWidth="14" markerHeight="14" refX="9" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#d97706"/>
+    </marker>
+    <linearGradient id="hdr" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0f766e"/><stop offset="1" stop-color="#2563eb"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="920" height="1500" fill="#f8fafc"/>
+
+  <!-- Header -->
+  <rect x="0" y="0" width="920" height="118" fill="url(#hdr)"/>
+  <text x="460" y="52" text-anchor="middle" fill="#ffffff" font-size="30" font-weight="700">Bliss HQ — How We Build &amp; Run the Platform</text>
+  <text x="460" y="88" text-anchor="middle" fill="#d1fae5" font-size="17">One closed loop · structured intake · transparent feedback · always-on monitoring</text>
+
+  <!-- ===================== PHASE 1 ===================== -->
+  <text x="150" y="158" fill="#2563eb" font-size="17" font-weight="700" letter-spacing="2">PHASE 1 · UNDERSTAND</text>
+
+  <!-- Card 1 -->
+  <rect x="150" y="172" width="620" height="84" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="196" cy="214" r="22" fill="#2563eb"/><text x="196" y="222" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">1</text>
+  <text x="238" y="206" fill="#1e3a8a" font-size="20" font-weight="700">🎙️ Discovery Call</text>
+  <text x="238" y="232" fill="#334155" font-size="15">Fixed agenda · recorded → auto-transcribed &amp; summarised into Plane</text>
+
+  <!-- Card 2 -->
+  <rect x="150" y="272" width="620" height="84" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="196" cy="314" r="22" fill="#2563eb"/><text x="196" y="322" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">2</text>
+  <text x="238" y="306" fill="#1e3a8a" font-size="20" font-weight="700">📋 Collect Data</text>
+  <text x="238" y="332" fill="#334155" font-size="15">Simple forms: business + per-villa onboarding → structured, no chasing</text>
+
+  <!-- Card 3 -->
+  <rect x="150" y="372" width="620" height="84" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+  <circle cx="196" cy="414" r="22" fill="#2563eb"/><text x="196" y="422" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">3</text>
+  <text x="238" y="406" fill="#1e3a8a" font-size="20" font-weight="700">🎯 Scope &amp; Sign-off</text>
+  <text x="238" y="432" fill="#334155" font-size="15">Agree the next testable chunk + clear "done" criteria — no scope creep</text>
+
+  <!-- ===================== PHASE 2 ===================== -->
+  <text x="150" y="500" fill="#059669" font-size="17" font-weight="700" letter-spacing="2">PHASE 2 · BUILD &amp; SHIP</text>
+
+  <!-- Card 4 -->
+  <rect x="150" y="514" width="620" height="84" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="196" cy="556" r="22" fill="#059669"/><text x="196" y="564" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">4</text>
+  <text x="238" y="548" fill="#065f46" font-size="20" font-weight="700">🔨 Build in Small Chunks</text>
+  <text x="238" y="574" fill="#334155" font-size="15">Each slice demoable · auto-tested · performance budget must pass</text>
+
+  <!-- Card 5 -->
+  <rect x="150" y="614" width="620" height="84" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="196" cy="656" r="22" fill="#059669"/><text x="196" y="664" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">5</text>
+  <text x="238" y="648" fill="#065f46" font-size="20" font-weight="700">📱 Client Tests Early</text>
+  <text x="238" y="674" fill="#334155" font-size="15">Tap-to-open preview link + plain-language "what to test" note</text>
+
+  <!-- Card 6 -->
+  <rect x="150" y="714" width="620" height="84" rx="14" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+  <circle cx="196" cy="756" r="22" fill="#059669"/><text x="196" y="764" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">6</text>
+  <text x="238" y="748" fill="#065f46" font-size="20" font-weight="700">🚀 Release Safely</text>
+  <text x="238" y="774" fill="#334155" font-size="15">Gated deploy · staged rollout · one-click rollback + backups</text>
+
+  <!-- ===================== PHASE 3 ===================== -->
+  <text x="150" y="842" fill="#d97706" font-size="17" font-weight="700" letter-spacing="2">PHASE 3 · RUN &amp; IMPROVE</text>
+
+  <!-- Card 7 -->
+  <rect x="150" y="856" width="620" height="84" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <circle cx="196" cy="898" r="22" fill="#d97706"/><text x="196" y="906" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">7</text>
+  <text x="238" y="890" fill="#92400e" font-size="20" font-weight="700">📡 Run &amp; Monitor</text>
+  <text x="238" y="916" fill="#334155" font-size="15">Errors · speed · uptime · cost watched 24/7 → alerts before complaints</text>
+
+  <!-- Card 8 -->
+  <rect x="150" y="956" width="620" height="84" rx="14" fill="#fffbeb" stroke="#d97706" stroke-width="2"/>
+  <circle cx="196" cy="998" r="22" fill="#d97706"/><text x="196" y="1006" text-anchor="middle" fill="#fff" font-size="22" font-weight="700">8</text>
+  <text x="238" y="990" fill="#92400e" font-size="20" font-weight="700">💬 Feedback &amp; Upkeep</text>
+  <text x="238" y="1016" fill="#334155" font-size="15">One feedback inbox · visible status · patches, backups, health reports</text>
+
+  <!-- straight down arrows -->
+  <g stroke="#475569" stroke-width="2.5" marker-end="url(#arrow)">
+    <line x1="460" y1="256" x2="460" y2="270"/>
+    <line x1="460" y1="356" x2="460" y2="370"/>
+    <line x1="460" y1="456" x2="460" y2="512"/>
+    <line x1="460" y1="598" x2="460" y2="612"/>
+    <line x1="460" y1="698" x2="460" y2="712"/>
+    <line x1="460" y1="798" x2="460" y2="854"/>
+    <line x1="460" y1="940" x2="460" y2="954"/>
+  </g>
+
+  <!-- Feedback loop arrow: from card 8 back up to scope (card 3) -->
+  <path d="M 770 998 C 858 998 858 414 772 414" fill="none" stroke="#d97706" stroke-width="3" stroke-dasharray="9 7" marker-end="url(#loop)"/>
+  <text x="864" y="700" fill="#d97706" font-size="15" font-weight="700" transform="rotate(90 864 700)">feedback loops back into scope &amp; build</text>
+
+  <!-- ===================== MONITORING SPINE ===================== -->
+  <rect x="150" y="1078" width="620" height="150" rx="16" fill="#0f172a"/>
+  <text x="460" y="1112" text-anchor="middle" fill="#ffffff" font-size="19" font-weight="700">⚙️ Always-On Spine (runs under every stage)</text>
+  <g font-size="14" fill="#e2e8f0" text-anchor="middle">
+    <rect x="172" y="1130" width="135" height="74" rx="10" fill="#1e293b"/>
+    <text x="239" y="1158" font-weight="700" fill="#fff">n8n</text><text x="239" y="1182">automation glue</text>
+    <rect x="319" y="1130" width="135" height="74" rx="10" fill="#1e293b"/>
+    <text x="386" y="1158" font-weight="700" fill="#fff">Plane</text><text x="386" y="1182">tasks + feedback</text>
+    <rect x="466" y="1130" width="135" height="74" rx="10" fill="#1e293b"/>
+    <text x="533" y="1158" font-weight="700" fill="#fff">Monitoring</text><text x="533" y="1182">errors·speed·uptime</text>
+    <rect x="613" y="1130" width="135" height="74" rx="10" fill="#1e293b"/>
+    <text x="680" y="1158" font-weight="700" fill="#fff">Cost watch</text><text x="680" y="1182">free-tier first</text>
+  </g>
+
+  <!-- Performance footer -->
+  <rect x="150" y="1248" width="620" height="78" rx="14" fill="#e0f2fe" stroke="#0284c7" stroke-width="2"/>
+  <text x="460" y="1280" text-anchor="middle" fill="#075985" font-size="17" font-weight="700">⚡ Speed is a promise, not a hope</text>
+  <text x="460" y="1306" text-anchor="middle" fill="#0c4a6e" font-size="14">Offline = instant on-device · targets set (cold start &lt;2s, taps &lt;200ms) · alert if breached</text>
+
+  <text x="460" y="1370" text-anchor="middle" fill="#64748b" font-size="14">Built for non-tech, low-literacy field staff · mobile/tablet · visual-first · Telugu · Hindi · English · Urdu</text>
+</svg>
