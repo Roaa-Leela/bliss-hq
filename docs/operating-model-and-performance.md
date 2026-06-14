@@ -115,8 +115,8 @@ Always-on observability, all alerting into **one channel** via n8n:
 
 | Layer | Tool | Catches |
 |---|---|---|
-| Errors | GlitchTip | Crashes, exceptions |
-| Performance / RUM | Grafana Faro | Lag, slow INP/LCP, slow sync |
+| Errors + perf + replay | **Sentry (managed)** | Crashes, exceptions, slow traces, crash-free % — one tool |
+| Performance / RUM | Sentry (or Grafana Faro) | Lag, slow INP/LCP, slow sync |
 | API latency | OTel → Tempo/SigNoz | Slow endpoints |
 | Uptime + response time | Uptime Kuma | Outages, slowdowns |
 | Product + replay | PostHog | Drop-offs, see the lag |
@@ -148,6 +148,20 @@ Always-on observability, all alerting into **one channel** via n8n:
 | **Quarterly** | Phase/roadmap planning |
 
 ---
+
+## Production-readiness gaps to close (no-surprises checklist)
+
+Small but important details that make the difference between "works in demo" and "works at 2 a.m.":
+
+1. **Caretaker sign-in** — PIN or phone-OTP (most have no email / low literacy), not email+password. *(Decision in the intake form.)*
+2. **Security & secrets** — secrets manager, PII encryption at rest, rate limiting, and a joint review of **RLS + PowerSync sync rules** (offline data-leak risk).
+3. **Audit trail** — first-class "who changed/approved what, when."
+4. **Caretaker onboarding & support** — in-app guided first-run + a support channel (WhatsApp/in-app help).
+5. **Task notifications** — web push (PWA) + WhatsApp for "you've been assigned a turnover."
+6. **Legal/DPDP** — agency = Data Processor, client = Data Fiduciary → data-processing agreement, privacy policy, consent copy.
+7. **Data import** — migrate the client's existing villa list/spreadsheets at onboarding.
+8. **Offline conflict policy** — define last-write-wins vs server-authoritative up front.
+9. **Environments** — dev / staging / prod, staging mirrors prod for safe UAT.
 
 ## Net additions to the stack & cost
 
