@@ -95,6 +95,24 @@ The proposals promise **3–5 weeks**, but **Path B itself caveats there's "no s
 
 ---
 
+## Back-office ERP: is ERPNext the best, or just the default? (Phase 2 decision)
+
+Verified 2026: for **India GST e-invoicing + fully open-source + robust**, ERPNext is genuinely the strongest — the "more elegant" alternatives have disqualifying catches.
+
+| Parameter | **ERPNext** ✅ | Odoo Community | Dolibarr | Tryton |
+|---|---|---|---|---|
+| India GST / e-invoicing | **Native, free** | **Gated behind paid Enterprise** | Community modules (light) | **No India localization** |
+| Truly free for our needs | **Yes** | Open-*core* (key bits paid) | Yes | Yes |
+| Depth (inventory, procurement, payouts) | **Deep** | Deep (Enterprise) | "Just enough" | Less breadth |
+| Elegance / UX | v15 + Frappe CRM (Vue) | **Most polished** | Dated | Spartan |
+
+- **Odoo Community lacks the Accounting module** → GST needs paid Enterprise (~$24–36/user/mo). Not truly free.
+- **Dolibarr** = "just enough", lacks depth. **Tryton** = elegant but no India GST → we'd build compliance ourselves (dealbreaker).
+- **On "elegant":** ERPNext runs **headless** behind our own custom UI via REST — non-technical users never see it; it just does GST/payouts/procurement.
+- **Verdict:** ERPNext stands for Phase 2 — revisit at zero cost when we get there. **Phase 1 (Modules 1–3) needs no ERP at all.**
+
+---
+
 ## Net effect on the earlier plan
 
 - **Reference architecture updates** to a **hybrid**: custom offline PWA (Supabase/PowerSync/React) **+** ERPNext/Frappe back-office **+** best-of-breed OSS (Chatwoot/DocuSeal/Metabase/listmonk/AiSensy/Beds24).
