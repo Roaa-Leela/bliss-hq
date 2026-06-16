@@ -62,6 +62,8 @@ Read the options, mark the pick. REC is our recommended default. One line on the
 
 4. First checklist to build: turnover and cleaning [REC] / also maintenance / also inspection and inventory
    - Picked: ____  (a narrow first build is faster to test, others follow in chunks)
+   - Which routine checks do you run today (tick all): pre-stay / post-stay / weekly inspection / monthly audit / maintenance / housekeeping
+   - Which one matters most to start with: ____
 
 5. Manager approval: approve only flagged items [REC] / approve every turnover / monitor only
    - Picked: ____  (approving everything gives full control but heavy workload, flagged only scales)
@@ -77,6 +79,32 @@ Read the options, mark the pick. REC is our recommended default. One line on the
 
 9. Devices: personal phones / company tablets / mix
    - Picked: ____  (affects support, security, and which devices we test on)
+
+## 6A. More requirements to capture (from the earlier scoping)
+
+Photo structure (for setup and tagging):
+- How do you break a villa down for checks and photos: rooms, areas (pool, garden, kitchen), and key assets or appliances? We tag every photo by villa, room, area, and asset so you can search later.
+- Notes:
+
+Notifications and overdue:
+- When something is flagged or assigned, who should be told, and how (email now, WhatsApp later)?
+- After how long is a task considered overdue and pushed up: ____ hours or days?
+- Notes:
+
+Photo retention (confirm this works for you):
+- Routine photos: full quality 14 days, then a small thumbnail for 90 days, then deleted.
+- Flagged photos: kept full quality for 1 year.
+- Pre and post stay photos: full quality 60 days (the dispute window), then thumbnail for 1 year.
+- Does the dispute window match how long disputes usually take for you: yes / change to ____
+
+Guest documents (capture now, likely built in a later chunk):
+- Do you need to store guest IDs and signed agreements inside the system? yes / no
+- Who is allowed to view them: ____
+- How long must they be kept for legal reasons: ____
+
+Villa handbook (capture now, likely a later chunk):
+- Do you want a per villa digital handbook (house rules, services, nearby attractions) with a QR code guests can scan? yes / no / later
+- Who would keep it updated: ____
 
 ## 7. Lock list, needed before build starts (3 min)
 Confirm who owns each and by when:
