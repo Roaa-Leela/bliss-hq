@@ -33,6 +33,9 @@ export default function Today() {
         <button className="btn btn-primary" style={{ marginTop: 22 }} onClick={() => nav("/caretaker/areas")}>
           {tr("continue", lang)} <Arrow />
         </button>
+        <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/laundry")}>
+          Housekeeping &amp; laundry log
+        </button>
 
         <div className="label" style={{ marginTop: 28 }}>Areas</div>
         <div className="list">

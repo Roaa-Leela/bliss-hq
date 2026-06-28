@@ -99,3 +99,51 @@ a{color:inherit;text-decoration:none}
 .langs{display:flex;gap:8px}
 .lang{font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px;border:1px solid var(--line);color:var(--slate);background:var(--surface)}
 .lang.on{background:var(--forest);color:#fff;border-color:var(--forest)}
+
+/* ---- Forms & inputs ---- */
+.field{margin-top:20px}
+.flabel{font-size:13px;font-weight:700;color:var(--ink);display:block;margin-bottom:9px}
+.input,.textarea{width:100%;border:1px solid var(--line);border-radius:11px;padding:14px;font-family:inherit;font-size:15px;color:var(--ink);background:var(--surface)}
+.textarea{min-height:120px;resize:none;line-height:1.45}
+.input:focus,.textarea:focus{outline:none;border-color:var(--forest)}
+.options{display:flex;gap:10px;flex-wrap:wrap}
+.opt{flex:1;min-width:96px;border:1.5px solid var(--line);border-radius:11px;padding:14px 10px;text-align:center;font-size:14px;font-weight:600;color:var(--ink);background:var(--surface)}
+.opt.sel{border-color:var(--forest);background:var(--mist);color:var(--forest)}
+
+/* ---- Photo grid ---- */
+.photogrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.thumb{aspect-ratio:1;border-radius:11px;background:linear-gradient(135deg,#9DBE6A,#415E27)}
+.addthumb{aspect-ratio:1;border-radius:11px;border:1.5px dashed #C5C9B8;background:var(--cloud);display:flex;align-items:center;justify-content:center;color:var(--forest)}
+
+/* ---- Stepper (counts) ---- */
+.counter{display:flex;align-items:center;justify-content:space-between;padding:16px 2px;border-top:1px solid var(--line)}
+.counter .cn{font-size:16px;color:var(--ink)}
+.counter .cs{font-size:12.5px;color:var(--slate);margin-top:3px}
+.stepper{display:flex;align-items:center;gap:12px}
+.step{width:42px;height:42px;border-radius:11px;border:1.5px solid var(--line);font-size:22px;font-weight:700;color:var(--forest);display:flex;align-items:center;justify-content:center;background:var(--surface);line-height:1}
+.step:active{background:var(--mist)}
+.stepval{min-width:30px;text-align:center;font-size:18px;font-weight:800;color:var(--ink)}
+
+/* ---- Success / celebration ---- */
+.celebrate{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:0 var(--pad)}
+.celebrate .ring{width:96px;height:96px;border-radius:50%;background:var(--ok-bg);display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+.celebrate h1{font-size:28px;font-weight:800;color:var(--forest);letter-spacing:-.5px}
+.celebrate p{font-size:15px;color:var(--slate);margin-top:12px;max-width:300px;line-height:1.5}
+
+/* ---- Timeline (owner) ---- */
+.tl-item{display:flex;gap:14px;padding:18px 2px;border-top:1px solid var(--line)}
+.tl-dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.tl-item .tt{font-size:15.5px;color:var(--ink);font-weight:600}
+.tl-item .ts{font-size:12.5px;color:var(--slate);margin-top:3px}
+
+/* ---- Review card ---- */
+.shot-big{height:230px;border-radius:var(--r-card);background:linear-gradient(135deg,#9DBE6A,#3C5A24);position:relative;overflow:hidden;margin-top:12px}
+.shot-big .tag{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:6px 11px;border-radius:8px}
+
+/* ---- Bottom nav (caretaker) ---- */
+.bottomnav{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);display:flex;justify-content:space-around;padding:10px 0 14px}
+.bottomnav a{display:flex;flex-direction:column;align-items:center;gap:4px;font-size:11px;font-weight:700;color:#AEB3A1}
+.bottomnav a.on{color:var(--forest)}
+
+/* Wider column for manager/owner/admin on desktop */
+@media(min-width:760px){.screen.wide{max-width:680px}}

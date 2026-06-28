@@ -61,3 +61,31 @@ export const roles: { id: RoleId; title: string; sub: string }[] = [
   { id: "owner", title: "Villa Owner", sub: "See your property" },
   { id: "admin", title: "Admin", sub: "Set up and oversee everything" },
 ];
+
+// Demo data for manager, owner and laundry views.
+export const managerProps = [
+  { id: "palm-grove", name: "Palm Grove Villa", sub: "Pre check-in · Guest 4:00 PM", state: "ready" as const },
+  { id: "misty", name: "Misty Acres", sub: "5 of 8 areas", state: "active" as const },
+  { id: "lake", name: "Lake House", sub: "Not started", state: "todo" as const },
+  { id: "fern", name: "Fern Villa", sub: "Post-stay cleaning", state: "active" as const },
+];
+
+export const openIssues = [
+  { id: "i1", title: "AC not cooling", where: "Palm Grove · Bedroom 2", when: "2h ago", level: "alert" as const },
+  { id: "i2", title: "Towels short", where: "Lake House · Restock", when: "Today", level: "warn" as const },
+];
+
+export const laundryItems = [
+  { id: "l1", name: "Bed sheets", size: "Queen / King" },
+  { id: "l2", name: "Pillow covers", size: "Standard" },
+  { id: "l3", name: "Bath towels", size: "Large" },
+  { id: "l4", name: "Hand towels", size: "Medium" },
+  { id: "l5", name: "Duvet covers", size: "Queen / King" },
+];
+
+export const ownerTimeline = [
+  { id: "t1", title: "Pre check-in inspection completed", sub: "12 June · all 8 areas passed", kind: "ok" as const },
+  { id: "t2", title: "AC service done", sub: "10 June · vendor visit", kind: "info" as const },
+  { id: "t3", title: "Damage reported and resolved", sub: "2 June · chair repaired", kind: "warn" as const },
+  { id: "t4", title: "Post-stay cleaning completed", sub: "1 June", kind: "ok" as const },
+];

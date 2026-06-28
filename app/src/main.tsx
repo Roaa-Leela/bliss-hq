@@ -7,16 +7,26 @@ import RoleSelect from "./screens/RoleSelect";
 import Today from "./screens/caretaker/Today";
 import Areas from "./screens/caretaker/Areas";
 import Task from "./screens/caretaker/Task";
-import Stub from "./screens/Stub";
+import ReportIssue from "./screens/caretaker/ReportIssue";
+import LaundryLog from "./screens/caretaker/LaundryLog";
+import Submit from "./screens/caretaker/Submit";
+import Operations from "./screens/manager/Operations";
+import Review from "./screens/manager/Review";
+import Owner from "./screens/Owner";
+import Admin from "./screens/Admin";
 
 const router = createBrowserRouter([
   { path: "/", element: <RoleSelect /> },
   { path: "/caretaker", element: <Today /> },
   { path: "/caretaker/areas", element: <Areas /> },
   { path: "/caretaker/task", element: <Task /> },
-  { path: "/manager", element: <Stub title="Property Manager dashboard" /> },
-  { path: "/owner", element: <Stub title="Owner view" /> },
-  { path: "/admin", element: <Stub title="Admin setup" /> },
+  { path: "/caretaker/issue", element: <ReportIssue /> },
+  { path: "/caretaker/laundry", element: <LaundryLog /> },
+  { path: "/caretaker/submit", element: <Submit /> },
+  { path: "/manager", element: <Operations /> },
+  { path: "/manager/review", element: <Review /> },
+  { path: "/owner", element: <Owner /> },
+  { path: "/admin", element: <Admin /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(

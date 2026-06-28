@@ -52,7 +52,7 @@ export default function Task() {
 
       <div className="actions">
         <button className="btn btn-primary" onClick={() => markDone(item.id)}>Looks good <Check /></button>
-        <button className="btn btn-danger" onClick={() => markDone(item.id)}>Report an issue</button>
+        <button className="btn btn-danger" onClick={() => nav("/caretaker/issue")}>Report an issue</button>
       </div>
     </div>
   );

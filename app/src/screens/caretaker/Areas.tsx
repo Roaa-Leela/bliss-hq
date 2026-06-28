@@ -40,6 +40,11 @@ export default function Areas() {
           })}
         </div>
       </div>
+      {tp.pct === 100 && (
+        <div className="actions">
+          <button className="btn btn-primary" onClick={() => nav("/caretaker/submit")}>Submit inspection</button>
+        </div>
+      )}
     </div>
   );
 }
