@@ -20,7 +20,7 @@ export default function Owner() {
       </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("own.your")}</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>{property.name}</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>{t("prop." + property.id)}</h1>
 
         <div className="card" style={{ marginTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>

@@ -17,14 +17,14 @@ export default function Today() {
     <div className="screen">
       <div className="appbar"><Brand /><LangSwitch /></div>
       <div className="pad grow">
-        <div className="kicker" style={{ marginTop: 14 }}>{t("day.thu")} · 12 June</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>{t("today.greeting")},<br />Ramesh</h1>
+        <div className="kicker" style={{ marginTop: 14 }}>{t("today.dateline")}</div>
+        <h1 className="h1" style={{ marginTop: 10 }}>{t("today.greeting")},<br />{t("name.ramesh")}</h1>
 
         <div className="card" style={{ marginTop: 24 }}>
           <div className="label">{t("today.currentProperty")}</div>
-          <h2 className="h2" style={{ marginTop: 8 }}>{property.name}</h2>
+          <h2 className="h2" style={{ marginTop: 8 }}>{t("prop." + property.id)}</h2>
           <div className="meta" style={{ marginTop: 6 }}>
-            {t("meta.preCheckin")} · {property.bhk} · {t("today.guest")} {property.guestTime}
+            {t("meta.preCheckin")} · {property.bhk} · {t("today.guest")} {t("time.4pm")}
           </div>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 18 }}>
             <strong style={{ fontSize: 13 }}>{t("today.areasReady", { done: tp.done, total: tp.total })}</strong>

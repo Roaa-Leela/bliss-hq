@@ -16,7 +16,7 @@ export default function Review() {
         <div className="celebrate">
           <div className="ring"><Check size={40} color="#3E9D2E" /></div>
           <h1>{t("rev.approved")}</h1>
-          <p>{t("rev.approvedBody", { name: property.name })}</p>
+          <p>{t("rev.approvedBody", { name: t("prop." + property.id) })}</p>
         </div>
         <div className="actions"><button className="btn btn-primary" onClick={() => nav("/manager")}>{t("act.backOps")}</button></div>
       </div>
@@ -31,7 +31,7 @@ export default function Review() {
       </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("rev.submittedBy")}</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>{property.name}</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>{t("prop." + property.id)}</h1>
         <div className="meta" style={{ marginTop: 8 }}>{t("rev.summary")}</div>
 
         <div className="label" style={{ marginTop: 26 }}>{t("rev.byArea")}</div>

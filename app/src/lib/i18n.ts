@@ -173,6 +173,17 @@ export const messages: Record<string, Entry> = {
 
   // Property meta on Today
   "today.metaLine": { en: "{checklist} · {bhk} · {guest} {time}", hi: "{checklist} · {bhk} · {guest} {time}", te: "{checklist} · {bhk} · {guest} {time}" },
+
+  // Names, villas, dates, time (transliterated for a fully native feel)
+  "name.ramesh": { en: "Ramesh", hi: "रमेश", te: "రమేష్" },
+  "prop.palm-grove": { en: "Palm Grove Villa", hi: "पाम ग्रोव विला", te: "పామ్ గ్రోవ్ విల్లా" },
+  "prop.misty": { en: "Misty Acres", hi: "मिस्टी एकर्स", te: "మిస్టీ ఏకర్స్" },
+  "prop.lake": { en: "Lake House", hi: "लेक हाउस", te: "లేక్ హౌస్" },
+  "prop.fern": { en: "Fern Villa", hi: "फर्न विला", te: "ఫెర్న్ విల్లా" },
+  "today.dateline": { en: "Thursday · 12 June", hi: "गुरुवार · 12 जून", te: "గురువారం · 12 జూన్" },
+  "mgr.dateline": { en: "Friday · 13 June", hi: "शुक्रवार · 13 जून", te: "శుక్రవారం · 13 జూన్" },
+  "time.4pm": { en: "4:00 PM", hi: "शाम 4:00", te: "సాయంత్రం 4:00" },
+  "rev.areasPhotos": { en: "8 of 8 areas · 6 photos", hi: "8 में से 8 एरिया · 6 फोटो", te: "8 లో 8 ఏరియాలు · 6 ఫోటోలు" },
 };
 
 // Area names by id

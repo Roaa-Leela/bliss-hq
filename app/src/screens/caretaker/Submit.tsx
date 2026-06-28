@@ -11,7 +11,7 @@ export default function Submit() {
     <div className="screen">
       <div className="celebrate">
         <div className="ring"><Check size={40} color="#3E9D2E" /></div>
-        <h1>{t("submit.ready", { name: property.name })}</h1>
+        <h1>{t("submit.ready", { name: t("prop." + property.id) })}</h1>
         <p>{t("submit.body", { total: tp.total })}</p>
       </div>
       <div className="actions">

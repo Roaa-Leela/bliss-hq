@@ -28,7 +28,7 @@ export default function Admin() {
         <div className="list">
           {managerProps.map((p) => (
             <div className="li" key={p.id}>
-              <span><span className="li-name">{p.name}</span><span className="li-sub">{t("adm.propSub")}</span></span>
+              <span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{t("adm.propSub")}</span></span>
               <span className="pill pill-todo">{t("adm.edit")}</span>
             </div>
           ))}

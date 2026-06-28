@@ -13,7 +13,7 @@ export default function Operations() {
   const { t } = useStore();
   const chipLabel = { ready: t("st.ready"), active: t("st.inProgress"), todo: t("st.todo") };
   const sub = (id: string) =>
-    id === "palm-grove" ? `${t("meta.preCheckin")} · ${t("today.guest")} 4:00 PM`
+    id === "palm-grove" ? `${t("meta.preCheckin")} · ${t("today.guest")} ${t("time.4pm")}`
     : id === "misty" ? t("mgr.areasN", { done: 5, total: 8 })
     : id === "lake" ? t("mgr.notStarted")
     : t("mgr.postStay");
@@ -22,7 +22,7 @@ export default function Operations() {
     <div className="screen wide">
       <div className="appbar"><Brand /><LangSwitch /></div>
       <div className="pad grow">
-        <div className="kicker" style={{ marginTop: 14 }}>{t("day.fri")} · 13 June</div>
+        <div className="kicker" style={{ marginTop: 14 }}>{t("mgr.dateline")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("mgr.ops")}</h1>
 
         <div className="statgrid" style={{ marginTop: 22 }}>
@@ -35,7 +35,7 @@ export default function Operations() {
         <div className="list">
           {managerProps.map((p) => (
             <button className="li" key={p.id} onClick={() => nav("/manager/review")}>
-              <span><span className="li-name">{p.name}</span><span className="li-sub">{sub(p.id)}</span></span>
+              <span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{sub(p.id)}</span></span>
               <span className={"pill " + chip[p.state]}>{chipLabel[p.state]}</span>
             </button>
           ))}

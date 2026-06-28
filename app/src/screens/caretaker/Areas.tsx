@@ -19,7 +19,7 @@ export default function Areas() {
       </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 14 }}>{t("meta.preCheckin")}</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>{property.name}</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>{t("prop." + property.id)}</h1>
         <div className="meta" style={{ marginTop: 8 }}>{t("areas.ready2", { done: tp.done, total: tp.total })} · {tp.pct}%</div>
         <div className="progress" style={{ marginTop: 12 }}><i style={{ width: `${tp.pct}%` }} /></div>
 
