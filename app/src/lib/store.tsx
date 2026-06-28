@@ -1,7 +1,8 @@
 import { createContext, useContext, useMemo, useState, type ReactNode } from "react";
 import { property, type Area, type RoleId } from "../data/mock";
+import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
 
-type Lang = "en" | "hi" | "te";
+type Vars = Record<string, string | number>;
 
 type Store = {
   role: RoleId | null; setRole: (r: RoleId | null) => void;
@@ -9,11 +10,13 @@ type Store = {
   done: Record<string, boolean>;
   markDone: (itemId: string) => void;
   currentAreaId: string | null; setCurrentArea: (id: string | null) => void;
-  // helpers
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
   totalProgress: () => { done: number; total: number; pct: number };
   firstOpenItem: (a: Area) => string | null;
+  t: (key: string, vars?: Vars) => string;
+  tArea: (id: string) => string;
+  tItem: (id: string) => string;
 };
 
 const Ctx = createContext<Store | null>(null);
@@ -46,6 +49,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
       currentAreaId, setCurrentArea,
       areaProgress, areaState, totalProgress, firstOpenItem,
+      t: (key, vars) => translate(messages, key, lang, vars),
+      tArea: (id) => translate(areaNames, id, lang),
+      tItem: (id) => translate(itemTexts, id, lang),
     };
   }, [role, lang, done, currentAreaId]);
 
@@ -56,13 +62,4 @@ export function useStore() {
   const v = useContext(Ctx);
   if (!v) throw new Error("useStore outside provider");
   return v;
-}
-
-// Tiny demo translations. Will move to i18next when wiring the real app.
-const dict: Record<string, Record<Lang, string>> = {
-  greeting: { en: "Good morning", hi: "नमस्ते", te: "నమస్తే" },
-  continue: { en: "Continue inspection", hi: "जारी रखें", te: "కొనసాగించు" },
-};
-export function tr(key: string, lang: Lang) {
-  return dict[key]?.[lang] ?? dict[key]?.en ?? key;
 }

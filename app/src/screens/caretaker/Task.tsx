@@ -6,11 +6,10 @@ import { useStore } from "../../lib/store";
 
 export default function Task() {
   const nav = useNavigate();
-  const { currentAreaId, firstOpenItem, markDone, areaProgress } = useStore();
+  const { t, tArea, tItem, currentAreaId, firstOpenItem, markDone, areaProgress } = useStore();
   const area = property.areas.find((a) => a.id === currentAreaId) ?? property.areas[0];
   const openId = firstOpenItem(area);
 
-  // Area finished: go back to the area list.
   useEffect(() => { if (!openId) nav("/caretaker/areas"); }, [openId, nav]);
   if (!openId) return null;
 
@@ -22,37 +21,37 @@ export default function Task() {
 
   return (
     <div className="screen">
-      <div className="pad" style={{ paddingBottom: 0 }}>
+      <div className="pad" style={{ paddingBottom: 0, paddingTop: 24 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <button className="iconbtn" onClick={() => nav("/caretaker/areas")}><Back /></button>
+          <button className="iconbtn" onClick={() => nav("/caretaker/areas")} aria-label={t("a.back")}><Back /></button>
           <div style={{ flex: 1 }}>
-            <div className="kicker">{area.name}</div>
-            <div style={{ fontSize: 17, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>Check {idx} of {total}</div>
+            <div className="kicker">{tArea(area.id)}</div>
+            <div style={{ fontSize: 16, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>{t("task.check", { idx, total })}</div>
           </div>
         </div>
-        <div className="progress" style={{ marginTop: 18 }}><i style={{ width: `${pct}%` }} /></div>
+        <div className="progress" style={{ marginTop: 16 }}><i style={{ width: `${pct}%` }} /></div>
       </div>
 
-      <div className="pad grow">
-        <div style={{ fontSize: 25, fontWeight: 700, lineHeight: 1.3, letterSpacing: "-.2px", marginTop: 8 }}>{item.text}</div>
+      <div className="pad grow" style={{ paddingTop: 18, paddingBottom: 14 }}>
+        <div style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.3, letterSpacing: "-.2px" }}>{tItem(item.id)}</div>
 
         {item.requiresPhoto && (
           <>
-            <div className="label" style={{ margin: "30px 0 12px" }}>Reference · how it should look</div>
-            <div className="ref"><div className="tag">Ideal setup</div></div>
+            <div className="label" style={{ margin: "22px 0 10px" }}>{t("task.reference")}</div>
+            <div className="ref" style={{ height: 148 }}><div className="tag">{t("task.idealSetup")}</div></div>
           </>
         )}
 
-        <div className="label" style={{ margin: "26px 0 12px" }}>Your photo</div>
-        <button className="capture">
+        <div className="label" style={{ margin: "20px 0 10px" }}>{t("task.yourPhoto")}</div>
+        <button className="capture" style={{ height: 128 }}>
           <span className="cam"><Camera /></span>
-          <span>Take photo</span>
+          <span>{t("act.takePhoto")}</span>
         </button>
       </div>
 
       <div className="actions">
-        <button className="btn btn-primary" onClick={() => markDone(item.id)}>Looks good <Check /></button>
-        <button className="btn btn-danger" onClick={() => nav("/caretaker/issue")}>Report an issue</button>
+        <button className="btn btn-primary" onClick={() => markDone(item.id)}>{t("act.looksGood")} <Check /></button>
+        <button className="btn btn-danger" onClick={() => nav("/caretaker/issue")}>{t("act.reportIssue")}</button>
       </div>
     </div>
   );

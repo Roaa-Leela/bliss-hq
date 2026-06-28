@@ -1,55 +1,57 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
+import { LangSwitch } from "../components/LangSwitch";
+import { Back } from "../components/Icons";
 import { managerProps } from "../data/mock";
+import { useStore } from "../lib/store";
 
-const templates = ["Pre check-in", "Post-stay", "Daily", "Weekly", "Monthly", "Ad-hoc"];
+const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
 
 export default function Admin() {
   const nav = useNavigate();
+  const { t } = useStore();
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/")} aria-label="Back">
-          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="#2D4A1A" strokeWidth="2.4" fill="none" strokeLinecap="round" strokeLinejoin="round" /></svg>
-        </button>
+        <button className="iconbtn" onClick={() => nav("/")} aria-label={t("a.back")}><Back /></button>
         <Brand />
-        <span style={{ width: 42 }} />
+        <LangSwitch />
       </div>
       <div className="pad grow">
-        <div className="kicker" style={{ marginTop: 12 }}>Setup</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>Admin</h1>
+        <div className="kicker" style={{ marginTop: 12 }}>{t("adm.setup")}</div>
+        <h1 className="h1" style={{ marginTop: 10 }}>{t("adm.title")}</h1>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
-          <div className="label">Properties</div>
-          <span className="pill pill-go">Add</span>
+          <div className="label">{t("adm.properties")}</div>
+          <span className="pill pill-go">{t("adm.add")}</span>
         </div>
         <div className="list">
           {managerProps.map((p) => (
             <div className="li" key={p.id}>
-              <span><span className="li-name">{p.name}</span><span className="li-sub">Caretaker assigned · checklist set</span></span>
-              <span className="pill pill-todo">Edit</span>
+              <span><span className="li-name">{p.name}</span><span className="li-sub">{t("adm.propSub")}</span></span>
+              <span className="pill pill-todo">{t("adm.edit")}</span>
             </div>
           ))}
         </div>
 
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
-          <div className="label">Checklist templates</div>
-          <span className="pill pill-go">New</span>
+          <div className="label">{t("adm.templates")}</div>
+          <span className="pill pill-go">{t("adm.new")}</span>
         </div>
         <div className="list">
-          {templates.map((t) => (
-            <div className="li" key={t}>
-              <span><span className="li-name">{t}</span><span className="li-sub">Master checklist · room by room</span></span>
-              <span className="pill pill-todo">Edit</span>
+          {templateKeys.map((k) => (
+            <div className="li" key={k}>
+              <span><span className="li-name">{t(k)}</span><span className="li-sub">{t("adm.tplSub")}</span></span>
+              <span className="pill pill-todo">{t("adm.edit")}</span>
             </div>
           ))}
         </div>
 
-        <div className="label" style={{ marginTop: 28 }}>People</div>
+        <div className="label" style={{ marginTop: 28 }}>{t("adm.people")}</div>
         <div className="statgrid" style={{ marginTop: 8 }}>
-          <div className="stat"><div className="num">3</div><div className="lab">Managers</div></div>
-          <div className="stat"><div className="num">10</div><div className="lab">Caretakers</div></div>
-          <div className="stat"><div className="num">8</div><div className="lab">Owners</div></div>
+          <div className="stat"><div className="num">3</div><div className="lab">{t("adm.managers")}</div></div>
+          <div className="stat"><div className="num">10</div><div className="lab">{t("adm.caretakers")}</div></div>
+          <div className="stat"><div className="num">8</div><div className="lab">{t("adm.owners")}</div></div>
         </div>
       </div>
     </div>
