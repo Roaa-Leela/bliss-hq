@@ -1,0 +1,100 @@
+:root{
+  /* Brand */
+  --forest:#2D4A1A; --leaf:#84BC25; --leaf-deep:#5E8E1E; --sage:#DCE8C2; --mist:#EAF2C0;
+  /* Neutral */
+  --ink:#1F2A16; --slate:#6B7160; --line:#E5E4D9; --cloud:#F1F0E6; --paper:#F4F2EA; --surface:#FFFFFF; --todo:#5B6150;
+  /* Status */
+  --ok:#3E9D2E; --ok-text:#2C7A1C; --ok-bg:#E6F4DD;
+  --warn:#E7A50F; --warn-text:#8A5E00; --warn-bg:#FBEFCF;
+  --alert:#E14434; --alert-text:#B5281B; --alert-bg:#FBE3DF;
+  --info:#2E84C4; --info-text:#1C66A6; --info-bg:#E2EFFA;
+  --leaf-tint:#DDEFB0; --leaf-text:#3A6B0C;
+  /* Shape */
+  --r-card:13px; --r-pill:8px; --r-btn:13px;
+  --pad:30px;
+  --font:'Inter','Liberation Sans','DejaVu Sans',system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+html,body,#root{height:100%}
+body{font-family:var(--font);color:var(--ink);background:var(--paper);line-height:1.4}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+a{color:inherit;text-decoration:none}
+
+/* App frame: mobile-first, centered column on larger screens */
+.app{min-height:100%;display:flex;justify-content:center;background:var(--paper)}
+.screen{width:100%;max-width:480px;background:var(--surface);min-height:100vh;position:relative;display:flex;flex-direction:column}
+@media(min-width:520px){.screen{min-height:calc(100vh - 48px);margin:24px 0;border-radius:24px;box-shadow:0 30px 70px -40px rgba(35,50,20,.4);overflow:hidden}}
+.pad{padding:28px var(--pad)}
+.grow{flex:1}
+
+/* Typography */
+.kicker{font-size:11px;letter-spacing:2.5px;color:var(--slate);text-transform:uppercase}
+.h1{font-size:32px;font-weight:800;color:var(--forest);letter-spacing:-.6px;line-height:1.05}
+.h2{font-size:21px;font-weight:800;color:var(--forest);letter-spacing:-.3px}
+.label{font-size:11px;letter-spacing:2.5px;color:var(--slate);text-transform:uppercase}
+.meta{font-size:13px;color:var(--slate)}
+.muted{color:var(--slate)}
+
+/* App bar */
+.appbar{display:flex;align-items:center;justify-content:space-between;padding:26px var(--pad) 0}
+.brand{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--forest);font-size:14px}
+.avatar{width:40px;height:40px;border-radius:50%;background:var(--forest);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:15px}
+.iconbtn{width:42px;height:42px;border-radius:11px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;background:var(--surface)}
+
+/* Card */
+.card{border:1px solid var(--line);border-radius:var(--r-card);padding:22px;background:var(--surface)}
+
+/* Buttons */
+.btn{height:58px;border-radius:var(--r-btn);display:flex;align-items:center;justify-content:center;gap:10px;font-size:16px;font-weight:700;width:100%}
+.btn-primary{background:var(--forest);color:#fff}
+.btn-primary:active{background:#243d15}
+.btn-outline{background:var(--surface);border:1.5px solid var(--forest);color:var(--forest)}
+.btn-danger{background:var(--alert-bg);border:1.4px solid var(--alert);color:var(--alert-text)}
+
+/* Progress */
+.progress{height:8px;background:var(--mist);border-radius:6px;overflow:hidden}
+.progress > i{display:block;height:8px;background:var(--leaf);border-radius:6px;transition:width .3s}
+
+/* List rows */
+.list .li{display:flex;align-items:center;justify-content:space-between;padding:18px 2px;border-top:1px solid var(--line);width:100%;text-align:left}
+.li .li-name{font-size:16.5px;color:var(--ink)}
+.li .li-sub{font-size:12.5px;color:var(--slate);margin-top:3px}
+
+/* Pills / chips */
+.pill{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-pill);display:inline-flex;align-items:center}
+.pill-ok{background:var(--ok-bg);color:var(--ok-text)}
+.pill-next{background:var(--forest);color:#fff}
+.pill-todo{background:var(--cloud);color:var(--todo)}
+.pill-go{background:var(--leaf-tint);color:var(--leaf-text)}
+.pill-alert{background:var(--alert-bg);color:var(--alert-text)}
+.pill-warn{background:var(--warn-bg);color:var(--warn-text)}
+
+/* Reference + capture (task screen) */
+.ref{height:178px;border-radius:var(--r-card);background:linear-gradient(135deg,#9DBE6A,#415E27);position:relative;overflow:hidden}
+.ref .tag{position:absolute;left:16px;bottom:14px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px}
+.capture{height:150px;border-radius:var(--r-card);border:1.6px dashed #C5C9B8;background:var(--cloud);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%}
+.capture .cam{width:54px;height:54px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center}
+.capture span{font-size:15px;color:var(--forest);font-weight:700}
+
+/* Stat grid (manager) */
+.statgrid{display:flex;gap:12px}
+.stat{flex:1;border:1px solid var(--line);border-radius:12px;padding:15px 14px}
+.stat .accent{height:3px;width:26px;border-radius:3px;margin-bottom:11px}
+.stat .num{font-size:25px;font-weight:800;letter-spacing:-.5px}
+.stat .lab{font-size:11px;color:var(--slate);margin-top:5px}
+
+/* Sticky bottom action area */
+.actions{padding:0 var(--pad) 28px;display:flex;flex-direction:column;gap:12px}
+
+/* Role select */
+.roles{display:flex;flex-direction:column;gap:14px}
+.role{display:flex;align-items:center;gap:16px;border:1px solid var(--line);border-radius:var(--r-card);padding:18px 20px;background:var(--surface);width:100%;text-align:left}
+.role:active{background:var(--cloud)}
+.role .ric{width:48px;height:48px;border-radius:13px;background:var(--mist);display:flex;align-items:center;justify-content:center;flex:0 0 48px}
+.role .rt{font-size:17px;font-weight:700;color:var(--ink)}
+.role .rs{font-size:13px;color:var(--slate);margin-top:2px}
+
+/* Language switch */
+.langs{display:flex;gap:8px}
+.lang{font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px;border:1px solid var(--line);color:var(--slate);background:var(--surface)}
+.lang.on{background:var(--forest);color:#fff;border-color:var(--forest)}
