@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
 import { Back } from "../components/Icons";
-import { property, ownerTimeline } from "../data/mock";
 import { useStore } from "../lib/store";
 
 const dot = { ok: "var(--ok)", info: "var(--info)", warn: "var(--warn)" };
@@ -10,7 +9,7 @@ const idxOf: Record<string, string> = { t1: "1", t2: "2", t3: "3", t4: "4" };
 
 export default function Owner() {
   const nav = useNavigate();
-  const { t } = useStore();
+  const { property, ownerTimeline, t } = useStore();
   return (
     <div className="screen wide">
       <div className="appbar">

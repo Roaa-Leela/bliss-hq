@@ -1,7 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { managerProps, openIssues } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 const chip = { ready: "pill-ok", active: "pill-go", todo: "pill-todo" } as const;
@@ -10,7 +9,7 @@ const issueWhenKey: Record<string, string> = { i1: "when.2h", i2: "when.today" }
 
 export default function Operations() {
   const nav = useNavigate();
-  const { t } = useStore();
+  const { managerProps, openIssues, t } = useStore();
   const chipLabel = { ready: t("st.ready"), active: t("st.inProgress"), todo: t("st.todo") };
   const sub = (id: string) =>
     id === "palm-grove" ? `${t("meta.preCheckin")} · ${t("today.guest")} ${t("time.4pm")}`

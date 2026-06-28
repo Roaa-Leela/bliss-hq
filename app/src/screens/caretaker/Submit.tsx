@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Check } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 export default function Submit() {
   const nav = useNavigate();
-  const { t, totalProgress } = useStore();
+  const { property, t, totalProgress } = useStore();
   const tp = totalProgress();
   return (
     <div className="screen">

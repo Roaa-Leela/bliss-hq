@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 const cats = [["cat.cleaning"], ["cat.damage"], ["cat.missing"], ["cat.maintenance"]].map((x) => x[0]);
@@ -9,7 +8,7 @@ const lvls = ["lvl.low", "lvl.medium", "lvl.high"];
 
 export default function ReportIssue() {
   const nav = useNavigate();
-  const { t, tArea, currentAreaId, firstOpenItem, markDone } = useStore();
+  const { property, t, tArea, currentAreaId, firstOpenItem, markDone } = useStore();
   const area = property.areas.find((a) => a.id === currentAreaId) ?? property.areas[0];
   const itemId = firstOpenItem(area);
   const [cat, setCat] = useState("cat.damage");

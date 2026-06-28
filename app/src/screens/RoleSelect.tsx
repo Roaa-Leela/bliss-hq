@@ -9,7 +9,7 @@ const dest: Record<RoleId, string> = { caretaker: "/caretaker", manager: "/manag
 
 export default function RoleSelect() {
   const nav = useNavigate();
-  const { setRole, t } = useStore();
+  const { setRole, reset, t } = useStore();
   const choose = (id: RoleId) => { setRole(id); nav(dest[id]); };
   return (
     <div className="screen">
@@ -29,6 +29,12 @@ export default function RoleSelect() {
             </button>
           ))}
         </div>
+        <button
+          onClick={reset}
+          style={{ marginTop: 22, color: "var(--slate)", fontSize: 13, fontWeight: 600, textDecoration: "underline", textUnderlineOffset: 3 }}
+        >
+          {t("demo.reset")}
+        </button>
       </div>
     </div>
   );

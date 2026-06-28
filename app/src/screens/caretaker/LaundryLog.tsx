@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back } from "../../components/Icons";
-import { laundryItems } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 const nameKey: Record<string, string> = { l1: "ln.sheets", l2: "ln.pillow", l3: "ln.bath", l4: "ln.hand", l5: "ln.duvet" };
@@ -9,7 +8,7 @@ const sizeKey: Record<string, string> = { l1: "sz.queenking", l2: "sz.standard",
 
 export default function LaundryLog() {
   const nav = useNavigate();
-  const { t } = useStore();
+  const { laundryItems, t } = useStore();
   const [counts, setCounts] = useState<Record<string, number>>({});
   const set = (id: string, d: number) => setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + d) }));
   const total = Object.values(counts).reduce((a, b) => a + b, 0);

@@ -1,0 +1,45 @@
+# PowerSync sync rules for Bliss HQ.
+# These mirror the RLS scoping so a device only ever downloads what its user may see.
+# A caretaker's phone receives only assigned properties and their child rows.
+
+bucket_definitions:
+  # Each user's own profile
+  user_profile:
+    parameters: select request.user_id() as id
+    data:
+      - select * from profiles where id = bucket.id
+
+  # Properties a caretaker is assigned to, plus all child rows scoped to those properties
+  caretaker_properties:
+    parameters: select property_id as pid from caretaker_assignments where caretaker_id = request.user_id()
+    data:
+      - select * from properties where id = bucket.pid
+      - select * from rooms where property_id = bucket.pid
+      - select * from property_checklists where property_id = bucket.pid
+      - select * from checklist_runs where property_id = bucket.pid
+      - select * from run_responses where run_id in (select id from checklist_runs where property_id = bucket.pid)
+      - select * from media_assets where property_id = bucket.pid
+      - select * from issues where property_id = bucket.pid
+      - select * from inventory_items where property_id = bucket.pid
+      - select * from laundry_dispatch where property_id = bucket.pid
+
+  # Properties a manager runs or an owner owns
+  managed_properties:
+    parameters: select id as pid from properties where manager_id = request.user_id() or owner_id = request.user_id()
+    data:
+      - select * from properties where id = bucket.pid
+      - select * from rooms where property_id = bucket.pid
+      - select * from checklist_runs where property_id = bucket.pid
+      - select * from run_responses where run_id in (select id from checklist_runs where property_id = bucket.pid)
+      - select * from media_assets where property_id = bucket.pid
+      - select * from issues where property_id = bucket.pid
+      - select * from inventory_items where property_id = bucket.pid
+      - select * from caretaker_assignments where property_id = bucket.pid
+
+  # Shared catalogue available to every signed-in user
+  global_catalog:
+    parameters: select request.user_id() as uid
+    data:
+      - select * from checklist_templates
+      - select * from checklist_items
+      - select * from vendors

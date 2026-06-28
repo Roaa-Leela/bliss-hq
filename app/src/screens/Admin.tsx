@@ -2,14 +2,13 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
 import { Back } from "../components/Icons";
-import { managerProps } from "../data/mock";
 import { useStore } from "../lib/store";
 
 const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
 
 export default function Admin() {
   const nav = useNavigate();
-  const { t } = useStore();
+  const { managerProps, t } = useStore();
   return (
     <div className="screen wide">
       <div className="appbar">

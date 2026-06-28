@@ -1,12 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back, Check } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 export default function Review() {
   const nav = useNavigate();
-  const { t, tArea } = useStore();
+  const { property, t, tArea } = useStore();
   const [done, setDone] = useState(false);
   const photoAreas = property.areas.filter((a) => a.items.some((i) => i.requiresPhoto)).slice(0, 6);
 

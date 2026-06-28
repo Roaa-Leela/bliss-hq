@@ -9,6 +9,8 @@ type Entry = { en: string; hi: string; te: string };
 export const messages: Record<string, Entry> = {
   // Common actions / statuses
   "act.continue": { en: "Continue inspection", hi: "जाँच जारी रखें", te: "తనిఖీ కొనసాగించండి" },
+  "act.start": { en: "Start inspection", hi: "जाँच शुरू करें", te: "తనిఖీ ప్రారంభించండి" },
+  "demo.reset": { en: "Reset demo data", hi: "डेमो डेटा रीसेट करें", te: "డెమో డేటాను రీసెట్ చేయండి" },
   "act.looksGood": { en: "Looks good", hi: "सब ठीक है", te: "బాగుంది" },
   "act.reportIssue": { en: "Report an issue", hi: "समस्या बताएं", te: "సమస్యను నివేదించండి" },
   "act.takePhoto": { en: "Take photo", hi: "फोटो लें", te: "ఫోటో తీయండి" },

@@ -1,11 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Back } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 export default function Areas() {
   const nav = useNavigate();
-  const { t, tArea, areaState, areaProgress, setCurrentArea, totalProgress } = useStore();
+  const { property, t, tArea, areaState, areaProgress, setCurrentArea, totalProgress } = useStore();
   const tp = totalProgress();
   const stateLabel = { done: t("st.done"), active: t("st.resume"), todo: t("st.start") };
   const statePill = { done: "pill-ok", active: "pill-next", todo: "pill-todo" };

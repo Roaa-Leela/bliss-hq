@@ -2,12 +2,11 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
 import { Arrow } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 export default function Today() {
   const nav = useNavigate();
-  const { t, tArea, totalProgress, areaState, areaProgress } = useStore();
+  const { property, t, tArea, totalProgress, areaState, areaProgress } = useStore();
   const tp = totalProgress();
   const preview = property.areas.slice(0, 4);
   const stateLabel = { done: t("st.done"), active: t("st.inProgress"), todo: t("st.todo") };
@@ -34,7 +33,7 @@ export default function Today() {
         </div>
 
         <button className="btn btn-primary" style={{ marginTop: 22 }} onClick={() => nav("/caretaker/areas")}>
-          {t("act.continue")} <Arrow />
+          {tp.pct === 0 ? t("act.start") : t("act.continue")} <Arrow />
         </button>
         <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/laundry")}>
           {t("act.laundryLog")}

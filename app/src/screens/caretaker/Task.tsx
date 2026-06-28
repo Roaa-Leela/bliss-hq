@@ -1,12 +1,11 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back, Camera, Check } from "../../components/Icons";
-import { property } from "../../data/mock";
 import { useStore } from "../../lib/store";
 
 export default function Task() {
   const nav = useNavigate();
-  const { t, tArea, tItem, currentAreaId, firstOpenItem, markDone, areaProgress } = useStore();
+  const { property, t, tArea, tItem, currentAreaId, firstOpenItem, markDone, areaProgress } = useStore();
   const area = property.areas.find((a) => a.id === currentAreaId) ?? property.areas[0];
   const openId = firstOpenItem(area);
 
