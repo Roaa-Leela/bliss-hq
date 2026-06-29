@@ -10,7 +10,7 @@ const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
 
 export default function Deposit() {
   const nav = useNavigate();
-  const { currentStayId, t } = useStore();
+  const { currentStayId, addDeduction, t } = useStore();
   const stay = bookingsData.find((b) => b.id === currentStayId) ?? bookingsData[0];
   const [reason, setReason] = useState<string | null>(null);
   const [amount, setAmount] = useState(0);
@@ -92,7 +92,11 @@ export default function Deposit() {
         <div className="ref" style={{ height: 130, marginTop: 20 }}><div className="tag">{t("dep.evidence")}</div></div>
       </div>
       <div className="actions">
-        <button className="btn btn-primary" disabled={!canSubmit} style={!canSubmit ? { opacity: 0.5 } : undefined} onClick={() => setSubmitted(true)}>{t("dep.submit")}</button>
+        <button className="btn btn-primary" disabled={!canSubmit} style={!canSubmit ? { opacity: 0.5 } : undefined}
+          onClick={() => {
+            addDeduction({ id: "dd-" + Date.now(), propId: stay.propId, guestKey: stay.guestKey, amount, reasonKey: "dep.reason." + reason, status: "pending", whenKey: "when.now" });
+            setSubmitted(true);
+          }}>{t("dep.submit")}</button>
       </div>
     </div>
   );

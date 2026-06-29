@@ -182,6 +182,13 @@ export type Booking = { id: string; propId: string; start: number; end: number; 
 export const calMonth = { year: 2026, month: 6, days: 30, firstDow: 1, todayDate: 13 }; // June 2026 starts on Monday
 export const DEPOSIT_AMOUNT = 10000; // sample security deposit per stay (INR)
 export const depositReasons = ["damage", "missing", "cleaning", "late"] as const;
+
+// Security deposit deduction requests: PM raises, owner approves or declines.
+export type DeductionStatus = "pending" | "approved" | "declined";
+export type Deduction = { id: string; propId: string; guestKey: string; amount: number; reasonKey: string; status: DeductionStatus; whenKey: string };
+export const deductionsData: Deduction[] = [
+  { id: "dd1", propId: "palm-grove", guestKey: "guest.rao", amount: 1500, reasonKey: "dep.reason.damage", status: "pending", whenKey: "when.yest" },
+];
 export const bookingsData: Booking[] = [
   { id: "bk1", propId: "palm-grove", start: 6, end: 8, guestKey: "guest.sharma" },
   { id: "bk2", propId: "palm-grove", start: 13, end: 16, guestKey: "guest.rao" },

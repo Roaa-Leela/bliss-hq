@@ -11,7 +11,8 @@ const ownPill: Record<string, string> = { ready: "pill-ok", review: "pill-warn",
 
 export default function Owner() {
   const nav = useNavigate();
-  const { property, ownerTimeline, propReadiness, t } = useStore();
+  const { property, ownerTimeline, propReadiness, deductions, setDeductionStatus, showToast, t } = useStore();
+  const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
   const r = propReadiness("palm-grove");
   const ownLabel: Record<string, string> = { ready: t("st.ready"), review: t("mgr.toReview"), active: t("st.inProgress"), todo: t("st.todo") };
   const ownTitle: Record<string, string> = { ready: t("own.readyGuest"), review: t("own.stReview"), active: t("own.stActive"), todo: t("own.stTodo") };
@@ -33,6 +34,29 @@ export default function Owner() {
           </div>
           <span className={"pill " + ownPill[r]}>{ownLabel[r]}</span>
         </div>
+
+        {deductions.length > 0 && (
+          <>
+            <div className="label" style={{ marginTop: 28 }}>{t("own.approvals")}</div>
+            {deductions.map((d) => (
+              <div className="card" key={d.id} style={{ marginTop: 12 }}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: 12 }}>
+                  <span className="li-name" style={{ fontWeight: 700 }}>{t(d.guestKey)}</span>
+                  <span style={{ fontSize: 20, fontWeight: 800, color: "var(--alert-text)", whiteSpace: "nowrap" }}>−{inr(d.amount)}</span>
+                </div>
+                <div className="li-sub" style={{ marginTop: 5 }}>{t(d.reasonKey)} · {t("own.deductFrom")}</div>
+                {d.status === "pending" ? (
+                  <div className="options" style={{ marginTop: 14 }}>
+                    <button className="opt" onClick={() => { setDeductionStatus(d.id, "declined"); showToast(t("toast.depDeclined")); }}>{t("dep.decline")}</button>
+                    <button className="opt sel" onClick={() => { setDeductionStatus(d.id, "approved"); showToast(t("toast.depApproved")); }}>{t("act.approve")}</button>
+                  </div>
+                ) : (
+                  <span className={"pill " + (d.status === "approved" ? "pill-ok" : "pill-alert")} style={{ marginTop: 12, display: "inline-flex" }}>{t("ddst." + d.status)}</span>
+                )}
+              </div>
+            ))}
+          </>
+        )}
 
         <div className="label" style={{ marginTop: 28 }}>{t("own.activity")}</div>
         <div>

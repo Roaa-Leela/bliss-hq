@@ -2,10 +2,10 @@ import { createContext, useContext, useEffect, useMemo, useRef, useState, type R
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
   caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData, taskChecklists,
-  baseReadiness, laundrySeed,
+  baseReadiness, laundrySeed, deductionsData,
   type IssueRec, type IssueStatus, type Assignee,
   type PurchaseReq, type PRLine, type StockMove, type MoveType, type Notif,
-  type Readiness, type LaundrySubmission,
+  type Readiness, type LaundrySubmission, type Deduction, type DeductionStatus,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, itemTexts, translate, type Lang } from "./i18n";
@@ -20,6 +20,7 @@ const MOVES_KEY = "bliss.moves.v1";
 const NOTIFS_KEY = "bliss.notifs.v1";
 const APPROVED_KEY = "bliss.approved.v1";
 const LAUNDRY_KEY = "bliss.laundry.v1";
+const DEDUCT_KEY = "bliss.deduct.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -66,6 +67,10 @@ type Store = {
   // laundry handoff to the manager
   laundrySubmission: LaundrySubmission | null;
   sendLaundry: (counts: Record<string, number>) => void;
+  // deposit deductions (PM raises -> owner decides)
+  deductions: Deduction[];
+  addDeduction: (d: Deduction) => void;
+  setDeductionStatus: (id: string, status: DeductionStatus) => void;
   // procurement (interactive)
   purchaseReqs: PurchaseReq[];
   currentReqId: string | null; setCurrentReq: (id: string | null) => void;
@@ -120,6 +125,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [approved, setApproved] = useState<Record<string, boolean>>(() => load(APPROVED_KEY, {}));
   const [currentReviewId, setReviewProp] = useState<string | null>(null);
   const [laundrySubmission, setLaundry] = useState<LaundrySubmission | null>(() => load<LaundrySubmission | null>(LAUNDRY_KEY, laundrySeed));
+  const [deductions, setDeductions] = useState<Deduction[]>(() => load(DEDUCT_KEY, deductionsData));
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
@@ -129,6 +135,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => { try { localStorage.setItem(NOTIFS_KEY, JSON.stringify(notifications)); } catch {} }, [notifications]);
   useEffect(() => { try { localStorage.setItem(APPROVED_KEY, JSON.stringify(approved)); } catch {} }, [approved]);
   useEffect(() => { try { localStorage.setItem(LAUNDRY_KEY, JSON.stringify(laundrySubmission)); } catch {} }, [laundrySubmission]);
+  useEffect(() => { try { localStorage.setItem(DEDUCT_KEY, JSON.stringify(deductions)); } catch {} }, [deductions]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -148,7 +155,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
       toggleDone: (id) => setDone((s) => ({ ...s, [id]: !s[id] })),
       taskChecklists, activeChecklistId, setActiveChecklist,
-      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); setApproved({}); setLaundry(laundrySeed); },
+      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); setApproved({}); setLaundry(laundrySeed); setDeductions(deductionsData); },
       currentAreaId, setCurrentArea,
       property, managerProps, laundryItems, ownerTimeline, inventoryItems: inv, vendors, caretakers, prefVendorByCat,
       issues, currentIssueId, setCurrentIssue,
@@ -216,6 +223,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markNotifRead: (id) => setNotifications((s) => s.map((n) => (n.id === id ? { ...n, read: true } : n))),
       markAllNotifsRead: () => setNotifications((s) => s.map((n) => ({ ...n, read: true }))),
       currentStayId, setCurrentStay,
+      deductions,
+      addDeduction: (d) => setDeductions((s) => [d, ...s]),
+      setDeductionStatus: (id, status) => setDeductions((s) => s.map((d) => (d.id === id ? { ...d, status } : d))),
       toast,
       showToast: (text) => { toastId.current += 1; setToast({ text, id: toastId.current }); },
       clearToast: () => setToast(null),
@@ -227,7 +237,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       },
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission, toast]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission, deductions, toast]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

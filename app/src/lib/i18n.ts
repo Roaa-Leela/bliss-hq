@@ -430,6 +430,13 @@ export const messages: Record<string, Entry> = {
   "own.stReview": { en: "Awaiting your approval", hi: "आपकी मंज़ूरी बाकी", te: "మీ ఆమోదం కోసం వేచి ఉంది" },
   "own.stActive": { en: "Inspection in progress", hi: "जाँच चल रही है", te: "తనిఖీ జరుగుతోంది" },
   "own.stTodo": { en: "Not started yet", hi: "अभी शुरू नहीं हुआ", te: "ఇంకా ప్రారంభం కాలేదు" },
+  "own.approvals": { en: "Deposit approvals", hi: "डिपॉज़िट मंज़ूरी", te: "డిపాజిట్ ఆమోదాలు" },
+  "own.deductFrom": { en: "deduction from the security deposit", hi: "सिक्योरिटी डिपॉज़िट से कटौती", te: "సెక్యూరిటీ డిపాజిట్ నుండి తగ్గింపు" },
+  "dep.decline": { en: "Decline", hi: "अस्वीकार", te: "తిరస్కరించు" },
+  "ddst.approved": { en: "Approved", hi: "मंज़ूर", te: "ఆమోదించబడింది" },
+  "ddst.declined": { en: "Declined", hi: "अस्वीकृत", te: "తిరస్కరించబడింది" },
+  "toast.depApproved": { en: "Deduction approved", hi: "कटौती मंज़ूर", te: "తగ్గింపు ఆమోదించబడింది" },
+  "toast.depDeclined": { en: "Deduction declined", hi: "कटौती अस्वीकृत", te: "తగ్గింపు తిరస్కరించబడింది" },
 
   // Availability calendar
   "cal.title": { en: "Availability", hi: "उपलब्धता", te: "లభ్యత" },
