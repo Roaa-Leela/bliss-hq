@@ -186,6 +186,51 @@ export const messages: Record<string, Entry> = {
   "mgr.dateline": { en: "Friday · 13 June", hi: "शुक्रवार · 13 जून", te: "శుక్రవారం · 13 జూన్" },
   "time.4pm": { en: "4:00 PM", hi: "शाम 4:00", te: "సాయంత్రం 4:00" },
   "rev.areasPhotos": { en: "8 of 8 areas · 6 photos", hi: "8 में से 8 एरिया · 6 फोटो", te: "8 లో 8 ఏరియాలు · 6 ఫోటోలు" },
+
+  // Inventory
+  "inv.title": { en: "Inventory", hi: "इन्वेंट्री", te: "ఇన్వెంటరీ" },
+  "inv.sub": { en: "Stock across Palm Grove Villa", hi: "विला का स्टॉक", te: "విల్లా స్టాక్" },
+  "inv.lowStock": { en: "Low stock", hi: "स्टॉक कम", te: "స్టాక్ తక్కువ" },
+  "inv.inStock": { en: "In stock", hi: "स्टॉक में", te: "స్టాక్‌లో" },
+  "inv.reorder": { en: "Reorder", hi: "दोबारा मंगाएं", te: "మళ్లీ ఆర్డర్" },
+  "vnd.title": { en: "Vendor directory", hi: "वेंडर डायरेक्टरी", te: "వెండర్ డైరెక్టరీ" },
+  "vnd.sub": { en: "Approved contractors and services", hi: "स्वीकृत ठेकेदार और सेवाएं", te: "ఆమోదిత కాంట్రాక్టర్లు, సేవలు" },
+  "act.call": { en: "Call", hi: "कॉल करें", te: "కాల్ చేయండి" },
+  "adm.inventory": { en: "Inventory", hi: "इन्वेंट्री", te: "ఇన్వెంటరీ" },
+  "adm.vendors": { en: "Vendor directory", hi: "वेंडर डायरेक्टरी", te: "వెండర్ డైరెక్టరీ" },
+  "adm.open": { en: "Open", hi: "खोलें", te: "తెరువు" },
+
+  // Inventory categories
+  "cat.kitchen": { en: "Kitchen & appliances", hi: "रसोई और उपकरण", te: "వంటగది & పరికరాలు" },
+  "cat.crockery": { en: "Cutlery & crockery", hi: "बर्तन और क्रॉकरी", te: "కట్లరీ & క్రాకరీ" },
+  "cat.linen": { en: "Linen", hi: "लिनेन", te: "లినెన్" },
+  "cat.toiletries": { en: "Toiletries", hi: "टॉयलेटरीज़", te: "టాయిలెట్రీస్" },
+  "cat.consumables": { en: "Consumables", hi: "उपभोग वस्तुएं", te: "వినియోగ వస్తువులు" },
+
+  // Trades
+  "trade.plumbing": { en: "Plumbing", hi: "प्लंबिंग", te: "ప్లంబింగ్" },
+  "trade.electrical": { en: "Electrical", hi: "इलेक्ट्रिकल", te: "ఎలక్ట్రికల్" },
+  "trade.ac": { en: "AC service", hi: "एसी सर्विस", te: "ఏసీ సర్వీస్" },
+  "trade.pool": { en: "Pool care", hi: "पूल केयर", te: "పూల్ కేర్" },
+  "trade.laundry": { en: "Laundry", hi: "लॉन्ड्री", te: "లాండ్రీ" },
+  "trade.pest": { en: "Pest control", hi: "पेस्ट कंट्रोल", te: "పెస్ట్ కంట్రోల్" },
+
+  // Condition
+  "cond.good": { en: "Good", hi: "अच्छा", te: "బాగుంది" },
+  "cond.fair": { en: "Fair", hi: "ठीक", te: "ఫర్వాలేదు" },
+  "cond.poor": { en: "Poor", hi: "खराब", te: "బాగోలేదు" },
+
+  // Inventory item names
+  "inv.iv1": { en: "Refrigerator", hi: "फ्रिज", te: "ఫ్రిజ్" },
+  "inv.iv2": { en: "Microwave", hi: "माइक्रोवेव", te: "మైక్రోవేవ్" },
+  "inv.iv3": { en: "Induction cooktop", hi: "इंडक्शन कुकटॉप", te: "ఇండక్షన్ కుక్‌టాప్" },
+  "inv.iv4": { en: "Dinner plates", hi: "डिनर प्लेट", te: "డిన్నర్ ప్లేట్లు" },
+  "inv.iv5": { en: "Water glasses", hi: "पानी के गिलास", te: "నీటి గ్లాసులు" },
+  "inv.iv6": { en: "Bed sheet sets", hi: "बेड शीट सेट", te: "బెడ్ షీట్ సెట్లు" },
+  "inv.iv7": { en: "Bath towels", hi: "बाथ टॉवल", te: "స్నాన తువ్వాళ్లు" },
+  "inv.iv8": { en: "Shower gel (5L)", hi: "शॉवर जेल (5L)", te: "షవర్ జెల్ (5L)" },
+  "inv.iv9": { en: "Floor cleaner", hi: "फर्श क्लीनर", te: "ఫ్లోర్ క్లీనర్" },
+  "inv.iv10": { en: "Toilet cleaner", hi: "टॉयलेट क्लीनर", te: "టాయిలెట్ క్లీనర్" },
 };
 
 // Area names by id

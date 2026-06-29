@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  property, managerProps, openIssues, laundryItems, ownerTimeline,
+  property, managerProps, openIssues, laundryItems, ownerTimeline, inventoryItems, vendors,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -33,6 +33,8 @@ type Store = {
   openIssues: typeof openIssues;
   laundryItems: typeof laundryItems;
   ownerTimeline: typeof ownerTimeline;
+  inventoryItems: typeof inventoryItems;
+  vendors: typeof vendors;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -72,7 +74,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
       reset: () => setDone(seedDone()),
       currentAreaId, setCurrentArea,
-      property, managerProps, openIssues, laundryItems, ownerTimeline,
+      property, managerProps, openIssues, laundryItems, ownerTimeline, inventoryItems, vendors,
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),

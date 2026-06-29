@@ -14,6 +14,8 @@ import Operations from "./screens/manager/Operations";
 import Review from "./screens/manager/Review";
 import Owner from "./screens/Owner";
 import Admin from "./screens/Admin";
+import Inventory from "./screens/Inventory";
+import Vendors from "./screens/Vendors";
 
 const router = createBrowserRouter([
   { path: "/", element: <RoleSelect /> },
@@ -27,6 +29,8 @@ const router = createBrowserRouter([
   { path: "/manager/review", element: <Review /> },
   { path: "/owner", element: <Owner /> },
   { path: "/admin", element: <Admin /> },
+  { path: "/inventory", element: <Inventory /> },
+  { path: "/vendors", element: <Vendors /> },
 ]);
 
 createRoot(document.getElementById("root")!).render(

@@ -89,3 +89,26 @@ export const ownerTimeline = [
   { id: "t3", title: "Damage reported and resolved", sub: "2 June · chair repaired", kind: "warn" as const },
   { id: "t4", title: "Post-stay cleaning completed", sub: "1 June", kind: "ok" as const },
 ];
+
+// Inventory and vendors, drawn from the client's Property Bible.
+export const inventoryItems = [
+  { id: "iv1", cat: "kitchen", must: 1, stock: 1, condition: "good" as const },
+  { id: "iv2", cat: "kitchen", must: 1, stock: 1, condition: "fair" as const },
+  { id: "iv3", cat: "kitchen", must: 2, stock: 1, condition: "good" as const },
+  { id: "iv4", cat: "crockery", must: 12, stock: 12, condition: "good" as const },
+  { id: "iv5", cat: "crockery", must: 12, stock: 8, condition: "good" as const },
+  { id: "iv6", cat: "linen", must: 9, stock: 9, condition: "good" as const },
+  { id: "iv7", cat: "linen", must: 6, stock: 4, condition: "fair" as const },
+  { id: "iv8", cat: "toiletries", must: 2, stock: 0, condition: "good" as const },
+  { id: "iv9", cat: "consumables", must: 3, stock: 1, condition: "good" as const },
+  { id: "iv10", cat: "consumables", must: 3, stock: 3, condition: "good" as const },
+];
+
+export const vendors = [
+  { id: "vd1", trade: "plumbing", name: "Sai Plumbing Works", area: "Shamirpet", rating: 5 },
+  { id: "vd2", trade: "electrical", name: "Sri Lakshmi Electricals", area: "Medchal", rating: 4 },
+  { id: "vd3", trade: "ac", name: "CoolCare AC Service", area: "Shamirpet", rating: 5 },
+  { id: "vd4", trade: "pool", name: "AquaPure Pool Care", area: "Hyderabad", rating: 4 },
+  { id: "vd5", trade: "laundry", name: "FreshFold Laundry", area: "Kompally", rating: 5 },
+  { id: "vd6", trade: "pest", name: "GreenShield Pest Control", area: "Medchal", rating: 4 },
+];

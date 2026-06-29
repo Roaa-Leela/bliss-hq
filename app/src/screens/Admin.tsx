@@ -20,6 +20,17 @@ export default function Admin() {
         <div className="kicker" style={{ marginTop: 12 }}>{t("adm.setup")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("adm.title")}</h1>
 
+        <div className="list" style={{ marginTop: 20 }}>
+          <button className="li" onClick={() => nav("/inventory")}>
+            <span><span className="li-name">{t("adm.inventory")}</span><span className="li-sub">{t("inv.sub")}</span></span>
+            <span className="pill pill-go">{t("adm.open")}</span>
+          </button>
+          <button className="li" onClick={() => nav("/vendors")}>
+            <span><span className="li-name">{t("adm.vendors")}</span><span className="li-sub">{t("vnd.sub")}</span></span>
+            <span className="pill pill-go">{t("adm.open")}</span>
+          </button>
+        </div>
+
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
           <div className="label">{t("adm.properties")}</div>
           <span className="pill pill-go">{t("adm.add")}</span>
