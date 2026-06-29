@@ -8,7 +8,7 @@ const lvls = ["lvl.low", "lvl.medium", "lvl.high"];
 
 export default function ReportIssue() {
   const nav = useNavigate();
-  const { property, t, tArea, currentAreaId, firstOpenItem, markDone, addIssue } = useStore();
+  const { property, t, tArea, currentAreaId, firstOpenItem, markDone, addIssue, showToast } = useStore();
   const area = property.areas.find((a) => a.id === currentAreaId) ?? property.areas[0];
   const itemId = firstOpenItem(area);
   const [cat, setCat] = useState("cat.damage");
@@ -30,6 +30,7 @@ export default function ReportIssue() {
       assignee: null,
     });
     if (itemId) markDone(itemId);
+    showToast(t("toast.issueSent"));
     nav("/caretaker/task");
   };
 

@@ -1,16 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, CatIcon } from "../../components/Icons";
+import { Back, CatIcon, QuickIcon } from "../../components/Icons";
+import { StatusPicker } from "../../components/StatusPicker";
+import { Empty } from "../../components/Empty";
 import { useStore } from "../../lib/store";
-import type { IssueStatus } from "../../data/mock";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
-const statuses: IssueStatus[] = ["open", "in_progress", "resolved"];
 
 export default function MyTasks() {
   const nav = useNavigate();
-  const { issues, setIssueStatus, t } = useStore();
+  const { issues, setIssueStatus, showToast, t } = useStore();
   const mine = issues.filter((i) => i.assignee?.type === "caretaker" && i.assignee.id === "c1");
 
   return (
@@ -26,7 +26,7 @@ export default function MyTasks() {
         <p className="meta" style={{ marginTop: 8 }}>{t("ct.sub")}</p>
 
         {mine.length === 0 ? (
-          <p className="meta" style={{ marginTop: 24 }}>{t("ct.none")}</p>
+          <Empty icon={<QuickIcon id="tasks" size={24} color="var(--slate)" />} title={t("ct.none")} />
         ) : (
           <div style={{ marginTop: 18 }}>
             {mine.map((i) => (
@@ -36,10 +36,8 @@ export default function MyTasks() {
                   <span className="tcnm">{i.title ?? t(i.titleKey)}</span>
                 </div>
                 <div className="tcsub">{t("prop." + i.propId)} · {t(i.locKey)}</div>
-                <div className="options" style={{ marginTop: 12 }}>
-                  {statuses.map((s) => (
-                    <button key={s} className={"opt" + (i.status === s ? " sel" : "")} onClick={() => setIssueStatus(i.id, s)}>{t("ist." + s)}</button>
-                  ))}
+                <div style={{ marginTop: 12 }}>
+                  <StatusPicker value={i.status} onChange={(s) => { setIssueStatus(i.id, s); showToast(t("toast.statusSaved")); }} />
                 </div>
               </div>
             ))}

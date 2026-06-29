@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css";
 import { StoreProvider } from "./lib/store";
 import { RoleSwitcher } from "./components/RoleSwitcher";
+import { Toast } from "./components/Toast";
 import RoleSelect from "./screens/RoleSelect";
 import Today from "./screens/caretaker/Today";
 import Areas from "./screens/caretaker/Areas";
@@ -31,7 +32,7 @@ import InventoryItem from "./screens/InventoryItem";
 import Notifications from "./screens/Notifications";
 
 function Layout() {
-  return (<><Outlet /><RoleSwitcher /></>);
+  return (<><Outlet /><RoleSwitcher /><Toast /></>);
 }
 
 const router = createBrowserRouter([

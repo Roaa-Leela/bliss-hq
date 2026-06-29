@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState, type ReactNode } from "react";
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
   caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData, taskChecklists,
@@ -83,6 +83,10 @@ type Store = {
   markAllNotifsRead: () => void;
   // selected stay (for deposit deduction)
   currentStayId: string | null; setCurrentStay: (id: string | null) => void;
+  // transient confirmation toast
+  toast: { text: string; id: number } | null;
+  showToast: (text: string) => void;
+  clearToast: () => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -111,6 +115,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
   const [currentStayId, setCurrentStay] = useState<string | null>(null);
   const [activeChecklistId, setActiveChecklist] = useState<string | null>(null);
+  const [toast, setToast] = useState<{ text: string; id: number } | null>(null);
+  const toastId = useRef(0);
   const [approved, setApproved] = useState<Record<string, boolean>>(() => load(APPROVED_KEY, {}));
   const [currentReviewId, setReviewProp] = useState<string | null>(null);
   const [laundrySubmission, setLaundry] = useState<LaundrySubmission | null>(() => load<LaundrySubmission | null>(LAUNDRY_KEY, laundrySeed));
@@ -210,12 +216,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markNotifRead: (id) => setNotifications((s) => s.map((n) => (n.id === id ? { ...n, read: true } : n))),
       markAllNotifsRead: () => setNotifications((s) => s.map((n) => ({ ...n, read: true }))),
       currentStayId, setCurrentStay,
+      toast,
+      showToast: (text) => { toastId.current += 1; setToast({ text, id: toastId.current }); },
+      clearToast: () => setToast(null),
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission, toast]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

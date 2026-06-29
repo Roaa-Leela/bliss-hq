@@ -9,7 +9,7 @@ const moveColor: Record<MoveType, string> = { receipt: "var(--ok-text)", consump
 
 export default function InventoryItem() {
   const nav = useNavigate();
-  const { inventoryItems, stockMoves, currentItemId, adjustStock, t } = useStore();
+  const { inventoryItems, stockMoves, currentItemId, adjustStock, showToast, t } = useStore();
   const item = inventoryItems.find((i) => i.id === currentItemId);
   const [mode, setMode] = useState<MoveType>("receipt");
   const [qty, setQty] = useState(1);
@@ -23,7 +23,7 @@ export default function InventoryItem() {
   const qLabel = mode === "receipt" ? "stock.qtyReceive" : mode === "consumption" ? "stock.qtyUse" : "stock.qtyCount";
 
   const pick = (m: MoveType) => { setMode(m); setQty(m === "count" ? item.stock : 1); };
-  const apply = () => { adjustStock(item.id, mode, qty); setMode("receipt"); setQty(1); };
+  const apply = () => { adjustStock(item.id, mode, qty); showToast(t("toast.stockUpdated")); setMode("receipt"); setQty(1); };
 
   return (
     <div className="screen wide">

@@ -2,7 +2,8 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
 import { NotifBell } from "../../components/NotifBell";
-import { Calendar, Home } from "../../components/Icons";
+import { Calendar, Home, Check } from "../../components/Icons";
+import { Empty } from "../../components/Empty";
 import { useStore } from "../../lib/store";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
@@ -44,7 +45,7 @@ export default function Operations() {
           <div className="stat"><div className="accent" style={{ background: "var(--alert)" }} /><div className="num" style={{ color: "var(--alert)" }}>{open.length}</div><div className="lab">{t("mgr.openIssues")}</div></div>
         </div>
 
-        <div className="label" style={{ marginTop: 28 }}>{t("mgr.readiness")}</div>
+        <div className="section-head"><div className="label">{t("mgr.readiness")}</div></div>
         <div className="list">
           {managerProps.map((p) => {
             const r = propReadiness(p.id);
@@ -57,22 +58,26 @@ export default function Operations() {
           })}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
+        <div className="section-head">
           <div className="label">{t("mgr.openIssues")}</div>
-          <button className="pill pill-go" onClick={() => nav("/manager/issues")}>{t("iss.viewAll")}</button>
+          {open.length > 0 && <button className="pill pill-go" onClick={() => nav("/manager/issues")}>{t("iss.viewAll")}</button>}
         </div>
-        <div className="list">
-          {open.slice(0, 3).map((i) => (
-            <button className="tl-item" key={i.id} style={{ width: "100%", textAlign: "left" }}
-              onClick={() => openIssue(i.id)}>
-              <span className="tl-dot" style={{ background: sevColor[i.sev] }} />
-              <div>
-                <div className="tt">{i.title ?? t(i.titleKey)} · {t("prop." + i.propId)}</div>
-                <div className="ts">{t(i.locKey)} · {t("mgr.flagged", { when: t(i.whenKey) })}</div>
-              </div>
-            </button>
-          ))}
-        </div>
+        {open.length === 0 ? (
+          <Empty icon={<Check size={22} color="var(--ok)" />} title={t("ops.noOpen")} sub={t("ops.noOpenSub")} />
+        ) : (
+          <div className="list">
+            {open.slice(0, 3).map((i) => (
+              <button className="tl-item" key={i.id} style={{ width: "100%", textAlign: "left" }}
+                onClick={() => openIssue(i.id)}>
+                <span className="tl-dot" style={{ background: sevColor[i.sev] }} />
+                <div>
+                  <div className="tt">{i.title ?? t(i.titleKey)} · {t("prop." + i.propId)}</div>
+                  <div className="ts">{t(i.locKey)} · {t("mgr.flagged", { when: t(i.whenKey) })}</div>
+                </div>
+              </button>
+            ))}
+          </div>
+        )}
       </div>
     </div>
   );

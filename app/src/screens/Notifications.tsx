@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, NotifIcon } from "../components/Icons";
+import { Back, NotifIcon, Bell } from "../components/Icons";
+import { Empty } from "../components/Empty";
 import { useStore } from "../lib/store";
 import type { NotifKind } from "../data/mock";
 
@@ -37,6 +38,9 @@ export default function Notifications() {
         </div>
 
         <div>
+          {notifications.length === 0 && (
+            <Empty icon={<Bell size={22} color="var(--slate)" />} title={t("nt.empty")} />
+          )}
           {notifications.map((n) => (
             <button className={"ntrow" + (n.read ? "" : " unread")} key={n.id}
               onClick={() => { if (n.propId) setReviewProp(n.propId); markNotifRead(n.id); nav(n.route); }}>

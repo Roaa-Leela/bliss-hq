@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
 import { Back, Cart } from "../components/Icons";
+import { Empty } from "../components/Empty";
 import { useStore } from "../lib/store";
 import type { PRStatus } from "../data/mock";
 
@@ -76,8 +77,11 @@ export default function Procurement() {
           </>
         )}
 
-        <div className="label" style={{ marginTop: 30 }}>{t("proc.requests")}</div>
-        <div style={{ marginTop: 4 }}>
+        <div className="section-head"><div className="label">{t("proc.requests")}</div></div>
+        <div>
+          {purchaseReqs.length === 0 && (
+            <Empty icon={<Cart size={22} color="var(--slate)" />} title={t("proc.noReqs")} />
+          )}
           {purchaseReqs.map((r) => (
             <button className="irow iconrow" key={r.id} onClick={() => { setCurrentReq(r.id); nav("/procurement/request"); }}>
               <span className="iicon" style={{ color: prsDot[r.status], background: "var(--cloud)" }}><Cart size={18} /></span>

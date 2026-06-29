@@ -29,6 +29,14 @@ export const messages: Record<string, Entry> = {
   "st.ready": { en: "Ready", hi: "तैयार", te: "సిద్ధం" },
   "st.inProgress": { en: "In progress", hi: "चल रहा है", te: "జరుగుతోంది" },
   "a.back": { en: "Back", hi: "वापस", te: "వెనుకకు" },
+  "act.done": { en: "Done", hi: "हो गया", te: "పూర్తయింది" },
+  "act.save": { en: "Save changes", hi: "बदलाव सहेजें", te: "మార్పులు సేవ్ చేయండి" },
+  "toast.statusSaved": { en: "Status updated", hi: "स्थिति अपडेट हुई", te: "స్థితి నవీకరించబడింది" },
+  "toast.assigned": { en: "Assignment saved", hi: "असाइनमेंट सहेजा", te: "కేటాయింపు సేవ్ అయింది" },
+  "toast.issueSent": { en: "Issue sent to manager", hi: "समस्या मैनेजर को भेजी", te: "సమస్య మేనేజర్‌కు పంపబడింది" },
+  "toast.laundrySent": { en: "List sent to manager", hi: "सूची मैनेजर को भेजी", te: "జాబితా మేనేజర్‌కు పంపబడింది" },
+  "toast.stockUpdated": { en: "Stock updated", hi: "स्टॉक अपडेट हुआ", te: "స్టాక్ నవీకరించబడింది" },
+  "toast.sentBack": { en: "Sent back to caretaker", hi: "केयरटेकर को वापस भेजा", te: "కేర్‌టేకర్‌కు వెనక్కి పంపబడింది" },
 
   // Role select
   "role.title": { en: "Choose a view", hi: "एक व्यू चुनें", te: "ఒక వీక్షణ ఎంచుకోండి" },
@@ -108,6 +116,8 @@ export const messages: Record<string, Entry> = {
   "mgr.notStarted": { en: "Not started", hi: "शुरू नहीं हुआ", te: "ప్రారంభం కాలేదు" },
   "mgr.postStay": { en: "Post-stay cleaning", hi: "स्टे के बाद सफाई", te: "స్టే తర్వాత శుభ్రత" },
   "mgr.areasN": { en: "{done} of {total} areas", hi: "{total} में से {done} एरिया", te: "{total} లో {done} ఏరియాలు" },
+  "ops.noOpen": { en: "No open issues", hi: "कोई खुली समस्या नहीं", te: "పెండింగ్ సమస్యలు లేవు" },
+  "ops.noOpenSub": { en: "Everything is handled right now", hi: "अभी सब संभाला हुआ है", te: "ప్రస్తుతం అన్నీ చక్కబెట్టబడ్డాయి" },
 
   // Review
   "rev.submittedBy": { en: "Pre check-in · submitted by Ramesh", hi: "प्री चेक-इन · रमेश द्वारा जमा", te: "ప్రీ చెక్-ఇన్ · రమేష్ సమర్పించారు" },
@@ -235,6 +245,8 @@ export const messages: Record<string, Entry> = {
   "iss.title": { en: "Issues", hi: "समस्याएं", te: "సమస్యలు" },
   "iss.sub": { en: "Flagged across all villas", hi: "सभी विला से दर्ज", te: "అన్ని విల్లాల నుండి నమోదైనవి" },
   "iss.all": { en: "All", hi: "सभी", te: "అన్నీ" },
+  "iss.none": { en: "No issues here", hi: "यहाँ कोई समस्या नहीं", te: "ఇక్కడ సమస్యలు లేవు" },
+  "iss.noneSub": { en: "Nothing matches this filter", hi: "इस फ़िल्टर में कुछ नहीं", te: "ఈ ఫిల్టర్‌కు ఏదీ సరిపోలలేదు" },
   "iss.viewAll": { en: "View all issues", hi: "सभी समस्याएं देखें", te: "అన్ని సమస్యలు చూడండి" },
   "iss.detail": { en: "Issue", hi: "समस्या", te: "సమస్య" },
   "iss.statusLabel": { en: "Status", hi: "स्थिति", te: "స్థితి" },
@@ -324,6 +336,7 @@ export const messages: Record<string, Entry> = {
   "proc.raiseN": { en: "Raise request · {n} items", hi: "रिक्वेस्ट बनाएं · {n} वस्तुएं", te: "రిక్వెస్ట్ సృష్టించండి · {n} వస్తువులు" },
   "proc.selectNone": { en: "Select at least one item", hi: "कम से कम एक वस्तु चुनें", te: "కనీసం ఒక వస్తువు ఎంచుకోండి" },
   "proc.requests": { en: "Purchase requests", hi: "परचेज़ रिक्वेस्ट", te: "పర్చేజ్ రిక్వెస్ట్‌లు" },
+  "proc.noReqs": { en: "No purchase requests yet", hi: "अभी कोई परचेज़ रिक्वेस्ट नहीं", te: "ఇంకా పర్చేజ్ రిక్వెస్ట్‌లు లేవు" },
   "proc.from": { en: "From {vendor}", hi: "{vendor} से", te: "{vendor} నుండి" },
   "proc.itemsN": { en: "{n} items", hi: "{n} वस्तुएं", te: "{n} వస్తువులు" },
   "proc.item1": { en: "1 item", hi: "1 वस्तु", te: "1 వస్తువు" },
@@ -365,6 +378,7 @@ export const messages: Record<string, Entry> = {
   "nt.sub": { en: "Everything that needs your attention", hi: "जिन पर ध्यान देना है", te: "మీ దృష్టి అవసరమైనవన్నీ" },
   "nt.markAll": { en: "Mark all read", hi: "सभी पढ़ा हुआ करें", te: "అన్నీ చదివినట్లు గుర్తించు" },
   "nt.allRead": { en: "You are all caught up", hi: "सब कुछ देख लिया", te: "అన్నీ చూసేశారు" },
+  "nt.empty": { en: "No notifications", hi: "कोई सूचना नहीं", te: "నోటిఫికేషన్లు లేవు" },
   "nt.unreadN": { en: "{n} new", hi: "{n} नई", te: "{n} కొత్తవి" },
   "nt.review.t": { en: "Palm Grove Villa ready to review", hi: "पाम ग्रोव विला समीक्षा के लिए तैयार", te: "పామ్ గ్రోవ్ విల్లా సమీక్షకు సిద్ధం" },
   "nt.review.s": { en: "Ramesh submitted the pre check-in", hi: "रमेश ने प्री चेक-इन जमा किया", te: "రమేష్ ప్రీ చెక్-ఇన్ సమర్పించారు" },

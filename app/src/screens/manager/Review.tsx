@@ -5,7 +5,7 @@ import { useStore } from "../../lib/store";
 
 export default function Review() {
   const nav = useNavigate();
-  const { property, propReadiness, approveProperty, currentReviewId, totalProgress, t, tArea } = useStore();
+  const { property, propReadiness, approveProperty, currentReviewId, totalProgress, showToast, t, tArea } = useStore();
   const [done, setDone] = useState(false);
   const propId = currentReviewId ?? "palm-grove";
   const name = t("prop." + propId);
@@ -77,7 +77,7 @@ export default function Review() {
 
       <div className="actions">
         <button className="btn btn-primary" onClick={() => { approveProperty(propId); setDone(true); }}>{t("act.approve")} <Check /></button>
-        <button className="btn btn-danger" onClick={() => nav("/manager")}>{t("act.sendBack")}</button>
+        <button className="btn btn-danger" onClick={() => { showToast(t("toast.sentBack")); nav("/manager"); }}>{t("act.sendBack")}</button>
       </div>
     </div>
   );

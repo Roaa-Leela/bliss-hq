@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back, CatIcon, Person, TradeIcon } from "../../components/Icons";
+import { StatusPicker } from "../../components/StatusPicker";
 import { useStore } from "../../lib/store";
-import type { IssueStatus } from "../../data/mock";
 
-const statuses: IssueStatus[] = ["open", "in_progress", "resolved"];
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
 
 export default function IssueDetail() {
   const nav = useNavigate();
-  const { issues, currentIssueId, setIssueStatus, assignIssue, caretakers, vendors, t } = useStore();
+  const { issues, currentIssueId, setIssueStatus, assignIssue, caretakers, vendors, showToast, t } = useStore();
   const issue = issues.find((i) => i.id === currentIssueId);
 
   useEffect(() => { if (!issue) nav("/manager/issues"); }, [issue, nav]);
@@ -37,32 +36,31 @@ export default function IssueDetail() {
 
         <div className="field">
           <span className="flabel">{t("iss.statusLabel")}</span>
-          <div className="options">
-            {statuses.map((s) => (
-              <button key={s} className={"opt" + (issue.status === s ? " sel" : "")} onClick={() => setIssueStatus(issue.id, s)}>{t("ist." + s)}</button>
-            ))}
-          </div>
+          <StatusPicker value={issue.status} onChange={(s) => { setIssueStatus(issue.id, s); showToast(t("toast.statusSaved")); }} />
         </div>
 
         <div className="field">
           <span className="flabel">{t("iss.assign")}</span>
-          <button className={"pickrow" + (!issue.assignee ? " sel" : "")} onClick={() => assignIssue(issue.id, null)}>
+          <button className={"pickrow" + (!issue.assignee ? " sel" : "")} onClick={() => { assignIssue(issue.id, null); showToast(t("toast.assigned")); }}>
             <span className="pname">{t("iss.unassigned")}</span>
             <span className="tick">{!issue.assignee && <Tick />}</span>
           </button>
           {caretakers.map((c) => (
-            <button key={c.id} className={"pickrow" + (isAssigned("caretaker", c.id) ? " sel" : "")} onClick={() => assignIssue(issue.id, { type: "caretaker", id: c.id })}>
+            <button key={c.id} className={"pickrow" + (isAssigned("caretaker", c.id) ? " sel" : "")} onClick={() => { assignIssue(issue.id, { type: "caretaker", id: c.id }); showToast(t("toast.assigned")); }}>
               <span className="pk-left"><span className="licon"><Person size={20} /></span><span><span className="pname" style={{ display: "block" }}>{t(c.nameKey)}</span><span className="ptag">{t("gen.caretaker")}</span></span></span>
               <span className="tick">{isAssigned("caretaker", c.id) && <Tick />}</span>
             </button>
           ))}
           {vendors.map((v) => (
-            <button key={v.id} className={"pickrow" + (isAssigned("vendor", v.id) ? " sel" : "")} onClick={() => assignIssue(issue.id, { type: "vendor", id: v.id })}>
+            <button key={v.id} className={"pickrow" + (isAssigned("vendor", v.id) ? " sel" : "")} onClick={() => { assignIssue(issue.id, { type: "vendor", id: v.id }); showToast(t("toast.assigned")); }}>
               <span className="pk-left"><span className="licon"><TradeIcon id={v.trade} size={20} /></span><span><span className="pname" style={{ display: "block" }}>{t(v.nameKey)}</span><span className="ptag">{t("trade." + v.trade)}</span></span></span>
               <span className="tick">{isAssigned("vendor", v.id) && <Tick />}</span>
             </button>
           ))}
         </div>
+      </div>
+      <div className="actions">
+        <button className="btn btn-primary" onClick={() => nav("/manager/issues")}>{t("act.done")}</button>
       </div>
     </div>
   );
