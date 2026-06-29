@@ -4,7 +4,7 @@ import { LangSwitch } from "../components/LangSwitch";
 import { Back } from "../components/Icons";
 import { useStore } from "../lib/store";
 
-const trades = ["plumbing", "electrical", "ac", "pool", "laundry", "pest"];
+const trades = ["plumbing", "electrical", "ac", "pool", "laundry", "pest", "supplies"];
 
 function Stars({ n }: { n: number }) {
   return <span className="stars">{"★".repeat(n)}<span className="dim">{"★".repeat(5 - n)}</span></span>;
@@ -34,7 +34,7 @@ export default function Vendors() {
               {list.map((v) => (
                 <div className="vrow" key={v.id}>
                   <div>
-                    <div className="vname">{v.name}</div>
+                    <div className="vname">{t(v.nameKey)}</div>
                     <div className="vmeta">{v.area} · <Stars n={v.rating} /></div>
                   </div>
                   <button className="callbtn">

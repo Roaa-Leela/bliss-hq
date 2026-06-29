@@ -1,7 +1,9 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
-  caretakers, issuesData, type IssueRec, type IssueStatus, type Assignee,
+  caretakers, issuesData, prefVendorByCat, purchaseReqsData,
+  type IssueRec, type IssueStatus, type Assignee,
+  type PurchaseReq, type PRLine,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -10,6 +12,7 @@ type Vars = Record<string, string | number>;
 const DONE_KEY = "bliss.done.v1";
 const LANG_KEY = "bliss.lang.v1";
 const ISSUES_KEY = "bliss.issues.v1";
+const REQS_KEY = "bliss.reqs.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -37,11 +40,18 @@ type Store = {
   inventoryItems: typeof inventoryItems;
   vendors: typeof vendors;
   caretakers: typeof caretakers;
+  prefVendorByCat: typeof prefVendorByCat;
   // issues (interactive)
   issues: IssueRec[];
   currentIssueId: string | null; setCurrentIssue: (id: string | null) => void;
   setIssueStatus: (id: string, status: IssueStatus) => void;
   assignIssue: (id: string, assignee: Assignee) => void;
+  // procurement (interactive)
+  purchaseReqs: PurchaseReq[];
+  currentReqId: string | null; setCurrentReq: (id: string | null) => void;
+  createPurchaseReq: (lines: PRLine[]) => string;
+  approvePurchaseReq: (id: string) => void;
+  orderPurchaseReq: (id: string, vendorId: string) => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -62,9 +72,12 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [currentAreaId, setCurrentArea] = useState<string | null>(null);
   const [issues, setIssues] = useState<IssueRec[]>(() => load(ISSUES_KEY, issuesData));
   const [currentIssueId, setCurrentIssue] = useState<string | null>(null);
+  const [purchaseReqs, setPurchaseReqs] = useState<PurchaseReq[]>(() => load(REQS_KEY, purchaseReqsData));
+  const [currentReqId, setCurrentReq] = useState<string | null>(null);
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
+  useEffect(() => { try { localStorage.setItem(REQS_KEY, JSON.stringify(purchaseReqs)); } catch {} }, [purchaseReqs]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -82,20 +95,34 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return {
       role, setRole, lang, setLang, done,
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
-      reset: () => { setDone(seedDone()); setIssues(issuesData); },
+      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); },
       currentAreaId, setCurrentArea,
-      property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors, caretakers,
+      property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors, caretakers, prefVendorByCat,
       issues, currentIssueId, setCurrentIssue,
       setIssueStatus: (id, status) =>
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, status } : i))),
       assignIssue: (id, assignee) =>
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, assignee } : i))),
+      purchaseReqs, currentReqId, setCurrentReq,
+      createPurchaseReq: (lines) => {
+        const id = "pr" + (purchaseReqs.length + 1) + "-" + lines.length + "-" + lines.reduce((s, l) => s + l.qty, 0);
+        setPurchaseReqs((s) => [{ id, lines, status: "requested", vendorId: null, poNum: null, whenKey: "when.now" }, ...s]);
+        return id;
+      },
+      approvePurchaseReq: (id) =>
+        setPurchaseReqs((s) => s.map((r) => (r.id === id ? { ...r, status: "approved" } : r))),
+      orderPurchaseReq: (id, vendorId) =>
+        setPurchaseReqs((s) => {
+          const orderedCount = s.filter((r) => r.status === "ordered").length;
+          const poNum = "PO-" + (2042 + orderedCount);
+          return s.map((r) => (r.id === id ? { ...r, status: "ordered", vendorId, poNum } : r));
+        }),
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

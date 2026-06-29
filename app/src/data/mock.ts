@@ -105,13 +105,20 @@ export const inventoryItems = [
 ];
 
 export const vendors = [
-  { id: "vd1", trade: "plumbing", name: "Sai Plumbing Works", area: "Shamirpet", rating: 5 },
-  { id: "vd2", trade: "electrical", name: "Sri Lakshmi Electricals", area: "Medchal", rating: 4 },
-  { id: "vd3", trade: "ac", name: "CoolCare AC Service", area: "Shamirpet", rating: 5 },
-  { id: "vd4", trade: "pool", name: "AquaPure Pool Care", area: "Hyderabad", rating: 4 },
-  { id: "vd5", trade: "laundry", name: "FreshFold Laundry", area: "Kompally", rating: 5 },
-  { id: "vd6", trade: "pest", name: "GreenShield Pest Control", area: "Medchal", rating: 4 },
+  { id: "vd1", trade: "plumbing", nameKey: "vend.vd1", name: "Sai Plumbing Works", area: "Shamirpet", rating: 5 },
+  { id: "vd2", trade: "electrical", nameKey: "vend.vd2", name: "Sri Lakshmi Electricals", area: "Medchal", rating: 4 },
+  { id: "vd3", trade: "ac", nameKey: "vend.vd3", name: "CoolCare AC Service", area: "Shamirpet", rating: 5 },
+  { id: "vd4", trade: "pool", nameKey: "vend.vd4", name: "AquaPure Pool Care", area: "Hyderabad", rating: 4 },
+  { id: "vd5", trade: "laundry", nameKey: "vend.vd5", name: "FreshFold Laundry", area: "Kompally", rating: 5 },
+  { id: "vd6", trade: "pest", nameKey: "vend.vd6", name: "GreenShield Pest Control", area: "Medchal", rating: 4 },
+  { id: "vd7", trade: "supplies", nameKey: "vend.vd7", name: "Banjara General Stores", area: "Banjara Hills", rating: 5 },
+  { id: "vd8", trade: "supplies", nameKey: "vend.vd8", name: "Hyderabad Hospitality Supplies", area: "Madhapur", rating: 4 },
 ];
+
+// Preferred supply vendor for each inventory category (used by procurement).
+export const prefVendorByCat: Record<string, string> = {
+  kitchen: "vd8", crockery: "vd8", linen: "vd7", toiletries: "vd7", consumables: "vd7",
+};
 
 // Caretakers (for assigning issues/tasks)
 export const caretakers = [
@@ -133,4 +140,17 @@ export const issuesData: IssueRec[] = [
   { id: "i3", propId: "misty", locKey: "loc.bathroom1", titleKey: "ix.geyser", cat: "maintenance", sev: "high", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd1" } },
   { id: "i6", propId: "fern", locKey: "loc.kitchen", titleKey: "ix.fridge", cat: "electronic", sev: "low", status: "in_progress", whenKey: "when.yest", assignee: { type: "caretaker", id: "c2" } },
   { id: "i4", propId: "fern", locKey: "loc.living", titleKey: "ix.bulb", cat: "electronic", sev: "low", status: "resolved", whenKey: "when.2d", assignee: { type: "vendor", id: "vd2" } },
+];
+
+// Procurement: purchase requests move Requested -> Approved -> Ordered (PO to a supplier).
+export type PRStatus = "requested" | "approved" | "ordered";
+export type PRLine = { itemId: string; qty: number };
+export type PurchaseReq = {
+  id: string; lines: PRLine[]; status: PRStatus;
+  vendorId: string | null; poNum: string | null; whenKey: string;
+};
+export const purchaseReqsData: PurchaseReq[] = [
+  { id: "pr1", lines: [{ itemId: "iv9", qty: 2 }], status: "requested", vendorId: null, poNum: null, whenKey: "when.today" },
+  { id: "pr2", lines: [{ itemId: "iv7", qty: 2 }], status: "approved", vendorId: "vd7", poNum: null, whenKey: "when.yest" },
+  { id: "pr3", lines: [{ itemId: "iv3", qty: 1 }, { itemId: "iv5", qty: 4 }], status: "ordered", vendorId: "vd8", poNum: "PO-2041", whenKey: "when.2d" },
 ];

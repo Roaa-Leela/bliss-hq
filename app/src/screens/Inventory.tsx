@@ -8,8 +8,9 @@ const cats = ["kitchen", "crockery", "linen", "toiletries", "consumables"];
 
 export default function Inventory() {
   const nav = useNavigate();
-  const { inventoryItems, t } = useStore();
+  const { inventoryItems, vendors, prefVendorByCat, t } = useStore();
   const low = inventoryItems.filter((i) => i.stock < i.must).length;
+  const prefName = (cat: string) => { const v = vendors.find((x) => x.id === prefVendorByCat[cat]); return v ? t(v.nameKey) : ""; };
 
   const condStyle = (c: string) =>
     c === "good" ? { background: "var(--cloud)", color: "var(--todo)" }
@@ -29,10 +30,19 @@ export default function Inventory() {
         <p className="meta" style={{ marginTop: 8 }}>{t("inv.sub")}</p>
 
         {/* The thing a manager cares about first: what needs reordering */}
-        <div className={"banner " + (low ? "warn" : "ok")} style={{ marginTop: 18 }}>
-          <span className="dot" style={{ background: low ? "var(--warn)" : "var(--ok)" }} />
-          {low ? t("inv.needReorder", { n: low }) : t("inv.allStocked")}
-        </div>
+        {low ? (
+          <button className="banner warn" style={{ marginTop: 18, width: "100%", justifyContent: "space-between" }} onClick={() => nav("/procurement")}>
+            <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
+              <span className="dot" style={{ background: "var(--warn)" }} />
+              {t("inv.needReorder", { n: low })}
+            </span>
+            <span className="pill pill-warn">{t("inv.reorder")}</span>
+          </button>
+        ) : (
+          <div className="banner ok" style={{ marginTop: 18 }}>
+            <span className="dot" style={{ background: "var(--ok)" }} />{t("inv.allStocked")}
+          </div>
+        )}
 
         <div className="tbl-head" style={{ marginTop: 22 }}>
           <span /><span className="h">{t("inv.colItem")}</span>
@@ -54,7 +64,10 @@ export default function Inventory() {
                 return (
                   <div className="tbl-row" key={i.id}>
                     <span className="bar" style={{ background: barColor }} />
-                    <span className="nm">{t("inv." + i.id)}</span>
+                    <span className="nmwrap">
+                      <span className="nm">{t("inv." + i.id)}</span>
+                      {isLow && <span className="ivsub">{t("proc.from", { vendor: prefName(i.cat) })}</span>}
+                    </span>
                     <span className="cnt" style={{ color: cntColor }}>{i.stock}<small>/{i.must}</small></span>
                     <span className="cond" style={condStyle(i.condition)}>{t("cond." + i.condition)}</span>
                   </div>

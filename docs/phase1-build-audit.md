@@ -61,12 +61,12 @@ PENDING (needs backend or integration)
 DONE (showable now)
 - Inventory per villa: stock vs must-have, condition, low-stock banner, urgency colour, sorted low-first.
 - Vendor directory grouped by trade, rating, Call action.
+- Procurement flow: raise a purchase request from low stock (multi-select with suggested quantities), approve, then generate a purchase order to a chosen supplier. Status moves Requested to Approved to Ordered with a visual tracker and a PO number. Requests and statuses persist.
+- Preferred supplier shown on each low-stock inventory item, and the reorder banner taps straight into procurement.
 
 UI-NEXT (no backend needed)
-- Procurement flow: raise a purchase request from low stock, approve, generate a purchase order to a vendor.
 - Stock update actions: manual count, consumption, receipt (with a movements history).
 - Low-stock surfaced as a notification.
-- Preferred vendor shown on each inventory item.
 
 PENDING (needs backend or credentials)
 - Real notification delivery (web push now possible without an account; WhatsApp needs the BSP).

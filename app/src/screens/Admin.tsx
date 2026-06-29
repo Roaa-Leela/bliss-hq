@@ -25,6 +25,10 @@ export default function Admin() {
             <span><span className="li-name">{t("adm.inventory")}</span><span className="li-sub">{t("inv.sub")}</span></span>
             <span className="pill pill-go">{t("adm.open")}</span>
           </button>
+          <button className="li" onClick={() => nav("/procurement")}>
+            <span><span className="li-name">{t("adm.procurement")}</span><span className="li-sub">{t("proc.sub")}</span></span>
+            <span className="pill pill-go">{t("adm.open")}</span>
+          </button>
           <button className="li" onClick={() => nav("/vendors")}>
             <span><span className="li-name">{t("adm.vendors")}</span><span className="li-sub">{t("vnd.sub")}</span></span>
             <span className="pill pill-go">{t("adm.open")}</span>
