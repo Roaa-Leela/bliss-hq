@@ -73,6 +73,9 @@ a{color:inherit;text-decoration:none}
 /* Reference + capture (task screen) */
 .ref{height:178px;border-radius:var(--r-card);background:linear-gradient(135deg,#9DBE6A,#415E27);position:relative;overflow:hidden}
 .ref .tag{position:absolute;left:16px;bottom:14px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px}
+.refart{height:148px;border-radius:var(--r-card);overflow:hidden;position:relative;border:1px solid var(--line);background:#F6F4EC}
+.refart > svg{display:block}
+.refart .tag{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px}
 .capture{height:150px;border-radius:var(--r-card);border:1.6px dashed #C5C9B8;background:var(--cloud);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%}
 .capture .cam{width:54px;height:54px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center}
 .capture span{font-size:15px;color:var(--forest);font-weight:700}

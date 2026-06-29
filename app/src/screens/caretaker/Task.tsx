@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back, Camera, Check } from "../../components/Icons";
+import { RefImage, hasRefImage } from "../../components/Illustrations";
 import { useStore } from "../../lib/store";
 
 export default function Task() {
@@ -37,7 +38,11 @@ export default function Task() {
         {item.requiresPhoto && (
           <>
             <div className="label" style={{ margin: "22px 0 10px" }}>{t("task.reference")}</div>
-            <div className="ref" style={{ height: 148 }}><div className="tag">{t("task.idealSetup")}</div></div>
+            {hasRefImage(item.id) ? (
+              <div className="refart"><RefImage id={item.id} /><div className="tag">{t("task.idealSetup")}</div></div>
+            ) : (
+              <div className="ref" style={{ height: 148 }}><div className="tag">{t("task.idealSetup")}</div></div>
+            )}
           </>
         )}
 
