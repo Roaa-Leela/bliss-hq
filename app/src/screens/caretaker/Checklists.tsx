@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, ClIcon } from "../../components/Icons";
+import { ClIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 
 export default function Checklists() {
@@ -18,7 +19,6 @@ export default function Checklists() {
   return (
     <div className="screen">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/caretaker")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -56,6 +56,7 @@ export default function Checklists() {
           })}
         </div>
       </div>
+      <BottomBar onBack={() => nav("/caretaker")} />
     </div>
   );
 }

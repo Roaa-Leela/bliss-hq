@@ -1,6 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, TradeIcon } from "../components/Icons";
+import { TradeIcon } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 import type { PRStatus } from "../data/mock";
 
@@ -21,10 +22,6 @@ export default function RequestDetail() {
 
   return (
     <div className="screen wide">
-      <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/procurement")} aria-label={t("a.back")}><Back /></button>
-        <span style={{ width: 42 }} />
-      </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("proc.title")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("proc.reqTitle")}</h1>
@@ -73,15 +70,16 @@ export default function RequestDetail() {
         )}
       </div>
 
-      {req.status === "requested" && (
-        <div className="actions">
+      {req.status === "requested" ? (
+        <BottomBar onBack={() => nav("/procurement")}>
           <button className="btn btn-primary" onClick={() => approvePurchaseReq(req.id)}>{t("proc.approve")}</button>
-        </div>
-      )}
-      {req.status === "approved" && (
-        <div className="actions">
+        </BottomBar>
+      ) : req.status === "approved" ? (
+        <BottomBar onBack={() => nav("/procurement")}>
           <button className="btn btn-primary" onClick={() => orderPurchaseReq(req.id, vendorId)}>{t("proc.generatePO")}</button>
-        </div>
+        </BottomBar>
+      ) : (
+        <BottomBar onBack={() => nav("/procurement")} />
       )}
     </div>
   );

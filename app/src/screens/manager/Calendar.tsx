@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { Empty } from "../../components/Empty";
 import { CalendarBlank } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
@@ -33,7 +33,6 @@ export default function Calendar() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/manager")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -97,6 +96,7 @@ export default function Calendar() {
         </div>
         </div>
       </div>
+      <BottomBar onBack={() => nav("/manager")} />
     </div>
   );
 }

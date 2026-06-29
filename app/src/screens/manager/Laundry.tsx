@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, LaundryIcon } from "../../components/Icons";
+import { LaundryIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { Empty } from "../../components/Empty";
 import { Basket } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
@@ -18,7 +19,6 @@ export default function Laundry() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -50,6 +50,7 @@ export default function Laundry() {
           </>
         )}
       </div>
+      <BottomBar onBack={() => nav(-1)} />
     </div>
   );
 }

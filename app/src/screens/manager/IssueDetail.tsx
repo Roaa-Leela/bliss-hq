@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, CatIcon, Person, TradeIcon, MtIcon } from "../../components/Icons";
+import { CatIcon, Person, TradeIcon, MtIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { StatusPicker } from "../../components/StatusPicker";
 import { useStore } from "../../lib/store";
 import { maintenanceTypes, ownerships } from "../../data/mock";
@@ -21,10 +22,6 @@ export default function IssueDetail() {
 
   return (
     <div className="screen wide">
-      <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/manager/issues")} aria-label={t("a.back")}><Back /></button>
-        <span style={{ width: 42 }} />
-      </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("prop." + issue.propId)} · {t(issue.locKey)}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{issue.title ?? t(issue.titleKey)}</h1>
@@ -100,9 +97,9 @@ export default function IssueDetail() {
           </div>
         </div>
       </div>
-      <div className="actions">
+      <BottomBar onBack={() => nav("/manager/issues")}>
         <button className="btn btn-primary" onClick={() => nav("/manager/issues")}>{t("act.done")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

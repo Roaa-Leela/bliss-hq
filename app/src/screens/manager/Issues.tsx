@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, CatIcon } from "../../components/Icons";
+import { CatIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { Empty } from "../../components/Empty";
 import { AllClear } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
@@ -22,7 +23,6 @@ export default function Issues() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/manager")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -57,6 +57,7 @@ export default function Issues() {
           </div>
         </div>
       </div>
+      <BottomBar onBack={() => nav("/manager")} />
     </div>
   );
 }

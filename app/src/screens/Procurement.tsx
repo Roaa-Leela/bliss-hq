@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, Cart } from "../components/Icons";
+import { Cart } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { Empty } from "../components/Empty";
 import { EmptyBox } from "../components/EmptyArt";
 import { useStore } from "../lib/store";
@@ -37,7 +38,6 @@ export default function Procurement() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -93,12 +93,14 @@ export default function Procurement() {
           ))}
         </div>
       </div>
-      {low.length > 0 && (
-        <div className="actions">
+      {low.length > 0 ? (
+        <BottomBar onBack={() => nav(-1)}>
           <button className="btn btn-primary" disabled={chosen.length === 0} onClick={raise} style={chosen.length === 0 ? { opacity: 0.5 } : undefined}>
             {chosen.length ? t("proc.raiseN", { n: chosen.length }) : t("proc.selectNone")}
           </button>
-        </div>
+        </BottomBar>
+      ) : (
+        <BottomBar onBack={() => nav(-1)} />
       )}
     </div>
   );

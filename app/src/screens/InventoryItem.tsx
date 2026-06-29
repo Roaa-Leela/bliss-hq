@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 import type { MoveType } from "../data/mock";
 
@@ -27,10 +27,6 @@ export default function InventoryItem() {
 
   return (
     <div className="screen wide">
-      <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/inventory")} aria-label={t("a.back")}><Back /></button>
-        <span style={{ width: 42 }} />
-      </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("cat." + item.cat)}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("inv." + item.id)}</h1>
@@ -81,9 +77,9 @@ export default function InventoryItem() {
           </div>
         )}
       </div>
-      <div className="actions">
+      <BottomBar onBack={() => nav("/inventory")}>
         <button className="btn btn-primary" onClick={apply}>{t("stock.apply")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

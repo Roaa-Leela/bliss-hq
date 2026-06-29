@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, InvIcon } from "../components/Icons";
+import { InvIcon } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 
 const cats = ["kitchen", "crockery", "linen", "toiletries", "consumables"];
@@ -20,7 +21,6 @@ export default function Inventory() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -80,6 +80,7 @@ export default function Inventory() {
           );
         })}
       </div>
+      <BottomBar onBack={() => nav(-1)} />
     </div>
   );
 }

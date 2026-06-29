@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, CatIcon, Signal } from "../../components/Icons";
+import { CatIcon, Signal } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 
 const cats = [["cat.cleaning"], ["cat.damage"], ["cat.missing"], ["cat.maintenance"]].map((x) => x[0]);
@@ -37,12 +38,9 @@ export default function ReportIssue() {
   return (
     <div className="screen">
       <div className="pad" style={{ paddingBottom: 8, paddingTop: 24 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
-          <div>
-            <div className="kicker">{tArea(area.id)}</div>
-            <div style={{ fontSize: 17, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>{t("issue.title")}</div>
-          </div>
+        <div>
+          <div className="kicker">{tArea(area.id)}</div>
+          <div style={{ fontSize: 17, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>{t("issue.title")}</div>
         </div>
       </div>
 
@@ -74,9 +72,9 @@ export default function ReportIssue() {
         </div>
       </div>
 
-      <div className="actions">
+      <BottomBar onBack={() => nav(-1)}>
         <button className="btn btn-primary" onClick={submit}>{t("act.sendManager")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

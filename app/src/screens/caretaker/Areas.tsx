@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import { Back, AreaIcon } from "../../components/Icons";
+import { AreaIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 
 export default function Areas() {
@@ -12,10 +13,6 @@ export default function Areas() {
 
   return (
     <div className="screen">
-      <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/caretaker")} aria-label={t("a.back")}><Back /></button>
-        <span style={{ width: 42 }} />
-      </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 14 }}>{t("meta.preCheckin")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("prop." + property.id)}</h1>
@@ -41,10 +38,12 @@ export default function Areas() {
           })}
         </div>
       </div>
-      {tp.pct === 100 && (
-        <div className="actions">
+      {tp.pct === 100 ? (
+        <BottomBar onBack={() => nav("/caretaker")}>
           <button className="btn btn-primary" onClick={() => nav("/caretaker/submit")}>{t("act.submit")}</button>
-        </div>
+        </BottomBar>
+      ) : (
+        <BottomBar onBack={() => nav("/caretaker")} />
       )}
     </div>
   );

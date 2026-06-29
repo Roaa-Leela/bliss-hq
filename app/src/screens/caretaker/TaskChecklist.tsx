@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, Check } from "../../components/Icons";
+import { Check } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 
 export default function TaskChecklist() {
@@ -21,10 +22,6 @@ export default function TaskChecklist() {
   if (submitted) {
     return (
       <div className="screen">
-        <div className="appbar">
-          <button className="iconbtn" onClick={() => nav("/caretaker/checklists")} aria-label={t("a.back")}><Back /></button>
-          <span style={{ width: 42 }} />
-        </div>
         <div className="celebrate">
           <div className="ring"><Check size={40} color="var(--ok-text)" /></div>
           <h1>{t("cl.submittedT")}</h1>
@@ -38,7 +35,6 @@ export default function TaskChecklist() {
   return (
     <div className="screen">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/caretaker/checklists")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -60,9 +56,9 @@ export default function TaskChecklist() {
           })}
         </div>
       </div>
-      <div className="actions">
+      <BottomBar onBack={() => nav("/caretaker/checklists")}>
         <button className="btn btn-primary" disabled={d < total} style={d < total ? { opacity: 0.5 } : undefined} onClick={() => setSubmitted(true)}>{t("cl.submit")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

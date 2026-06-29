@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, Check, DepIcon } from "../../components/Icons";
+import { Check, DepIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 import { bookingsData, DEPOSIT_AMOUNT, depositReasons } from "../../data/mock";
 
@@ -23,10 +24,6 @@ export default function Deposit() {
   if (submitted) {
     return (
       <div className="screen wide">
-        <div className="appbar">
-          <button className="iconbtn" onClick={() => nav("/manager")} aria-label={t("a.back")}><Back /></button>
-          <span style={{ width: 42 }} />
-        </div>
         <div className="celebrate">
           <div className="ring"><Check size={40} color="var(--ok-text)" /></div>
           <h1>{t("dep.submittedT")}</h1>
@@ -40,7 +37,6 @@ export default function Deposit() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/manager/calendar")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -91,13 +87,13 @@ export default function Deposit() {
 
         <div className="ref" style={{ height: 130, marginTop: 20 }}><div className="tag">{t("dep.evidence")}</div></div>
       </div>
-      <div className="actions">
+      <BottomBar onBack={() => nav("/manager/calendar")}>
         <button className="btn btn-primary" disabled={!canSubmit} style={!canSubmit ? { opacity: 0.5 } : undefined}
           onClick={() => {
             addDeduction({ id: "dd-" + Date.now(), propId: stay.propId, guestKey: stay.guestKey, amount, reasonKey: "dep.reason." + reason, status: "pending", whenKey: "when.now" });
             setSubmitted(true);
           }}>{t("dep.submit")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

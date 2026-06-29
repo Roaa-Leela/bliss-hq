@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, Camera, Check } from "../../components/Icons";
+import { Camera, Check } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { RefImage, hasRefImage } from "../../components/Illustrations";
 import { useStore } from "../../lib/store";
 
@@ -22,12 +23,9 @@ export default function Task() {
   return (
     <div className="screen">
       <div className="pad" style={{ paddingBottom: 0, paddingTop: 24 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-          <button className="iconbtn" onClick={() => nav("/caretaker/areas")} aria-label={t("a.back")}><Back /></button>
-          <div style={{ flex: 1 }}>
-            <div className="kicker">{tArea(area.id)}</div>
-            <div style={{ fontSize: 16, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>{t("task.check", { idx, total })}</div>
-          </div>
+        <div style={{ flex: 1 }}>
+          <div className="kicker">{tArea(area.id)}</div>
+          <div style={{ fontSize: 16, fontWeight: 800, color: "var(--forest)", marginTop: 3 }}>{t("task.check", { idx, total })}</div>
         </div>
         <div className="progress" style={{ marginTop: 16 }}><i style={{ width: `${pct}%` }} /></div>
       </div>
@@ -53,10 +51,10 @@ export default function Task() {
         </button>
       </div>
 
-      <div className="actions">
+      <BottomBar onBack={() => nav("/caretaker/areas")}>
         <button className="btn btn-primary" onClick={() => markDone(item.id)}>{t("act.looksGood")} <Check /></button>
         <button className="btn btn-danger" onClick={() => nav("/caretaker/issue")}>{t("act.reportIssue")}</button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

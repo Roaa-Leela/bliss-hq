@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, Person } from "../components/Icons";
+import { Person } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 
 function Row({ k, v }: { k: string; v: string }) {
@@ -17,7 +18,6 @@ export default function CaretakerProfile() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/admin")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -59,6 +59,7 @@ export default function CaretakerProfile() {
           <span className={"pill " + (c.trained ? "pill-ok" : "pill-warn")}>{c.trained ? t("stf.trained") : t("stf.untrained")}</span>
         </div>
       </div>
+      <BottomBar onBack={() => nav("/admin")} />
     </div>
   );
 }

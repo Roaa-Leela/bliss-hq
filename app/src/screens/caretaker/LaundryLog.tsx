@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, LaundryIcon } from "../../components/Icons";
+import { LaundryIcon } from "../../components/Icons";
+import { BottomBar } from "../../components/BottomBar";
 import { useStore } from "../../lib/store";
 
 const nameKey: Record<string, string> = { l1: "ln.sheets", l2: "ln.pillow", l3: "ln.bath", l4: "ln.hand", l5: "ln.duvet" };
@@ -15,10 +16,6 @@ export default function LaundryLog() {
 
   return (
     <div className="screen">
-      <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/caretaker")} aria-label={t("a.back")}><Back /></button>
-        <span style={{ width: 42 }} />
-      </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("laundry.kicker")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("laundry.title")}</h1>
@@ -44,12 +41,12 @@ export default function LaundryLog() {
         </div>
       </div>
 
-      <div className="actions">
+      <BottomBar onBack={() => nav("/caretaker")}>
         <button className="btn btn-primary" disabled={total === 0} style={total === 0 ? { opacity: 0.5 } : undefined}
           onClick={() => { sendLaundry(counts); showToast(t("toast.laundrySent")); nav("/caretaker"); }}>
           {total > 0 ? t("laundry.sendN", { n: total }) : t("laundry.send")}
         </button>
-      </div>
+      </BottomBar>
     </div>
   );
 }

@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, TradeIcon, Phone } from "../components/Icons";
+import { TradeIcon, Phone } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 
 const trades = ["plumbing", "electrical", "ac", "carpentry", "painting", "pool", "laundry", "pest", "supplies"];
@@ -16,7 +17,6 @@ export default function Vendors() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -48,6 +48,7 @@ export default function Vendors() {
           );
         })}
       </div>
+      <BottomBar onBack={() => nav(-1)} />
     </div>
   );
 }

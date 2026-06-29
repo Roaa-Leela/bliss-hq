@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, TlIcon } from "../components/Icons";
+import { TlIcon } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 
 const dot = { ok: "var(--ok)", info: "var(--info)", warn: "var(--warn)" };
@@ -19,7 +20,6 @@ export default function Owner() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -85,6 +85,7 @@ export default function Owner() {
         </div>
         </div>
       </div>
+      <BottomBar onBack={() => nav("/")} />
     </div>
   );
 }

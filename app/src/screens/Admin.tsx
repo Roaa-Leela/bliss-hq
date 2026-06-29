@@ -1,7 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, AdminIcon, Home, ClIcon, Person } from "../components/Icons";
+import { AdminIcon, Home, ClIcon, Person } from "../components/Icons";
+import { BottomBar } from "../components/BottomBar";
 import { useStore } from "../lib/store";
 
 const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
@@ -17,7 +18,6 @@ export default function Admin() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/")} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>
@@ -85,6 +85,7 @@ export default function Admin() {
         </div>
         </div>
       </div>
+      <BottomBar onBack={() => nav("/")} />
     </div>
   );
 }
