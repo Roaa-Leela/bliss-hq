@@ -48,26 +48,28 @@ export default function Calendar() {
           ))}
         </div>
 
-        <div className="calhead">{t("cal.month")}</div>
-        <div className="calgrid caldow">
-          {dows.map((d) => <span key={d} className="cdow">{t("dow." + d)}</span>)}
-        </div>
-        <div className="calgrid">
-          {cells.map((d, i) => {
-            if (d === null) return <span key={"e" + i} className="ccell empty" />;
-            const s = status(d);
-            const isToday = d === calMonth.todayDate;
-            return (
-              <span key={d} className={"ccell c-" + s + (isToday ? " today" : "")}>{d}</span>
-            );
-          })}
-        </div>
+        <div className="calwrap">
+          <div className="calhead">{t("cal.month")}</div>
+          <div className="calgrid caldow">
+            {dows.map((d) => <span key={d} className="cdow">{t("dow." + d)}</span>)}
+          </div>
+          <div className="calgrid">
+            {cells.map((d, i) => {
+              if (d === null) return <span key={"e" + i} className="ccell empty" />;
+              const s = status(d);
+              const isToday = d === calMonth.todayDate;
+              return (
+                <span key={d} className={"ccell c-" + s + (isToday ? " today" : "")}>{d}</span>
+              );
+            })}
+          </div>
 
-        <div className="callegend">
-          <span className="lg"><span className="lgsw c-in" />{t("cal.legend.in")}</span>
-          <span className="lg"><span className="lgsw c-stay" />{t("cal.legend.stay")}</span>
-          <span className="lg"><span className="lgsw c-out" />{t("cal.legend.out")}</span>
-          <span className="lg"><span className="lgsw c-free" />{t("cal.legend.free")}</span>
+          <div className="callegend">
+            <span className="lg"><span className="lgsw c-in" />{t("cal.legend.in")}</span>
+            <span className="lg"><span className="lgsw c-stay" />{t("cal.legend.stay")}</span>
+            <span className="lg"><span className="lgsw c-out" />{t("cal.legend.out")}</span>
+            <span className="lg"><span className="lgsw c-free" />{t("cal.legend.free")}</span>
+          </div>
         </div>
 
         <div className="label" style={{ marginTop: 28 }}>{t("cal.upcoming")}</div>

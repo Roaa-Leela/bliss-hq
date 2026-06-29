@@ -110,6 +110,8 @@ a{color:inherit;text-decoration:none}
 .textarea{min-height:120px;resize:none;line-height:1.45}
 .input:focus,.textarea:focus{outline:none;border-color:var(--forest)}
 .options{display:flex;gap:10px;flex-wrap:wrap}
+.options.optgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px}
+.options.optgrid .opt{flex:none;min-width:0}
 .opt{flex:1;min-width:96px;border:1.5px solid var(--line);border-radius:11px;padding:14px 10px;text-align:center;font-size:14px;font-weight:600;color:var(--ink);background:var(--surface)}
 .opt.sel{border-color:var(--forest);background:var(--mist);color:var(--forest)}
 
@@ -191,6 +193,12 @@ a{color:inherit;text-decoration:none}
   .deskmain .kicker{margin-top:0 !important}
   /* stat tiles read as chips on the white card */
   .deskmain .statgrid .stat{background:#F7F6F1}
+  /* confirmation + empty states need breathing room on the white card */
+  .deskmain .celebrate{padding:84px 40px}
+  .deskmain .empty.empty-full{padding:84px 40px}
+  /* triage form reads as two structured columns, not one stretched stack */
+  .deskmain .issueform{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;align-items:start}
+  .deskmain .issueform > *{min-width:0}
 }
 @keyframes popin{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
 
@@ -339,11 +347,12 @@ a{color:inherit;text-decoration:none}
 .amtchips .amtchip:active{background:var(--mist)}
 
 /* ---- Availability calendar ---- */
+.calwrap{max-width:440px;margin-top:4px}
 .calhead{font-size:15px;font-weight:800;color:var(--forest);margin-top:24px;text-align:center}
 .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
 .calgrid.caldow{margin-top:16px;margin-bottom:2px}
-.cdow{text-align:center;font-size:11px;font-weight:800;color:var(--slate);text-transform:uppercase;letter-spacing:.5px}
-.ccell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:14px;font-weight:700}
+.cdow{text-align:center;font-size:11px;font-weight:800;color:var(--slate);text-transform:uppercase;letter-spacing:.5px;min-width:0}
+.ccell{aspect-ratio:1;min-width:0;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:14px;font-weight:700}
 .ccell.empty{background:transparent}
 .ccell.c-free{background:var(--cloud);color:var(--slate);font-weight:600}
 .ccell.c-stay{background:var(--mist);color:var(--forest)}
