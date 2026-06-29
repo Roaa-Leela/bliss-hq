@@ -54,6 +54,32 @@ export const property: Property = {
   ],
 };
 
+// Other checklist types beyond pre check-in. These run as simple tick lists
+// (daily/weekly/monthly are task routines, not room-by-room photo passes).
+export type TaskItem = { id: string; textKey: string };
+export type TaskChecklist = { id: string; freqKey: string; items: TaskItem[] };
+export const taskChecklists: TaskChecklist[] = [
+  { id: "postStay", freqKey: "freq.perStay", items: [
+    { id: "ps1", textKey: "cl.ps1" }, { id: "ps2", textKey: "cl.ps2" }, { id: "ps3", textKey: "cl.ps3" },
+    { id: "ps4", textKey: "cl.ps4" }, { id: "ps5", textKey: "cl.ps5" }, { id: "ps6", textKey: "cl.ps6" },
+  ]},
+  { id: "daily", freqKey: "freq.daily", items: [
+    { id: "dl1", textKey: "cl.dl1" }, { id: "dl2", textKey: "cl.dl2" }, { id: "dl3", textKey: "cl.dl3" },
+    { id: "dl4", textKey: "cl.dl4" }, { id: "dl5", textKey: "cl.dl5" },
+  ]},
+  { id: "weekly", freqKey: "freq.weekly", items: [
+    { id: "wk1", textKey: "cl.wk1" }, { id: "wk2", textKey: "cl.wk2" }, { id: "wk3", textKey: "cl.wk3" },
+    { id: "wk4", textKey: "cl.wk4" }, { id: "wk5", textKey: "cl.wk5" },
+  ]},
+  { id: "monthly", freqKey: "freq.monthly", items: [
+    { id: "mo1", textKey: "cl.mo1" }, { id: "mo2", textKey: "cl.mo2" }, { id: "mo3", textKey: "cl.mo3" },
+    { id: "mo4", textKey: "cl.mo4" }, { id: "mo5", textKey: "cl.mo5" },
+  ]},
+  { id: "adhoc", freqKey: "freq.adhoc", items: [
+    { id: "ah1", textKey: "cl.ah1" }, { id: "ah2", textKey: "cl.ah2" }, { id: "ah3", textKey: "cl.ah3" },
+  ]},
+];
+
 export type RoleId = "caretaker" | "manager" | "owner" | "admin";
 export const roles: { id: RoleId; title: string; sub: string }[] = [
   { id: "caretaker", title: "Caretaker", sub: "Do checks on the ground" },

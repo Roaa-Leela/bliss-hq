@@ -24,8 +24,10 @@ DONE (showable now)
 DONE (added)
 - In-app notifications view: a bell with an unread badge on the operations bar opens a colour-coded feed (review, issue, stock, laundry, order, approved). Each item taps through to the right screen and marks itself read; mark-all-read clears the badge. State persists.
 
+DONE (added)
+- The other checklist types are live with real content: a checklists hub lists pre check-in (the room-by-room photo flow) plus post-stay, daily, weekly, monthly and ad-hoc routines. The recurring ones run as tickable task lists with progress and submit, fully translated.
+
 UI-NEXT (no backend needed)
-- The other checklist types live: post-stay, daily, weekly, monthly, ad-hoc (add content).
 - Icon-led, image-led pass to cut reading further.
 
 PENDING (needs backend or device)

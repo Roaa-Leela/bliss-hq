@@ -190,6 +190,13 @@ a{color:inherit;text-decoration:none}
 .tbl-row .nmwrap{display:flex;flex-direction:column;min-width:0}
 .tbl-row .ivsub{font-size:11.5px;color:var(--slate);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+/* ---- Task checklist (tickable items) ---- */
+.checkrow{display:flex;align-items:flex-start;gap:14px;width:100%;text-align:left;padding:16px 2px;border-top:1px solid var(--line)}
+.checkrow .cbox{width:26px;height:26px;border-radius:8px;border:2px solid var(--line);flex:0 0 26px;display:flex;align-items:center;justify-content:center;background:var(--surface);margin-top:1px}
+.checkrow.on .cbox{background:var(--forest);border-color:var(--forest)}
+.checkrow .ctext{font-size:15.5px;color:var(--ink);line-height:1.4}
+.checkrow.on .ctext{color:var(--slate);text-decoration:line-through}
+
 /* ---- Security deposit deduction ---- */
 .staycard{display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);border-radius:var(--r-card);padding:16px 18px;margin-top:16px}
 .staycard .sgn{font-size:16px;font-weight:700;color:var(--ink)}

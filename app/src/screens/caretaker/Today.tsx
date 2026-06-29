@@ -35,6 +35,9 @@ export default function Today() {
         <button className="btn btn-primary" style={{ marginTop: 22 }} onClick={() => nav("/caretaker/areas")}>
           {tp.pct === 0 ? t("act.start") : t("act.continue")} <Arrow />
         </button>
+        <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/checklists")}>
+          {t("cl.hubTitle")}
+        </button>
         <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/laundry")}>
           {t("act.laundryLog")}
         </button>

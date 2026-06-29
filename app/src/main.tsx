@@ -10,6 +10,8 @@ import Task from "./screens/caretaker/Task";
 import ReportIssue from "./screens/caretaker/ReportIssue";
 import LaundryLog from "./screens/caretaker/LaundryLog";
 import Submit from "./screens/caretaker/Submit";
+import Checklists from "./screens/caretaker/Checklists";
+import TaskChecklist from "./screens/caretaker/TaskChecklist";
 import Operations from "./screens/manager/Operations";
 import Review from "./screens/manager/Review";
 import Issues from "./screens/manager/Issues";
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
   { path: "/caretaker/issue", element: <ReportIssue /> },
   { path: "/caretaker/laundry", element: <LaundryLog /> },
   { path: "/caretaker/submit", element: <Submit /> },
+  { path: "/caretaker/checklists", element: <Checklists /> },
+  { path: "/caretaker/checklist", element: <TaskChecklist /> },
   { path: "/manager", element: <Operations /> },
   { path: "/manager/review", element: <Review /> },
   { path: "/manager/issues", element: <Issues /> },

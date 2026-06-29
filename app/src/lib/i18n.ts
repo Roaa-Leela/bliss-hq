@@ -153,6 +153,58 @@ export const messages: Record<string, Entry> = {
   "tpl.monthly": { en: "Monthly", hi: "मासिक", te: "నెలవారీ" },
   "tpl.adhoc": { en: "Ad-hoc", hi: "ज़रूरत अनुसार", te: "అవసరమైనప్పుడు" },
 
+  // Checklist frequencies
+  "freq.preCheckin": { en: "Before check-in", hi: "चेक-इन से पहले", te: "చెక్-ఇన్‌కు ముందు" },
+  "freq.perStay": { en: "After each stay", hi: "हर ठहराव के बाद", te: "ప్రతి బస తర్వాత" },
+  "freq.daily": { en: "Every day", hi: "हर दिन", te: "ప్రతిరోజు" },
+  "freq.weekly": { en: "Every week", hi: "हर हफ्ते", te: "ప్రతి వారం" },
+  "freq.monthly": { en: "Every month", hi: "हर महीने", te: "ప్రతి నెల" },
+  "freq.adhoc": { en: "As needed", hi: "ज़रूरत अनुसार", te: "అవసరమైనప్పుడు" },
+
+  // Checklists hub + task checklist
+  "cl.hubTitle": { en: "Checklists", hi: "चेकलिस्ट", te: "చెక్‌లిస్ట్‌లు" },
+  "cl.hubSub": { en: "Your routines for this property", hi: "इस प्रॉपर्टी के लिए आपके काम", te: "ఈ ఆస్తికి మీ దినచర్యలు" },
+  "cl.checksN": { en: "{n} checks", hi: "{n} जाँच", te: "{n} తనిఖీలు" },
+  "cl.progress": { en: "{done} of {total} done", hi: "{total} में से {done} पूरे", te: "{total} లో {done} పూర్తి" },
+  "cl.allDone": { en: "All done", hi: "सब पूरा", te: "అన్నీ పూర్తి" },
+  "cl.submit": { en: "Submit checklist", hi: "चेकलिस्ट जमा करें", te: "చెక్‌లిస్ట్ సమర్పించండి" },
+  "cl.submittedT": { en: "Checklist submitted", hi: "चेकलिस्ट जमा हुई", te: "చెక్‌లిస్ట్ సమర్పించబడింది" },
+  "cl.submittedS": { en: "All {n} checks done and sent to your manager.", hi: "सभी {n} जाँच पूरी और मैनेजर को भेज दी गईं।", te: "మొత్తం {n} తనిఖీలు పూర్తయి మేనేజర్‌కు పంపబడ్డాయి." },
+
+  // Post-stay checklist
+  "cl.ps1": { en: "Strip all beds, collect used linen and towels for laundry", hi: "सभी बिस्तरों से चादरें उतारें, इस्तेमाल किए लिनेन और तौलिए लॉन्ड्री के लिए इकट्ठा करें", te: "అన్ని పడకల దుప్పట్లు తీసి, వాడిన లినెన్, తువ్వాళ్లను లాండ్రీకి సేకరించండి" },
+  "cl.ps2": { en: "Check every room for guest belongings left behind", hi: "हर कमरे में मेहमान का छूटा सामान जाँचें", te: "ప్రతి గదిలో అతిథి మరిచిన వస్తువులను తనిఖీ చేయండి" },
+  "cl.ps3": { en: "Inspect for any damage or missing items and report", hi: "किसी नुकसान या गायब सामान की जाँच करें और रिपोर्ट करें", te: "ఏదైనా నష్టం లేదా మిస్సింగ్ వస్తువులను తనిఖీ చేసి నివేదించండి" },
+  "cl.ps4": { en: "Empty and clean the fridge, discard leftover food", hi: "फ्रिज खाली और साफ करें, बचा खाना हटाएं", te: "ఫ్రిజ్ ఖాళీ చేసి శుభ్రం చేయండి, మిగిలిన ఆహారం పారవేయండి" },
+  "cl.ps5": { en: "Wash all used utensils and take out the trash", hi: "सभी इस्तेमाल किए बर्तन धोएं और कचरा बाहर निकालें", te: "వాడిన పాత్రలన్నీ కడిగి, చెత్తను బయటకు తీయండి" },
+  "cl.ps6": { en: "Switch off ACs, geysers and unnecessary lights", hi: "एसी, गीज़र और गैर-ज़रूरी लाइटें बंद करें", te: "ఏసీలు, గీజర్లు, అనవసర లైట్లను ఆపండి" },
+
+  // Daily checklist
+  "cl.dl1": { en: "Skim the pool and check the water is clear", hi: "पूल साफ करें और पानी साफ है यह जाँचें", te: "పూల్‌ను శుభ్రం చేసి నీరు స్వచ్ఛంగా ఉందో చూడండి" },
+  "cl.dl2": { en: "Water the garden and outdoor plants", hi: "बगीचे और बाहर के पौधों को पानी दें", te: "తోట, బయటి మొక్కలకు నీరు పోయండి" },
+  "cl.dl3": { en: "Sweep the entrance and main pathways", hi: "प्रवेश और मुख्य रास्ते साफ करें", te: "ప్రవేశం, ప్రధాన దారులను ఊడ్చండి" },
+  "cl.dl4": { en: "Check all outdoor lights work in the evening", hi: "शाम को सभी बाहरी लाइटें जाँचें", te: "సాయంత్రం అన్ని బయటి లైట్లు పనిచేస్తున్నాయో చూడండి" },
+  "cl.dl5": { en: "Confirm Wi-Fi and TV are working", hi: "वाई-फाई और टीवी चालू हैं यह पक्का करें", te: "వై-ఫై, టీవీ పనిచేస్తున్నాయని నిర్ధారించండి" },
+
+  // Weekly checklist
+  "cl.wk1": { en: "Deep clean the kitchen stove and chimney", hi: "रसोई का चूल्हा और चिमनी गहराई से साफ करें", te: "వంటగది స్టవ్, చిమ్నీని లోతుగా శుభ్రం చేయండి" },
+  "cl.wk2": { en: "Check and top up the pool chemicals", hi: "पूल के केमिकल जाँचें और भरें", te: "పూల్ కెమికల్స్ తనిఖీ చేసి నింపండి" },
+  "cl.wk3": { en: "Wipe down all fans and clean the AC filters", hi: "सभी पंखे पोंछें और एसी फिल्टर साफ करें", te: "అన్ని ఫ్యాన్లు తుడిచి, ఏసీ ఫిల్టర్లను శుభ్రం చేయండి" },
+  "cl.wk4": { en: "Test the inverter and backup power", hi: "इन्वर्टर और बैकअप पावर जाँचें", te: "ఇన్వర్టర్, బ్యాకప్ పవర్‌ను పరీక్షించండి" },
+  "cl.wk5": { en: "Check the first aid kit and restock used items", hi: "फर्स्ट एड किट जाँचें और इस्तेमाल हुई चीज़ें भरें", te: "ఫస్ట్ ఎయిడ్ కిట్ తనిఖీ చేసి, వాడిన వస్తువులను నింపండి" },
+
+  // Monthly checklist
+  "cl.mo1": { en: "Service the water purifier, replace the filter if due", hi: "वाटर प्यूरिफायर सर्विस करें, ज़रूरत हो तो फिल्टर बदलें", te: "వాటర్ ప్యూరిఫయర్‌కు సర్వీస్ చేసి, అవసరమైతే ఫిల్టర్ మార్చండి" },
+  "cl.mo2": { en: "Pest control inspection of all rooms", hi: "सभी कमरों की पेस्ट कंट्रोल जाँच", te: "అన్ని గదుల పెస్ట్ కంట్రోల్ తనిఖీ" },
+  "cl.mo3": { en: "Check for plumbing leaks under sinks and in bathrooms", hi: "सिंक के नीचे और बाथरूम में लीक जाँचें", te: "సింక్‌ల కింద, బాత్రూమ్‌లలో లీకేజ్‌లను తనిఖీ చేయండి" },
+  "cl.mo4": { en: "Test the smoke alarms and replace batteries", hi: "स्मोक अलार्म जाँचें और बैटरी बदलें", te: "స్మోక్ అలారాలను పరీక్షించి, బ్యాటరీలు మార్చండి" },
+  "cl.mo5": { en: "Full inventory count against the property list", hi: "प्रॉपर्टी सूची के अनुसार पूरी इन्वेंट्री गिनती", te: "ఆస్తి జాబితా ప్రకారం పూర్తి ఇన్వెంటరీ లెక్క" },
+
+  // Ad-hoc checklist
+  "cl.ah1": { en: "Touch up the paint where the wall is scuffed", hi: "जहाँ दीवार खराब है वहाँ पेंट ठीक करें", te: "గోడ గీరుకుపోయిన చోట పెయింట్ సరిచేయండి" },
+  "cl.ah2": { en: "Fix the loose cabinet handle in the kitchen", hi: "रसोई में ढीला कैबिनेट हैंडल ठीक करें", te: "వంటగదిలో వదులైన క్యాబినెట్ హ్యాండిల్‌ను సరిచేయండి" },
+  "cl.ah3": { en: "Replace the fused bulb in the corridor", hi: "गलियारे का फ्यूज़ बल्ब बदलें", te: "కారిడార్‌లో పాడైన బల్బును మార్చండి" },
+
   // Issue example titles (demo)
   "loc.bedroom2": { en: "Bedroom 2", hi: "बेडरूम 2", te: "బెడ్‌రూమ్ 2" },
   "loc.restock": { en: "Restock", hi: "रीस्टॉक", te: "రీస్టాక్" },

@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
-  caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData,
+  caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData, taskChecklists,
   type IssueRec, type IssueStatus, type Assignee,
   type PurchaseReq, type PRLine, type StockMove, type MoveType, type Notif,
   type Area, type RoleId, type Property,
@@ -33,7 +33,11 @@ type Store = {
   lang: Lang; setLang: (l: Lang) => void;
   done: Record<string, boolean>;
   markDone: (itemId: string) => void;
+  toggleDone: (itemId: string) => void;
   reset: () => void;
+  // other checklist types
+  taskChecklists: typeof taskChecklists;
+  activeChecklistId: string | null; setActiveChecklist: (id: string | null) => void;
   currentAreaId: string | null; setCurrentArea: (id: string | null) => void;
   // data (single source; swaps to Supabase later with no screen changes)
   property: Property;
@@ -93,6 +97,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [currentItemId, setCurrentItem] = useState<string | null>(null);
   const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
   const [currentStayId, setCurrentStay] = useState<string | null>(null);
+  const [activeChecklistId, setActiveChecklist] = useState<string | null>(null);
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
@@ -117,6 +122,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return {
       role, setRole, lang, setLang, done,
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
+      toggleDone: (id) => setDone((s) => ({ ...s, [id]: !s[id] })),
+      taskChecklists, activeChecklistId, setActiveChecklist,
       reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); },
       currentAreaId, setCurrentArea,
       property, managerProps, laundryItems, ownerTimeline, inventoryItems: inv, vendors, caretakers, prefVendorByCat,
@@ -165,7 +172,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }
