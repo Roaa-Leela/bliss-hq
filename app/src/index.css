@@ -88,7 +88,8 @@ a{color:inherit;text-decoration:none}
 .stat .lab{font-size:11px;color:var(--slate);margin-top:5px}
 
 /* Sticky bottom action area: stays reachable on long forms */
-.actions{position:sticky;bottom:0;z-index:20;padding:14px var(--pad) 22px;display:flex;flex-direction:column;gap:12px;background:var(--surface);border-top:1px solid var(--line)}
+/* right gutter reserves space for the floating role-switch button in the corner */
+.actions{position:sticky;bottom:0;z-index:20;padding:14px 76px 22px var(--pad);display:flex;flex-direction:column;gap:12px;background:var(--surface);border-top:1px solid var(--line)}
 /* Thumb-zone bottom bar: back on the left, primary action(s) fill the rest */
 .botbar{flex-direction:row;align-items:stretch;gap:12px}
 .botbar .btn-back{flex:0 0 auto;display:flex;align-items:center;justify-content:center;gap:8px;padding:0 20px;height:58px;border-radius:var(--r-btn);border:1.5px solid var(--line);background:var(--surface);color:var(--forest);font-weight:700;font-size:15px}
