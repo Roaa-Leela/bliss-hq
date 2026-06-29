@@ -151,6 +151,9 @@ export const Cart = (p: P) => (
 export const Home = (p: P) => (
   <I {...p}><path d="M4 11l8-6 8 6" /><path d="M6 10v9h12v-9" /><path d="M10 19v-5h4v5" /></I>
 );
+export const Grid = (p: P) => (
+  <I {...p}><rect x="4" y="4" width="7" height="7" rx="1.6" /><rect x="13" y="4" width="7" height="7" rx="1.6" /><rect x="4" y="13" width="7" height="7" rx="1.6" /><rect x="13" y="13" width="7" height="7" rx="1.6" /></I>
+);
 const Clock = (p: P) => (
   <I {...p}><circle cx="12" cy="12" r="8" /><path d="M12 7.5V12l3 2" /></I>
 );

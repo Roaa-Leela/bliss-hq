@@ -1,6 +1,6 @@
-import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useStore } from "../lib/store";
+import { useMedia } from "../lib/useMedia";
 import { roles, type RoleId } from "../data/mock";
 import { RoleIcon, Swap, Check } from "./Icons";
 
@@ -9,21 +9,26 @@ const dest: Record<RoleId, string> = { caretaker: "/caretaker", manager: "/manag
 export function RoleSwitcher() {
   const nav = useNavigate();
   const loc = useLocation();
-  const { role, setRole, t } = useStore();
-  const [open, setOpen] = useState(false);
+  const desktop = useMedia("(min-width: 1024px)");
+  const { role, setRole, switcherOpen, setSwitcher, t } = useStore();
 
-  // Hidden on the role-picker screen itself.
   if (loc.pathname === "/") return null;
 
-  const go = (id: RoleId) => { setRole(id); setOpen(false); nav(dest[id]); };
+  const go = (id: RoleId) => { setRole(id); setSwitcher(false); nav(dest[id]); };
+
+  // The desktop sidebar provides "Switch view", so hide the floating button only
+  // where the shell is active (desktop + back-office). Caretaker keeps the FAB.
+  const shell = desktop && !loc.pathname.startsWith("/caretaker");
 
   return (
     <>
-      <button className="roleswitch" onClick={() => setOpen(true)} aria-label={t("rsw.switch")}>
-        <Swap size={20} color="#fff" />
-      </button>
-      {open && (
-        <div className="sheetwrap" onClick={() => setOpen(false)}>
+      {!shell && (
+        <button className="roleswitch" onClick={() => setSwitcher(true)} aria-label={t("rsw.switch")}>
+          <Swap size={20} color="#fff" />
+        </button>
+      )}
+      {switcherOpen && (
+        <div className="sheetwrap" onClick={() => setSwitcher(false)}>
           <div className="sheet" onClick={(e) => e.stopPropagation()}>
             <div className="sheethandle" />
             <div className="kicker">{t("role.demo")}</div>

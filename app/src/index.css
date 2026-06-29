@@ -161,7 +161,40 @@ a{color:inherit;text-decoration:none}
   .cols2 > *{min-width:0}
   .rowgrid{display:grid;grid-template-columns:1fr 1fr;column-gap:46px}
   .rowgrid > *{min-width:0}
+
+  /* ---- Desktop app shell (sidebar + content) ---- */
+  .deskshell{display:flex;min-height:100vh;background:var(--paper)}
+  .deskshell .sidebar{position:sticky;top:0;align-self:flex-start;height:100vh;width:248px;flex:0 0 248px;background:var(--surface);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:20px 14px}
+  .sb-brand{padding:8px 10px 20px}
+  .sb-nav{display:flex;flex-direction:column;gap:3px}
+  .sb-item{display:flex;align-items:center;gap:13px;padding:11px 13px;border-radius:11px;color:var(--todo);font-size:14.5px;font-weight:600;width:100%;text-align:left}
+  .sb-item:hover{background:var(--cloud)}
+  .sb-item.on{background:var(--mist);color:var(--forest);font-weight:700}
+  .sb-item .sb-ic{display:flex;color:currentColor;flex:0 0 auto}
+  .sb-item .sb-badge{margin-left:auto;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--alert);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .sb-foot{margin-top:auto;display:flex;flex-direction:column;gap:12px;padding:14px 6px 2px;border-top:1px solid var(--line)}
+  .sb-switch{display:flex;align-items:center;gap:9px;padding:11px 13px;border-radius:11px;border:1.5px solid var(--line);color:var(--forest);font-weight:700;font-size:14px;background:var(--surface)}
+  .sb-switch:hover{background:var(--mist)}
+
+  .deskmain{flex:1;min-width:0;min-height:100vh;display:flex;flex-direction:column}
+  .deskhead{padding:20px 40px 0;max-width:1120px;margin:0 auto;width:100%}
+  .backlink{display:inline-flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--slate);padding:9px 14px;border-radius:10px;border:1px solid var(--line);background:var(--surface)}
+  .backlink:hover{color:var(--forest)}
+  .deskmain .screen{flex:1;max-width:none;width:100%;margin:0;border-radius:0;box-shadow:none;background:transparent;min-height:auto;overflow:visible}
+  .deskmain .screen.wide{max-width:none}
+  .deskmain .appbar{display:none}
+  .deskmain .pad{max-width:1120px;margin:0 auto;width:100%;padding:26px 40px 48px}
+  .deskmain .actions{position:sticky;bottom:0;max-width:1120px;margin:0 auto;width:100%;flex-direction:row;justify-content:flex-end;gap:14px}
+  .deskmain .actions .btn{width:auto;min-width:220px;padding:0 30px}
+  .deskmain .h1{font-size:30px}
+
+  /* sidebar replaces the floating switcher; switcher becomes a centred modal */
+  .roleswitch{display:none}
+  .sheetwrap{align-items:center}
+  .sheet{max-width:440px;border-radius:20px;padding:22px 26px 28px;animation:popin .18s ease}
+  .sheethandle{display:none}
 }
+@keyframes popin{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
 
 /* ---- Data table rows (prioritised: emphasis on the number, own columns) ---- */
 .tbl-head, .tbl-row { display: grid; grid-template-columns: 5px 1fr 64px 104px; gap: 12px; align-items: center; }

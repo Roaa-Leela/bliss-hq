@@ -94,6 +94,8 @@ type Store = {
   toast: { text: string; id: number } | null;
   showToast: (text: string) => void;
   clearToast: () => void;
+  // role switcher open state (shared by the FAB and the desktop sidebar)
+  switcherOpen: boolean; setSwitcher: (b: boolean) => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -125,6 +127,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [activeChecklistId, setActiveChecklist] = useState<string | null>(null);
   const [toast, setToast] = useState<{ text: string; id: number } | null>(null);
   const toastId = useRef(0);
+  const [switcherOpen, setSwitcher] = useState(false);
   const [approved, setApproved] = useState<Record<string, boolean>>(() => load(APPROVED_KEY, {}));
   const [currentReviewId, setReviewProp] = useState<string | null>(null);
   const [laundrySubmission, setLaundry] = useState<LaundrySubmission | null>(() => load<LaundrySubmission | null>(LAUNDRY_KEY, laundrySeed));
@@ -234,6 +237,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       toast,
       showToast: (text) => { toastId.current += 1; setToast({ text, id: toastId.current }); },
       clearToast: () => setToast(null),
+      switcherOpen, setSwitcher,
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => {
@@ -242,7 +246,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       },
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, currentStaffId, activeChecklistId, approved, currentReviewId, laundrySubmission, deductions, toast]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, currentStaffId, activeChecklistId, approved, currentReviewId, laundrySubmission, deductions, toast, switcherOpen]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

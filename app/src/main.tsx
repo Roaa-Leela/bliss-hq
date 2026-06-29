@@ -1,10 +1,12 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet, useLocation } from "react-router-dom";
 import "./index.css";
 import { StoreProvider } from "./lib/store";
 import { RoleSwitcher } from "./components/RoleSwitcher";
 import { Toast } from "./components/Toast";
+import { DeskShell } from "./components/DeskShell";
+import { useMedia } from "./lib/useMedia";
 import RoleSelect from "./screens/RoleSelect";
 import Today from "./screens/caretaker/Today";
 import Areas from "./screens/caretaker/Areas";
@@ -33,7 +35,18 @@ import Notifications from "./screens/Notifications";
 import CaretakerProfile from "./screens/CaretakerProfile";
 
 function Layout() {
-  return (<><Outlet /><RoleSwitcher /><Toast /></>);
+  const loc = useLocation();
+  const desktop = useMedia("(min-width: 1024px)");
+  // Back-office routes get a desktop sidebar shell; caretaker/role-picker stay mobile.
+  const backOffice = loc.pathname !== "/" && !loc.pathname.startsWith("/caretaker");
+  const useShell = desktop && backOffice;
+  return (
+    <>
+      {useShell ? <DeskShell><Outlet /></DeskShell> : <Outlet />}
+      <RoleSwitcher />
+      <Toast />
+    </>
+  );
 }
 
 const router = createBrowserRouter([
