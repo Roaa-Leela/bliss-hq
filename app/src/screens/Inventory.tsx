@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, InvIcon } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const cats = ["kitchen", "crockery", "linen", "toiletries", "consumables"];
@@ -56,7 +56,7 @@ export default function Inventory() {
           if (!items.length) return null;
           return (
             <div key={c}>
-              <div className="label" style={{ marginTop: 20, marginBottom: 4 }}>{t("cat." + c)}</div>
+              <div className="label cat-label" style={{ marginTop: 20, marginBottom: 4 }}><span className="clic"><InvIcon id={c} size={16} /></span>{t("cat." + c)}</div>
               {items.map((i) => {
                 const isLow = i.stock < i.must;
                 const barColor = i.stock === 0 ? "var(--alert)" : isLow ? "var(--warn)" : "var(--ok)";

@@ -32,6 +32,8 @@ export const messages: Record<string, Entry> = {
 
   // Role select
   "role.title": { en: "Choose a view", hi: "एक व्यू चुनें", te: "ఒక వీక్షణ ఎంచుకోండి" },
+  "rsw.title": { en: "Switch view", hi: "व्यू बदलें", te: "వీక్షణ మార్చండి" },
+  "rsw.switch": { en: "Switch role", hi: "भूमिका बदलें", te: "పాత్ర మార్చండి" },
   "role.demo": { en: "Demo", hi: "डेमो", te: "డెమో" },
   "role.help": { en: "Pick a role to explore the app. In the real product this is a secure login.", hi: "ऐप देखने के लिए एक भूमिका चुनें। असली प्रोडक्ट में यह एक सुरक्षित लॉगिन होगा।", te: "యాప్‌ను చూడటానికి ఒక పాత్రను ఎంచుకోండి. అసలు ఉత్పత్తిలో ఇది సురక్షిత లాగిన్ అవుతుంది." },
   "role.caretaker": { en: "Caretaker", hi: "केयरटेकर", te: "కేర్‌టేకర్" },

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 const cats = [["cat.cleaning"], ["cat.damage"], ["cat.missing"], ["cat.maintenance"]].map((x) => x[0]);
@@ -49,7 +49,7 @@ export default function ReportIssue() {
         <div className="field" style={{ marginTop: 6 }}>
           <span className="flabel">{t("issue.what")}</span>
           <div className="options">
-            {cats.map((c) => <button key={c} className={"opt" + (cat === c ? " sel" : "")} onClick={() => setCat(c)}>{t(c)}</button>)}
+            {cats.map((c) => <button key={c} className={"opt opt-ic" + (cat === c ? " sel" : "")} onClick={() => setCat(c)}><CatIcon id={c.replace("cat.", "")} size={22} /><span>{t(c)}</span></button>)}
           </div>
         </div>
         <div className="field">

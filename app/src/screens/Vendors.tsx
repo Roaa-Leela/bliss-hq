@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, TradeIcon, Phone } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const trades = ["plumbing", "electrical", "ac", "pool", "laundry", "pest", "supplies"];
@@ -30,7 +30,7 @@ export default function Vendors() {
           if (!list.length) return null;
           return (
             <div key={tr}>
-              <div className="label" style={{ marginTop: 26 }}>{t("trade." + tr)}</div>
+              <div className="label cat-label" style={{ marginTop: 26 }}><span className="clic"><TradeIcon id={tr} size={16} /></span>{t("trade." + tr)}</div>
               {list.map((v) => (
                 <div className="vrow" key={v.id}>
                   <div>
@@ -38,7 +38,7 @@ export default function Vendors() {
                     <div className="vmeta">{v.area} · <Stars n={v.rating} /></div>
                   </div>
                   <button className="callbtn">
-                    <svg width="16" height="16" viewBox="0 0 24 24"><path d="M6.5 4h3l1.5 4-2 1.5a11 11 0 005.5 5.5L16 17l4 1.5v3a1.5 1.5 0 01-1.6 1.5A17 17 0 013 6.6 1.5 1.5 0 014.5 5h2z" fill="none" stroke="#fff" strokeWidth="1.8" strokeLinejoin="round" /></svg>
+                    <Phone size={16} color="#fff" />
                     {t("act.call")}
                   </button>
                 </div>

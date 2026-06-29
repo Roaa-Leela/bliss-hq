@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Arrow } from "../../components/Icons";
+import { Arrow, AreaIcon, QuickIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 export default function Today() {
@@ -37,11 +37,11 @@ export default function Today() {
           {tp.pct === 0 ? t("act.start") : t("act.continue")} <Arrow />
         </button>
         <div className="quickrow">
-          <button className="qa" onClick={() => nav("/caretaker/checklists")}>{t("qa.checklists")}</button>
+          <button className="qa" onClick={() => nav("/caretaker/checklists")}><QuickIcon id="checklists" size={22} /><span>{t("qa.checklists")}</span></button>
           <button className="qa" onClick={() => nav("/caretaker/tasks")}>
-            {t("qa.tasks")}{myTasks > 0 && <span className="qabadge">{myTasks}</span>}
+            <QuickIcon id="tasks" size={22} /><span>{t("qa.tasks")}</span>{myTasks > 0 && <span className="qabadge">{myTasks}</span>}
           </button>
-          <button className="qa" onClick={() => nav("/caretaker/laundry")}>{t("qa.laundry")}</button>
+          <button className="qa" onClick={() => nav("/caretaker/laundry")}><QuickIcon id="laundry" size={22} /><span>{t("qa.laundry")}</span></button>
         </div>
 
         <div className="label" style={{ marginTop: 28 }}>{t("today.areas")}</div>
@@ -50,9 +50,12 @@ export default function Today() {
             const st = areaState(a); const p = areaProgress(a);
             return (
               <div className="li" key={a.id}>
-                <span>
-                  <span className="li-name">{tArea(a.id)}</span>
-                  {st === "active" && <span className="li-sub">{t("areas.checks", { done: p.done, total: p.total })}</span>}
+                <span className="li-left">
+                  <span className="licon"><AreaIcon id={a.id} size={22} /></span>
+                  <span>
+                    <span className="li-name">{tArea(a.id)}</span>
+                    {st === "active" && <span className="li-sub">{t("areas.checks", { done: p.done, total: p.total })}</span>}
+                  </span>
                 </span>
                 <span className={"pill " + statePill[st]}>{stateLabel[st]}</span>
               </div>

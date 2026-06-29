@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back } from "../../components/Icons";
+import { Back, ClIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 export default function Checklists() {
@@ -29,9 +29,12 @@ export default function Checklists() {
 
         <div className="list" style={{ marginTop: 18 }}>
           <button className="li" onClick={() => nav("/caretaker/areas")}>
-            <span>
-              <span className="li-name">{t("tpl.preCheckin")}</span>
-              <span className="li-sub">{t("freq.preCheckin")} · {t("cl.progress", { done: tp.done, total: tp.total })}</span>
+            <span className="li-left">
+              <span className="licon"><ClIcon id="preCheckin" size={22} /></span>
+              <span>
+                <span className="li-name">{t("tpl.preCheckin")}</span>
+                <span className="li-sub">{t("freq.preCheckin")} · {t("cl.progress", { done: tp.done, total: tp.total })}</span>
+              </span>
             </span>
             <span className={"pill " + (tp.pct === 100 ? "pill-ok" : tp.pct > 0 ? "pill-go" : "pill-todo")}>{tp.pct === 100 ? t("st.done") : tp.pct > 0 ? t("st.inProgress") : t("st.todo")}</span>
           </button>
@@ -40,9 +43,12 @@ export default function Checklists() {
             const pl = pill(d, cl.items.length);
             return (
               <button className="li" key={cl.id} onClick={() => openTask(cl.id)}>
-                <span>
-                  <span className="li-name">{t("tpl." + cl.id)}</span>
-                  <span className="li-sub">{t(cl.freqKey)} · {t("cl.checksN", { n: cl.items.length })}</span>
+                <span className="li-left">
+                  <span className="licon"><ClIcon id={cl.id} size={22} /></span>
+                  <span>
+                    <span className="li-name">{t("tpl." + cl.id)}</span>
+                    <span className="li-sub">{t(cl.freqKey)} · {t("cl.checksN", { n: cl.items.length })}</span>
+                  </span>
                 </span>
                 <span className={"pill " + pl.cls}>{pl.lab}</span>
               </button>

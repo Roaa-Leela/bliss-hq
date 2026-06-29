@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Arrow } from "../components/Icons";
+import { RoleIcon } from "../components/Icons";
 import { roles, type RoleId } from "../data/mock";
 import { useStore } from "../lib/store";
 
@@ -21,7 +21,7 @@ export default function RoleSelect() {
         <div className="roles">
           {roles.map((r) => (
             <button key={r.id} className="role" onClick={() => choose(r.id)}>
-              <span className="ric"><Arrow size={20} color="#2D4A1A" /></span>
+              <span className="ric"><RoleIcon id={r.id} size={24} color="var(--forest)" /></span>
               <span style={{ flex: 1 }}>
                 <span className="rt" style={{ display: "block" }}>{t("role." + r.id)}</span>
                 <span className="rs">{t("role." + r.id + ".sub")}</span>

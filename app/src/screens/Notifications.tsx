@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, NotifIcon } from "../components/Icons";
 import { useStore } from "../lib/store";
 import type { NotifKind } from "../data/mock";
 
@@ -40,8 +40,8 @@ export default function Notifications() {
           {notifications.map((n) => (
             <button className={"ntrow" + (n.read ? "" : " unread")} key={n.id}
               onClick={() => { if (n.propId) setReviewProp(n.propId); markNotifRead(n.id); nav(n.route); }}>
-              <span className="ntic" style={{ background: kindBg[n.kind] }}>
-                <span className="ntdot" style={{ background: kindDot[n.kind] }} />
+              <span className="ntic" style={{ background: kindBg[n.kind], color: kindDot[n.kind] }}>
+                <NotifIcon id={n.kind} size={21} />
               </span>
               <span className="ntbody">
                 <span className="ntt">{t(n.titleKey)}</span>

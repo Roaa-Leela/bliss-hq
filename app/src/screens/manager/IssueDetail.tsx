@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 import type { IssueStatus } from "../../data/mock";
 
@@ -29,7 +29,7 @@ export default function IssueDetail() {
         <h1 className="h1" style={{ marginTop: 10 }}>{issue.title ?? t(issue.titleKey)}</h1>
 
         <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
-          <span className="pill" style={{ background: "var(--cloud)", color: "var(--todo)" }}>{t("cat." + issue.cat)}</span>
+          <span className="pill" style={{ background: "var(--cloud)", color: "var(--todo)", gap: 6 }}><CatIcon id={issue.cat} size={14} />{t("cat." + issue.cat)}</span>
           <span className="pill" style={{ background: "var(--surface)", color: sevColor[issue.sev], border: "1.5px solid " + sevColor[issue.sev] }}>{t("lvl." + issue.sev)}</span>
         </div>
 

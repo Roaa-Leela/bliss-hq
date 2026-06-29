@@ -1,8 +1,9 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
 import "./index.css";
 import { StoreProvider } from "./lib/store";
+import { RoleSwitcher } from "./components/RoleSwitcher";
 import RoleSelect from "./screens/RoleSelect";
 import Today from "./screens/caretaker/Today";
 import Areas from "./screens/caretaker/Areas";
@@ -29,7 +30,14 @@ import RequestDetail from "./screens/RequestDetail";
 import InventoryItem from "./screens/InventoryItem";
 import Notifications from "./screens/Notifications";
 
+function Layout() {
+  return (<><Outlet /><RoleSwitcher /></>);
+}
+
 const router = createBrowserRouter([
+  {
+    element: <Layout />,
+    children: [
   { path: "/", element: <RoleSelect /> },
   { path: "/caretaker", element: <Today /> },
   { path: "/caretaker/areas", element: <Areas /> },
@@ -55,6 +63,8 @@ const router = createBrowserRouter([
   { path: "/procurement", element: <Procurement /> },
   { path: "/procurement/request", element: <RequestDetail /> },
   { path: "/notifications", element: <Notifications /> },
+    ],
+  },
 ]);
 
 createRoot(document.getElementById("root")!).render(
