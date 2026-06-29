@@ -25,6 +25,8 @@ export default function Admin() {
         <div className="kicker" style={{ marginTop: 12 }}>{t("adm.setup")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("adm.title")}</h1>
 
+        <div className="cols2">
+        <div>
         <div className="list" style={{ marginTop: 20 }}>
           <button className="li" onClick={() => nav("/inventory")}>
             <span className="li-left"><span className="licon"><AdminIcon id="inventory" size={21} /></span><span><span className="li-name">{t("adm.inventory")}</span><span className="li-sub">{t("inv.sub")}</span></span></span>
@@ -50,6 +52,8 @@ export default function Admin() {
           ))}
         </div>
 
+        </div>
+        <div>
         <div className="label" style={{ marginTop: 28 }}>{t("adm.templates")}</div>
         <div className="list">
           {templateKeys.map((k) => (
@@ -77,6 +81,8 @@ export default function Admin() {
           <div className="stat"><div className="num">3</div><div className="lab">{t("adm.managers")}</div></div>
           <div className="stat"><div className="num">10</div><div className="lab">{t("adm.caretakers")}</div></div>
           <div className="stat"><div className="num">8</div><div className="lab">{t("adm.owners")}</div></div>
+        </div>
+        </div>
         </div>
       </div>
     </div>

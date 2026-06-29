@@ -79,10 +79,8 @@ export default function Procurement() {
         )}
 
         <div className="section-head"><div className="label">{t("proc.requests")}</div></div>
-        <div>
-          {purchaseReqs.length === 0 && (
-            <Empty art={<EmptyBox />} title={t("proc.noReqs")} />
-          )}
+        {purchaseReqs.length === 0 && <Empty art={<EmptyBox />} title={t("proc.noReqs")} />}
+        <div className="rowgrid">
           {purchaseReqs.map((r) => (
             <button className="irow iconrow" key={r.id} onClick={() => { setCurrentReq(r.id); nav("/procurement/request"); }}>
               <span className="iicon" style={{ color: prsDot[r.status], background: "var(--cloud)" }}><Cart size={18} /></span>

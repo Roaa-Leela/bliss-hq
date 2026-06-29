@@ -58,6 +58,8 @@ export default function Owner() {
           </>
         )}
 
+        <div className="cols2">
+        <div>
         <div className="label" style={{ marginTop: 28 }}>{t("own.activity")}</div>
         <div>
           {ownerTimeline.map((tl) => (
@@ -70,7 +72,9 @@ export default function Owner() {
             </div>
           ))}
         </div>
+        </div>
 
+        <div>
         <div className="label" style={{ marginTop: 28 }}>{t("own.month")}</div>
         <div className="statgrid" style={{ marginTop: 8 }}>
           <div className="stat"><div className="num">6</div><div className="lab">{t("own.bookings")}</div></div>
@@ -78,6 +82,8 @@ export default function Owner() {
           <div className="stat"><div className="num">1</div><div className="lab">{t("own.issues")}</div></div>
         </div>
         <p className="meta" style={{ marginTop: 16 }}>{t("own.revenue")}</p>
+        </div>
+        </div>
       </div>
     </div>
   );

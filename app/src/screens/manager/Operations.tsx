@@ -46,6 +46,8 @@ export default function Operations() {
           <div className="stat"><div className="accent" style={{ background: "var(--alert)" }} /><div className="num" style={{ color: "var(--alert)" }}>{open.length}</div><div className="lab">{t("mgr.openIssues")}</div></div>
         </div>
 
+        <div className="cols2">
+        <div>
         <div className="section-head"><div className="label">{t("mgr.readiness")}</div></div>
         <div className="list">
           {managerProps.map((p) => {
@@ -58,7 +60,9 @@ export default function Operations() {
             );
           })}
         </div>
+        </div>
 
+        <div>
         <div className="section-head">
           <div className="label">{t("mgr.openIssues")}</div>
           {open.length > 0 && <button className="pill pill-go" onClick={() => nav("/manager/issues")}>{t("iss.viewAll")}</button>}
@@ -79,6 +83,8 @@ export default function Operations() {
             ))}
           </div>
         )}
+        </div>
+        </div>
       </div>
     </div>
   );

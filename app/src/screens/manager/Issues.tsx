@@ -43,6 +43,7 @@ export default function Issues() {
           {shown.length === 0 && (
             <Empty art={<AllClear />} title={t("iss.none")} sub={t("iss.noneSub")} />
           )}
+          <div className="rowgrid">
           {shown.map((i) => (
             <button className="irow iconrow" key={i.id} onClick={() => { setCurrentIssue(i.id); nav("/manager/issue"); }}>
               <span className="iicon" style={{ color: sevColor[i.sev], background: "var(--cloud)" }}><CatIcon id={i.cat} size={18} /></span>
@@ -53,6 +54,7 @@ export default function Issues() {
               <span className={"pill " + statusPill[i.status]}>{t("ist." + i.status)}</span>
             </button>
           ))}
+          </div>
         </div>
       </div>
     </div>
