@@ -156,13 +156,13 @@ export const caretakers = [
 export type IssueStatus = "open" | "in_progress" | "resolved";
 export type Assignee = { type: "vendor" | "caretaker"; id: string } | null;
 export type IssueRec = {
-  id: string; propId: string; locKey: string; titleKey: string;
+  id: string; propId: string; locKey: string; titleKey: string; title?: string;
   cat: string; sev: "low" | "medium" | "high"; status: IssueStatus; whenKey: string; assignee: Assignee;
 };
 export const issuesData: IssueRec[] = [
   { id: "i1", propId: "palm-grove", locKey: "loc.bedroom2", titleKey: "ix.ac", cat: "maintenance", sev: "high", status: "open", whenKey: "when.2h", assignee: null },
   { id: "i2", propId: "lake", locKey: "loc.restock", titleKey: "ix.towels", cat: "missing", sev: "medium", status: "open", whenKey: "when.today", assignee: null },
-  { id: "i5", propId: "palm-grove", locKey: "loc.pool", titleKey: "ix.poolpump", cat: "maintenance", sev: "medium", status: "open", whenKey: "when.today", assignee: null },
+  { id: "i5", propId: "palm-grove", locKey: "loc.pool", titleKey: "ix.poolpump", cat: "maintenance", sev: "medium", status: "in_progress", whenKey: "when.today", assignee: { type: "caretaker", id: "c1" } },
   { id: "i3", propId: "misty", locKey: "loc.bathroom1", titleKey: "ix.geyser", cat: "maintenance", sev: "high", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd1" } },
   { id: "i6", propId: "fern", locKey: "loc.kitchen", titleKey: "ix.fridge", cat: "electronic", sev: "low", status: "in_progress", whenKey: "when.yest", assignee: { type: "caretaker", id: "c2" } },
   { id: "i4", propId: "fern", locKey: "loc.living", titleKey: "ix.bulb", cat: "electronic", sev: "low", status: "resolved", whenKey: "when.2d", assignee: { type: "vendor", id: "vd2" } },
@@ -200,15 +200,31 @@ export const bookingsData: Booking[] = [
 
 // In-app notifications, aggregated across the modules.
 export type NotifKind = "review" | "issue" | "stock" | "po" | "approved" | "laundry";
-export type Notif = { id: string; kind: NotifKind; titleKey: string; subKey: string; whenKey: string; route: string; read: boolean };
+export type Notif = {
+  id: string; kind: NotifKind; titleKey: string; subKey: string; whenKey: string;
+  route: string; read: boolean; propId?: string; rawSub?: string;
+};
 export const notificationsData: Notif[] = [
-  { id: "n1", kind: "review", titleKey: "nt.review.t", subKey: "nt.review.s", whenKey: "when.today", route: "/manager/review", read: false },
+  { id: "n1", kind: "review", titleKey: "nt.review.t", subKey: "nt.review.s", whenKey: "when.today", route: "/manager/review", read: false, propId: "palm-grove" },
   { id: "n2", kind: "issue", titleKey: "nt.issue.t", subKey: "nt.issue.s", whenKey: "when.2h", route: "/manager/issues", read: false },
   { id: "n3", kind: "stock", titleKey: "nt.stock.t", subKey: "nt.stock.s", whenKey: "when.today", route: "/procurement", read: false },
-  { id: "n4", kind: "laundry", titleKey: "nt.laundry.t", subKey: "nt.laundry.s", whenKey: "when.yest", route: "/manager", read: true },
+  { id: "n4", kind: "laundry", titleKey: "nt.laundry.t", subKey: "nt.laundry.s", whenKey: "when.yest", route: "/manager/laundry", read: true },
   { id: "n5", kind: "po", titleKey: "nt.po.t", subKey: "nt.po.s", whenKey: "when.2d", route: "/procurement", read: true },
-  { id: "n6", kind: "approved", titleKey: "nt.approved.t", subKey: "nt.approved.s", whenKey: "when.2d", route: "/owner", read: true },
+  { id: "n6", kind: "approved", titleKey: "nt.approved.t", subKey: "nt.approved.s", whenKey: "when.2d", route: "/manager/review", read: true, propId: "misty" },
 ];
+
+// Property readiness baseline for villas the caretaker app does not drive directly.
+// Palm Grove is derived live from the caretaker's inspection progress + approval.
+export type Readiness = "todo" | "active" | "review" | "ready";
+export const baseReadiness: Record<string, Readiness> = {
+  misty: "review", lake: "todo", fern: "ready",
+};
+
+// Last laundry list sent up from a caretaker (seeded with a recent one).
+export type LaundrySubmission = { propId: string; counts: Record<string, number>; total: number; whenKey: string };
+export const laundrySeed: LaundrySubmission = {
+  propId: "lake", counts: { l1: 5, l3: 6, l2: 3 }, total: 14, whenKey: "when.yest",
+};
 
 // Stock movements: every count, consumption or receipt is logged for an item.
 export type MoveType = "receipt" | "consumption" | "count";

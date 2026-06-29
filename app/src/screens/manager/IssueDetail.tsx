@@ -26,7 +26,7 @@ export default function IssueDetail() {
       </div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("prop." + issue.propId)} · {t(issue.locKey)}</div>
-        <h1 className="h1" style={{ marginTop: 10 }}>{t(issue.titleKey)}</h1>
+        <h1 className="h1" style={{ marginTop: 10 }}>{issue.title ?? t(issue.titleKey)}</h1>
 
         <div style={{ display: "flex", gap: 10, marginTop: 14, flexWrap: "wrap" }}>
           <span className="pill" style={{ background: "var(--cloud)", color: "var(--todo)" }}>{t("cat." + issue.cat)}</span>

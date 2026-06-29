@@ -8,13 +8,30 @@ const lvls = ["lvl.low", "lvl.medium", "lvl.high"];
 
 export default function ReportIssue() {
   const nav = useNavigate();
-  const { property, t, tArea, currentAreaId, firstOpenItem, markDone } = useStore();
+  const { property, t, tArea, currentAreaId, firstOpenItem, markDone, addIssue } = useStore();
   const area = property.areas.find((a) => a.id === currentAreaId) ?? property.areas[0];
   const itemId = firstOpenItem(area);
   const [cat, setCat] = useState("cat.damage");
   const [level, setLevel] = useState("lvl.medium");
   const [note, setNote] = useState("");
-  const submit = () => { if (itemId) markDone(itemId); nav("/caretaker/task"); };
+  const submit = () => {
+    const catId = cat.replace("cat.", "");
+    const sev = level.replace("lvl.", "") as "low" | "medium" | "high";
+    addIssue({
+      id: "ri-" + Date.now(),
+      propId: "palm-grove",
+      locKey: "loc." + area.id,
+      titleKey: "cat." + catId,
+      title: note.trim() || undefined,
+      cat: catId,
+      sev,
+      status: "open",
+      whenKey: "when.now",
+      assignee: null,
+    });
+    if (itemId) markDone(itemId);
+    nav("/caretaker/task");
+  };
 
   return (
     <div className="screen">

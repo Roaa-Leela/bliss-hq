@@ -42,7 +42,7 @@ export default function Issues() {
             <button className="irow" key={i.id} onClick={() => { setCurrentIssue(i.id); nav("/manager/issue"); }}>
               <span className="idot" style={{ background: sevColor[i.sev] }} />
               <span>
-                <span className="inm">{t(i.titleKey)}</span>
+                <span className="inm">{i.title ?? t(i.titleKey)}</span>
                 <span className="isub">{t("prop." + i.propId)} · {t(i.locKey)}</span>
               </span>
               <span className={"pill " + statusPill[i.status]}>{t("ist." + i.status)}</span>

@@ -35,7 +35,7 @@ export default function Procurement() {
   return (
     <div className="screen wide">
       <div className="appbar">
-        <button className="iconbtn" onClick={() => nav("/admin")} aria-label={t("a.back")}><Back /></button>
+        <button className="iconbtn" onClick={() => nav(-1)} aria-label={t("a.back")}><Back /></button>
         <Brand />
         <LangSwitch />
       </div>

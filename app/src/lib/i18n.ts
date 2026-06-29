@@ -212,6 +212,10 @@ export const messages: Record<string, Entry> = {
   "loc.living": { en: "Living room", hi: "लिविंग रूम", te: "లివింగ్ రూమ్" },
   "loc.pool": { en: "Pool area", hi: "पूल एरिया", te: "పూల్ ఏరియా" },
   "loc.kitchen": { en: "Kitchen", hi: "रसोई", te: "వంటగది" },
+  "loc.bedroom-1": { en: "Bedroom 1", hi: "बेडरूम 1", te: "బెడ్‌రూమ్ 1" },
+  "loc.bathroom-1": { en: "Bathroom 1", hi: "बाथरूम 1", te: "బాత్రూమ్ 1" },
+  "loc.outdoor": { en: "Outdoor & garden", hi: "बाहर और बगीचा", te: "బయట & తోట" },
+  "loc.safety": { en: "Safety & security", hi: "सुरक्षा", te: "భద్రత" },
   "ix.geyser": { en: "Geyser leaking", hi: "गीज़र लीक कर रहा", te: "గీజర్ లీక్ అవుతోంది" },
   "ix.poolpump": { en: "Pool pump noise", hi: "पूल पंप से आवाज़", te: "పూల్ పంప్ శబ్దం" },
   "ix.fridge": { en: "Fridge not cooling", hi: "फ्रिज ठंडा नहीं कर रहा", te: "ఫ్రిజ్ చల్లబడటం లేదు" },
@@ -378,6 +382,38 @@ export const messages: Record<string, Entry> = {
   "nt.kind.laundry": { en: "Laundry", hi: "लॉन्ड्री", te: "లాండ్రీ" },
   "nt.kind.po": { en: "Order", hi: "ऑर्डर", te: "ఆర్డర్" },
   "nt.kind.approved": { en: "Approved", hi: "मंज़ूर", te: "ఆమోదం" },
+  "nt.laundryNew.s": { en: "Palm Grove Villa · sent just now", hi: "पाम ग्रोव विला · अभी भेजी", te: "పామ్ గ్రోవ్ విల్లా · ఇప్పుడే పంపారు" },
+
+  // Review states (driven by readiness)
+  "rev.kReview": { en: "Submitted, awaiting review", hi: "जमा हुआ, समीक्षा बाकी", te: "సమర్పించబడింది, సమీక్ష పెండింగ్" },
+  "rev.kReady": { en: "Approved", hi: "मंज़ूर", te: "ఆమోదించబడింది" },
+  "rev.kActive": { en: "Inspection in progress", hi: "जाँच चल रही है", te: "తనిఖీ జరుగుతోంది" },
+  "rev.kTodo": { en: "Not started", hi: "शुरू नहीं हुआ", te: "ప్రారంభం కాలేదు" },
+  "rev.emptyActive": { en: "This inspection is still in progress. {done} of {total} areas done. There is nothing to review yet.", hi: "यह जाँच अभी चल रही है। {total} में से {done} एरिया पूरे। अभी समीक्षा के लिए कुछ नहीं।", te: "ఈ తనిఖీ ఇంకా జరుగుతోంది. {total} లో {done} ఏరియాలు పూర్తి. ఇంకా సమీక్షించడానికి ఏమీ లేదు." },
+  "rev.emptyTodo": { en: "This inspection has not started yet.", hi: "यह जाँच अभी शुरू नहीं हुई।", te: "ఈ తనిఖీ ఇంకా ప్రారంభం కాలేదు." },
+  "rev.readyState": { en: "{name} is approved and ready for the guest.", hi: "{name} मंज़ूर और मेहमान के लिए तैयार है।", te: "{name} ఆమోదించబడి అతిథి కోసం సిద్ధంగా ఉంది." },
+  "rev.viewProperty": { en: "Back to operations", hi: "ऑपरेशन्स पर वापस", te: "ఆపరేషన్స్‌కు వెళ్లండి" },
+
+  // Manager laundry summary
+  "lnd.title": { en: "Laundry received", hi: "लॉन्ड्री मिली", te: "లాండ్రీ వచ్చింది" },
+  "lnd.sub": { en: "Counted and sent by the caretaker", hi: "केयरटेकर ने गिनकर भेजी", te: "కేర్‌టేకర్ లెక్కించి పంపారు" },
+  "lnd.none": { en: "No laundry list has been sent yet", hi: "अभी कोई लॉन्ड्री सूची नहीं भेजी", te: "ఇంకా లాండ్రీ జాబితా పంపలేదు" },
+  "lnd.total": { en: "{n} items total", hi: "कुल {n} सामान", te: "మొత్తం {n} వస్తువులు" },
+
+  // Caretaker tasks (assigned issues)
+  "ct.title": { en: "My tasks", hi: "मेरे काम", te: "నా పనులు" },
+  "ct.sub": { en: "Jobs assigned to you", hi: "आपको सौंपे गए काम", te: "మీకు కేటాయించిన పనులు" },
+  "ct.none": { en: "No jobs assigned to you right now", hi: "अभी आपको कोई काम नहीं सौंपा", te: "ప్రస్తుతం మీకు పనులు కేటాయించలేదు" },
+
+  // Caretaker quick actions
+  "qa.checklists": { en: "Checklists", hi: "चेकलिस्ट", te: "చెక్‌లిస్ట్‌లు" },
+  "qa.tasks": { en: "My tasks", hi: "मेरे काम", te: "నా పనులు" },
+  "qa.laundry": { en: "Laundry", hi: "लॉन्ड्री", te: "లాండ్రీ" },
+
+  // Owner readiness states
+  "own.stReview": { en: "Awaiting your approval", hi: "आपकी मंज़ूरी बाकी", te: "మీ ఆమోదం కోసం వేచి ఉంది" },
+  "own.stActive": { en: "Inspection in progress", hi: "जाँच चल रही है", te: "తనిఖీ జరుగుతోంది" },
+  "own.stTodo": { en: "Not started yet", hi: "अभी शुरू नहीं हुआ", te: "ఇంకా ప్రారంభం కాలేదు" },
 
   // Availability calendar
   "cal.title": { en: "Availability", hi: "उपलब्धता", te: "లభ్యత" },

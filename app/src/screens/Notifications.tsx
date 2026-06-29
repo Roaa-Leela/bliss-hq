@@ -16,7 +16,7 @@ const kindDot: Record<NotifKind, string> = {
 
 export default function Notifications() {
   const nav = useNavigate();
-  const { notifications, unreadCount, markNotifRead, markAllNotifsRead, t } = useStore();
+  const { notifications, unreadCount, markNotifRead, markAllNotifsRead, setReviewProp, t } = useStore();
   const unread = unreadCount();
 
   return (
@@ -39,13 +39,13 @@ export default function Notifications() {
         <div>
           {notifications.map((n) => (
             <button className={"ntrow" + (n.read ? "" : " unread")} key={n.id}
-              onClick={() => { markNotifRead(n.id); nav(n.route); }}>
+              onClick={() => { if (n.propId) setReviewProp(n.propId); markNotifRead(n.id); nav(n.route); }}>
               <span className="ntic" style={{ background: kindBg[n.kind] }}>
                 <span className="ntdot" style={{ background: kindDot[n.kind] }} />
               </span>
               <span className="ntbody">
                 <span className="ntt">{t(n.titleKey)}</span>
-                <span className="nts">{t(n.subKey)}</span>
+                <span className="nts">{n.rawSub ?? t(n.subKey)}</span>
               </span>
               <span className="ntmeta">
                 {!n.read && <span className="ntnew" />}

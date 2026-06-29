@@ -6,8 +6,9 @@ import { useStore } from "../../lib/store";
 
 export default function Today() {
   const nav = useNavigate();
-  const { property, t, tArea, totalProgress, areaState, areaProgress } = useStore();
+  const { property, issues, t, tArea, totalProgress, areaState, areaProgress } = useStore();
   const tp = totalProgress();
+  const myTasks = issues.filter((i) => i.assignee?.type === "caretaker" && i.assignee.id === "c1" && i.status !== "resolved").length;
   const preview = property.areas.slice(0, 4);
   const stateLabel = { done: t("st.done"), active: t("st.inProgress"), todo: t("st.todo") };
   const statePill = { done: "pill-ok", active: "pill-go", todo: "pill-todo" };
@@ -35,12 +36,13 @@ export default function Today() {
         <button className="btn btn-primary" style={{ marginTop: 22 }} onClick={() => nav("/caretaker/areas")}>
           {tp.pct === 0 ? t("act.start") : t("act.continue")} <Arrow />
         </button>
-        <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/checklists")}>
-          {t("cl.hubTitle")}
-        </button>
-        <button className="btn btn-outline" style={{ marginTop: 12 }} onClick={() => nav("/caretaker/laundry")}>
-          {t("act.laundryLog")}
-        </button>
+        <div className="quickrow">
+          <button className="qa" onClick={() => nav("/caretaker/checklists")}>{t("qa.checklists")}</button>
+          <button className="qa" onClick={() => nav("/caretaker/tasks")}>
+            {t("qa.tasks")}{myTasks > 0 && <span className="qabadge">{myTasks}</span>}
+          </button>
+          <button className="qa" onClick={() => nav("/caretaker/laundry")}>{t("qa.laundry")}</button>
+        </div>
 
         <div className="label" style={{ marginTop: 28 }}>{t("today.areas")}</div>
         <div className="list">

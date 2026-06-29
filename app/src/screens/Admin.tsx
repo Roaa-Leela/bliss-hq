@@ -5,10 +5,15 @@ import { Back } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
+const propCare: Record<string, string> = { "palm-grove": "name.ramesh", misty: "name.lakshmi", lake: "name.anil", fern: "name.ramesh" };
 
 export default function Admin() {
   const nav = useNavigate();
-  const { managerProps, t } = useStore();
+  const { managerProps, property, taskChecklists, t } = useStore();
+  const tplCount = (key: string) =>
+    key === "tpl.preCheckin"
+      ? property.areas.reduce((s, a) => s + a.items.length, 0)
+      : taskChecklists.find((c) => "tpl." + c.id === key)?.items.length ?? 0;
   return (
     <div className="screen wide">
       <div className="appbar">
@@ -35,28 +40,22 @@ export default function Admin() {
           </button>
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
-          <div className="label">{t("adm.properties")}</div>
-          <span className="pill pill-go">{t("adm.add")}</span>
-        </div>
+        <div className="label" style={{ marginTop: 28 }}>{t("adm.properties")}</div>
         <div className="list">
           {managerProps.map((p) => (
             <div className="li" key={p.id}>
               <span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{t("adm.propSub")}</span></span>
-              <span className="pill pill-todo">{t("adm.edit")}</span>
+              <span className="tag-info">{t(propCare[p.id])}</span>
             </div>
           ))}
         </div>
 
-        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginTop: 28 }}>
-          <div className="label">{t("adm.templates")}</div>
-          <span className="pill pill-go">{t("adm.new")}</span>
-        </div>
+        <div className="label" style={{ marginTop: 28 }}>{t("adm.templates")}</div>
         <div className="list">
           {templateKeys.map((k) => (
             <div className="li" key={k}>
               <span><span className="li-name">{t(k)}</span><span className="li-sub">{t("adm.tplSub")}</span></span>
-              <span className="pill pill-todo">{t("adm.edit")}</span>
+              <span className="tag-info">{t("cl.checksN", { n: tplCount(k) })}</span>
             </div>
           ))}
         </div>

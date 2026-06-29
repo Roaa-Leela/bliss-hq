@@ -2,8 +2,10 @@ import { createContext, useContext, useEffect, useMemo, useState, type ReactNode
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
   caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData, taskChecklists,
+  baseReadiness, laundrySeed,
   type IssueRec, type IssueStatus, type Assignee,
   type PurchaseReq, type PRLine, type StockMove, type MoveType, type Notif,
+  type Readiness, type LaundrySubmission,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -16,6 +18,8 @@ const REQS_KEY = "bliss.reqs.v1";
 const STOCK_KEY = "bliss.stock.v1";
 const MOVES_KEY = "bliss.moves.v1";
 const NOTIFS_KEY = "bliss.notifs.v1";
+const APPROVED_KEY = "bliss.approved.v1";
+const LAUNDRY_KEY = "bliss.laundry.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -53,6 +57,15 @@ type Store = {
   currentIssueId: string | null; setCurrentIssue: (id: string | null) => void;
   setIssueStatus: (id: string, status: IssueStatus) => void;
   assignIssue: (id: string, assignee: Assignee) => void;
+  addIssue: (issue: IssueRec) => void;
+  // property readiness (caretaker -> manager -> owner)
+  approved: Record<string, boolean>;
+  propReadiness: (propId: string) => Readiness;
+  approveProperty: (propId: string) => void;
+  currentReviewId: string | null; setReviewProp: (id: string | null) => void;
+  // laundry handoff to the manager
+  laundrySubmission: LaundrySubmission | null;
+  sendLaundry: (counts: Record<string, number>) => void;
   // procurement (interactive)
   purchaseReqs: PurchaseReq[];
   currentReqId: string | null; setCurrentReq: (id: string | null) => void;
@@ -98,6 +111,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
   const [currentStayId, setCurrentStay] = useState<string | null>(null);
   const [activeChecklistId, setActiveChecklist] = useState<string | null>(null);
+  const [approved, setApproved] = useState<Record<string, boolean>>(() => load(APPROVED_KEY, {}));
+  const [currentReviewId, setReviewProp] = useState<string | null>(null);
+  const [laundrySubmission, setLaundry] = useState<LaundrySubmission | null>(() => load<LaundrySubmission | null>(LAUNDRY_KEY, laundrySeed));
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
@@ -105,6 +121,8 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   useEffect(() => { try { localStorage.setItem(STOCK_KEY, JSON.stringify(inv)); } catch {} }, [inv]);
   useEffect(() => { try { localStorage.setItem(MOVES_KEY, JSON.stringify(stockMoves)); } catch {} }, [stockMoves]);
   useEffect(() => { try { localStorage.setItem(NOTIFS_KEY, JSON.stringify(notifications)); } catch {} }, [notifications]);
+  useEffect(() => { try { localStorage.setItem(APPROVED_KEY, JSON.stringify(approved)); } catch {} }, [approved]);
+  useEffect(() => { try { localStorage.setItem(LAUNDRY_KEY, JSON.stringify(laundrySubmission)); } catch {} }, [laundrySubmission]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -124,7 +142,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
       toggleDone: (id) => setDone((s) => ({ ...s, [id]: !s[id] })),
       taskChecklists, activeChecklistId, setActiveChecklist,
-      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); },
+      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); setApproved({}); setLaundry(laundrySeed); },
       currentAreaId, setCurrentArea,
       property, managerProps, laundryItems, ownerTimeline, inventoryItems: inv, vendors, caretakers, prefVendorByCat,
       issues, currentIssueId, setCurrentIssue,
@@ -132,6 +150,31 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, status } : i))),
       assignIssue: (id, assignee) =>
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, assignee } : i))),
+      addIssue: (issue) => setIssues((s) => [issue, ...s]),
+      approved,
+      propReadiness: (propId) => {
+        if (approved[propId]) return "ready";
+        if (propId === "palm-grove") {
+          const pct = (() => {
+            const total = property.areas.length;
+            const d = property.areas.filter((a) => a.items.every((i) => done[i.id])).length;
+            return Math.round((d / total) * 100);
+          })();
+          return pct === 100 ? "review" : pct > 0 ? "active" : "todo";
+        }
+        return baseReadiness[propId] ?? "todo";
+      },
+      approveProperty: (propId) => setApproved((s) => ({ ...s, [propId]: true })),
+      currentReviewId, setReviewProp,
+      laundrySubmission,
+      sendLaundry: (counts) => {
+        const total = Object.values(counts).reduce((a, b) => a + b, 0);
+        setLaundry({ propId: "palm-grove", counts, total, whenKey: "when.now" });
+        setNotifications((s) => [
+          { id: "n-laundry-" + s.length, kind: "laundry", titleKey: "nt.laundry.t", subKey: "nt.laundryNew.s", whenKey: "when.now", route: "/manager/laundry", read: false },
+          ...s,
+        ]);
+      },
       purchaseReqs, currentReqId, setCurrentReq,
       createPurchaseReq: (lines) => {
         const id = "pr" + (purchaseReqs.length + 1) + "-" + lines.length + "-" + lines.reduce((s, l) => s + l.qty, 0);
@@ -172,7 +215,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

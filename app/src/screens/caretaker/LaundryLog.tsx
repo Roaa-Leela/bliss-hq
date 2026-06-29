@@ -8,7 +8,7 @@ const sizeKey: Record<string, string> = { l1: "sz.queenking", l2: "sz.standard",
 
 export default function LaundryLog() {
   const nav = useNavigate();
-  const { laundryItems, t } = useStore();
+  const { laundryItems, sendLaundry, t } = useStore();
   const [counts, setCounts] = useState<Record<string, number>>({});
   const set = (id: string, d: number) => setCounts((c) => ({ ...c, [id]: Math.max(0, (c[id] ?? 0) + d) }));
   const total = Object.values(counts).reduce((a, b) => a + b, 0);
@@ -42,7 +42,8 @@ export default function LaundryLog() {
       </div>
 
       <div className="actions">
-        <button className="btn btn-primary" onClick={() => nav("/caretaker")}>
+        <button className="btn btn-primary" disabled={total === 0} style={total === 0 ? { opacity: 0.5 } : undefined}
+          onClick={() => { sendLaundry(counts); nav("/caretaker"); }}>
           {total > 0 ? t("laundry.sendN", { n: total }) : t("laundry.send")}
         </button>
       </div>

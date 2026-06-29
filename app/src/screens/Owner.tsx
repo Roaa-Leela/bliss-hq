@@ -7,9 +7,14 @@ import { useStore } from "../lib/store";
 const dot = { ok: "var(--ok)", info: "var(--info)", warn: "var(--warn)" };
 const idxOf: Record<string, string> = { t1: "1", t2: "2", t3: "3", t4: "4" };
 
+const ownPill: Record<string, string> = { ready: "pill-ok", review: "pill-warn", active: "pill-go", todo: "pill-todo" };
+
 export default function Owner() {
   const nav = useNavigate();
-  const { property, ownerTimeline, t } = useStore();
+  const { property, ownerTimeline, propReadiness, t } = useStore();
+  const r = propReadiness("palm-grove");
+  const ownLabel: Record<string, string> = { ready: t("st.ready"), review: t("mgr.toReview"), active: t("st.inProgress"), todo: t("st.todo") };
+  const ownTitle: Record<string, string> = { ready: t("own.readyGuest"), review: t("own.stReview"), active: t("own.stActive"), todo: t("own.stTodo") };
   return (
     <div className="screen wide">
       <div className="appbar">
@@ -23,10 +28,10 @@ export default function Owner() {
 
         <div className="card" style={{ marginTop: 22, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
           <div>
-            <div className="li-name" style={{ fontWeight: 700 }}>{t("own.readyGuest")}</div>
+            <div className="li-name" style={{ fontWeight: 700 }}>{ownTitle[r]}</div>
             <div className="li-sub">{t("own.nextCheckin")}</div>
           </div>
-          <span className="pill pill-ok">{t("st.ready")}</span>
+          <span className={"pill " + ownPill[r]}>{ownLabel[r]}</span>
         </div>
 
         <div className="label" style={{ marginTop: 28 }}>{t("own.activity")}</div>

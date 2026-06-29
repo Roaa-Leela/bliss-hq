@@ -12,6 +12,8 @@ import LaundryLog from "./screens/caretaker/LaundryLog";
 import Submit from "./screens/caretaker/Submit";
 import Checklists from "./screens/caretaker/Checklists";
 import TaskChecklist from "./screens/caretaker/TaskChecklist";
+import MyTasks from "./screens/caretaker/MyTasks";
+import ManagerLaundry from "./screens/manager/Laundry";
 import Operations from "./screens/manager/Operations";
 import Review from "./screens/manager/Review";
 import Issues from "./screens/manager/Issues";
@@ -37,12 +39,14 @@ const router = createBrowserRouter([
   { path: "/caretaker/submit", element: <Submit /> },
   { path: "/caretaker/checklists", element: <Checklists /> },
   { path: "/caretaker/checklist", element: <TaskChecklist /> },
+  { path: "/caretaker/tasks", element: <MyTasks /> },
   { path: "/manager", element: <Operations /> },
   { path: "/manager/review", element: <Review /> },
   { path: "/manager/issues", element: <Issues /> },
   { path: "/manager/issue", element: <IssueDetail /> },
   { path: "/manager/calendar", element: <Calendar /> },
   { path: "/manager/deposit", element: <Deposit /> },
+  { path: "/manager/laundry", element: <ManagerLaundry /> },
   { path: "/owner", element: <Owner /> },
   { path: "/admin", element: <Admin /> },
   { path: "/inventory", element: <Inventory /> },
