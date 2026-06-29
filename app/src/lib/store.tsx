@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
-  property, managerProps, openIssues, laundryItems, ownerTimeline, inventoryItems, vendors,
+  property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
+  caretakers, issuesData, type IssueRec, type IssueStatus, type Assignee,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -8,6 +9,7 @@ import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
 type Vars = Record<string, string | number>;
 const DONE_KEY = "bliss.done.v1";
 const LANG_KEY = "bliss.lang.v1";
+const ISSUES_KEY = "bliss.issues.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -30,11 +32,16 @@ type Store = {
   // data (single source; swaps to Supabase later with no screen changes)
   property: Property;
   managerProps: typeof managerProps;
-  openIssues: typeof openIssues;
   laundryItems: typeof laundryItems;
   ownerTimeline: typeof ownerTimeline;
   inventoryItems: typeof inventoryItems;
   vendors: typeof vendors;
+  caretakers: typeof caretakers;
+  // issues (interactive)
+  issues: IssueRec[];
+  currentIssueId: string | null; setCurrentIssue: (id: string | null) => void;
+  setIssueStatus: (id: string, status: IssueStatus) => void;
+  assignIssue: (id: string, assignee: Assignee) => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -53,8 +60,11 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>(() => load<Lang>(LANG_KEY, "en"));
   const [done, setDone] = useState<Record<string, boolean>>(() => load(DONE_KEY, seedDone()));
   const [currentAreaId, setCurrentArea] = useState<string | null>(null);
+  const [issues, setIssues] = useState<IssueRec[]>(() => load(ISSUES_KEY, issuesData));
+  const [currentIssueId, setCurrentIssue] = useState<string | null>(null);
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
+  useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -72,15 +82,20 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return {
       role, setRole, lang, setLang, done,
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
-      reset: () => setDone(seedDone()),
+      reset: () => { setDone(seedDone()); setIssues(issuesData); },
       currentAreaId, setCurrentArea,
-      property, managerProps, openIssues, laundryItems, ownerTimeline, inventoryItems, vendors,
+      property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors, caretakers,
+      issues, currentIssueId, setCurrentIssue,
+      setIssueStatus: (id, status) =>
+        setIssues((s) => s.map((i) => (i.id === id ? { ...i, status } : i))),
+      assignIssue: (id, assignee) =>
+        setIssues((s) => s.map((i) => (i.id === id ? { ...i, assignee } : i))),
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

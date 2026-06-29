@@ -112,3 +112,25 @@ export const vendors = [
   { id: "vd5", trade: "laundry", name: "FreshFold Laundry", area: "Kompally", rating: 5 },
   { id: "vd6", trade: "pest", name: "GreenShield Pest Control", area: "Medchal", rating: 4 },
 ];
+
+// Caretakers (for assigning issues/tasks)
+export const caretakers = [
+  { id: "c1", nameKey: "name.ramesh" },
+  { id: "c2", nameKey: "name.lakshmi" },
+  { id: "c3", nameKey: "name.anil" },
+];
+
+export type IssueStatus = "open" | "in_progress" | "resolved";
+export type Assignee = { type: "vendor" | "caretaker"; id: string } | null;
+export type IssueRec = {
+  id: string; propId: string; locKey: string; titleKey: string;
+  cat: string; sev: "low" | "medium" | "high"; status: IssueStatus; whenKey: string; assignee: Assignee;
+};
+export const issuesData: IssueRec[] = [
+  { id: "i1", propId: "palm-grove", locKey: "loc.bedroom2", titleKey: "ix.ac", cat: "maintenance", sev: "high", status: "open", whenKey: "when.2h", assignee: null },
+  { id: "i2", propId: "lake", locKey: "loc.restock", titleKey: "ix.towels", cat: "missing", sev: "medium", status: "open", whenKey: "when.today", assignee: null },
+  { id: "i5", propId: "palm-grove", locKey: "loc.pool", titleKey: "ix.poolpump", cat: "maintenance", sev: "medium", status: "open", whenKey: "when.today", assignee: null },
+  { id: "i3", propId: "misty", locKey: "loc.bathroom1", titleKey: "ix.geyser", cat: "maintenance", sev: "high", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd1" } },
+  { id: "i6", propId: "fern", locKey: "loc.kitchen", titleKey: "ix.fridge", cat: "electronic", sev: "low", status: "in_progress", whenKey: "when.yest", assignee: { type: "caretaker", id: "c2" } },
+  { id: "i4", propId: "fern", locKey: "loc.living", titleKey: "ix.bulb", cat: "electronic", sev: "low", status: "resolved", whenKey: "when.2d", assignee: { type: "vendor", id: "vd2" } },
+];
