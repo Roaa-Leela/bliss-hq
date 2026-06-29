@@ -199,6 +199,12 @@ a{color:inherit;text-decoration:none}
   /* triage form reads as two structured columns, not one stretched stack */
   .deskmain .issueform{display:grid;grid-template-columns:1fr 1fr;gap:0 46px;align-items:start}
   .deskmain .issueform > *{min-width:0}
+  /* calendar + upcoming stays sit side by side so the card width is used */
+  .deskmain .calsplit{display:grid;grid-template-columns:auto 1fr;gap:0 56px;align-items:start;margin-top:18px}
+  .deskmain .calsplit > *{min-width:0}
+  .deskmain .calwrap{margin-top:0}
+  .deskmain .calhead{margin-top:0}
+  .deskmain .calstays{margin-top:0}
 }
 @keyframes popin{from{transform:scale(.97);opacity:0}to{transform:scale(1);opacity:1}}
 
@@ -347,6 +353,8 @@ a{color:inherit;text-decoration:none}
 .amtchips .amtchip:active{background:var(--mist)}
 
 /* ---- Availability calendar ---- */
+.calsplit{margin-top:4px}
+.calstays{margin-top:28px}
 .calwrap{max-width:440px;margin-top:4px}
 .calhead{font-size:15px;font-weight:800;color:var(--forest);margin-top:24px;text-align:center}
 .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}

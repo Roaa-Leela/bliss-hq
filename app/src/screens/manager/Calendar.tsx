@@ -48,6 +48,7 @@ export default function Calendar() {
           ))}
         </div>
 
+        <div className="calsplit">
         <div className="calwrap">
           <div className="calhead">{t("cal.month")}</div>
           <div className="calgrid caldow">
@@ -72,26 +73,29 @@ export default function Calendar() {
           </div>
         </div>
 
-        <div className="label" style={{ marginTop: 28 }}>{t("cal.upcoming")}</div>
-        {bookings.length === 0 ? (
-          <Empty art={<CalendarBlank />} title={t("cal.noStays")} />
-        ) : (
-          <div>
-            {bookings.map((b) => {
-              const nights = b.end - b.start;
-              return (
-                <button className="bkrow" key={b.id} onClick={() => { setCurrentStay(b.id); nav("/manager/deposit"); }}>
-                  <span className="bkdate"><span className="bkd">{b.start}</span><span className="bkm">{t("cal.monShort")}</span></span>
-                  <span className="bkbody">
-                    <span className="bknm">{t(b.guestKey)}</span>
-                    <span className="bksub">{t("cal.range", { s: b.start, e: b.end })} · {nights === 1 ? t("cal.night1") : t("cal.nights", { n: nights })}</span>
-                  </span>
-                  <span className="bkgo">›</span>
-                </button>
-              );
-            })}
-          </div>
-        )}
+        <div className="calstays">
+          <div className="label">{t("cal.upcoming")}</div>
+          {bookings.length === 0 ? (
+            <Empty art={<CalendarBlank />} title={t("cal.noStays")} />
+          ) : (
+            <div>
+              {bookings.map((b) => {
+                const nights = b.end - b.start;
+                return (
+                  <button className="bkrow" key={b.id} onClick={() => { setCurrentStay(b.id); nav("/manager/deposit"); }}>
+                    <span className="bkdate"><span className="bkd">{b.start}</span><span className="bkm">{t("cal.monShort")}</span></span>
+                    <span className="bkbody">
+                      <span className="bknm">{t(b.guestKey)}</span>
+                      <span className="bksub">{t("cal.range", { s: b.start, e: b.end })} · {nights === 1 ? t("cal.night1") : t("cal.nights", { n: nights })}</span>
+                    </span>
+                    <span className="bkgo">›</span>
+                  </button>
+                );
+              })}
+            </div>
+          )}
+        </div>
+        </div>
       </div>
     </div>
   );
