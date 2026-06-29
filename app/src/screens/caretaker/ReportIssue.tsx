@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, CatIcon } from "../../components/Icons";
+import { Back, CatIcon, Signal } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 const cats = [["cat.cleaning"], ["cat.damage"], ["cat.missing"], ["cat.maintenance"]].map((x) => x[0]);
@@ -55,7 +55,7 @@ export default function ReportIssue() {
         <div className="field">
           <span className="flabel">{t("issue.urgent")}</span>
           <div className="options">
-            {lvls.map((l) => <button key={l} className={"opt" + (level === l ? " sel" : "")} onClick={() => setLevel(l)}>{t(l)}</button>)}
+            {lvls.map((l, i) => <button key={l} className={"opt opt-ic" + (level === l ? " sel" : "")} onClick={() => setLevel(l)}><Signal level={i + 1} size={20} /><span>{t(l)}</span></button>)}
           </div>
         </div>
         <div className="field">

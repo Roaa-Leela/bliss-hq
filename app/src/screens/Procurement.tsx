@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, Cart } from "../components/Icons";
 import { useStore } from "../lib/store";
 import type { PRStatus } from "../data/mock";
 
@@ -79,8 +79,8 @@ export default function Procurement() {
         <div className="label" style={{ marginTop: 30 }}>{t("proc.requests")}</div>
         <div style={{ marginTop: 4 }}>
           {purchaseReqs.map((r) => (
-            <button className="irow" key={r.id} onClick={() => { setCurrentReq(r.id); nav("/procurement/request"); }}>
-              <span className="idot" style={{ background: prsDot[r.status] }} />
+            <button className="irow iconrow" key={r.id} onClick={() => { setCurrentReq(r.id); nav("/procurement/request"); }}>
+              <span className="iicon" style={{ color: prsDot[r.status], background: "var(--cloud)" }}><Cart size={18} /></span>
               <span>
                 <span className="inm">{r.lines.map((l) => t("inv." + l.itemId)).join(", ")}</span>
                 <span className="isub">{r.lines.length === 1 ? t("proc.item1") : t("proc.itemsN", { n: r.lines.length })} · {t(r.whenKey)}{r.poNum ? " · " + r.poNum : ""}</span>

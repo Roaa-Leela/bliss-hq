@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, TlIcon } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const dot = { ok: "var(--ok)", info: "var(--info)", warn: "var(--warn)" };
@@ -38,7 +38,7 @@ export default function Owner() {
         <div>
           {ownerTimeline.map((tl) => (
             <div className="tl-item" key={tl.id}>
-              <span className="tl-dot" style={{ background: dot[tl.kind] }} />
+              <span className="tlic" style={{ color: dot[tl.kind], background: "var(--cloud)" }}><TlIcon id={tl.kind} size={16} /></span>
               <div>
                 <div className="tt">{t("tl." + idxOf[tl.id] + ".t")}</div>
                 <div className="ts">{t("tl." + idxOf[tl.id] + ".s")}</div>

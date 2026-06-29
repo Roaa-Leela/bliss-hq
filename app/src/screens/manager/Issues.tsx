@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 import type { IssueStatus } from "../../data/mock";
 
@@ -39,8 +39,8 @@ export default function Issues() {
 
         <div style={{ marginTop: 8 }}>
           {shown.map((i) => (
-            <button className="irow" key={i.id} onClick={() => { setCurrentIssue(i.id); nav("/manager/issue"); }}>
-              <span className="idot" style={{ background: sevColor[i.sev] }} />
+            <button className="irow iconrow" key={i.id} onClick={() => { setCurrentIssue(i.id); nav("/manager/issue"); }}>
+              <span className="iicon" style={{ color: sevColor[i.sev], background: "var(--cloud)" }}><CatIcon id={i.cat} size={18} /></span>
               <span>
                 <span className="inm">{i.title ?? t(i.titleKey)}</span>
                 <span className="isub">{t("prop." + i.propId)} · {t(i.locKey)}</span>

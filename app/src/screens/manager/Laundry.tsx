@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back } from "../../components/Icons";
+import { Back, LaundryIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 const nameKey: Record<string, string> = { l1: "ln.sheets", l2: "ln.pillow", l3: "ln.bath", l4: "ln.hand", l5: "ln.duvet" };
@@ -34,9 +34,12 @@ export default function Laundry() {
             <div style={{ marginTop: 14 }}>
               {rows.map(([id, n]) => (
                 <div className="counter" key={id} style={{ borderTop: "1px solid var(--line)" }}>
-                  <div>
-                    <div className="cn">{t(nameKey[id])}</div>
-                    <div className="cs">{t(sizeKey[id])}</div>
+                  <div className="li-left">
+                    <span className="licon"><LaundryIcon id={id} size={20} /></span>
+                    <div>
+                      <div className="cn">{t(nameKey[id])}</div>
+                      <div className="cs">{t(sizeKey[id])}</div>
+                    </div>
                   </div>
                   <span className="cnt" style={{ fontSize: 20, fontWeight: 800, color: "var(--forest)" }}>{n}</span>
                 </div>

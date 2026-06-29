@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 import type { IssueStatus } from "../../data/mock";
 
@@ -32,7 +32,7 @@ export default function MyTasks() {
             {mine.map((i) => (
               <div className="taskcard" key={i.id}>
                 <div className="tchead">
-                  <span className="idot" style={{ background: sevColor[i.sev] }} />
+                  <span className="iicon" style={{ color: sevColor[i.sev], background: "var(--cloud)" }}><CatIcon id={i.cat} size={18} /></span>
                   <span className="tcnm">{i.title ?? t(i.titleKey)}</span>
                 </div>
                 <div className="tcsub">{t("prop." + i.propId)} · {t(i.locKey)}</div>

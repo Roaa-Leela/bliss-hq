@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
 import { NotifBell } from "../../components/NotifBell";
-import { Calendar } from "../../components/Icons";
+import { Calendar, Home } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
@@ -50,7 +50,7 @@ export default function Operations() {
             const r = propReadiness(p.id);
             return (
               <button className="li" key={p.id} onClick={() => openReview(p.id)}>
-                <span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{sub(p.id)}</span></span>
+                <span className="li-left"><span className="licon"><Home size={20} /></span><span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{sub(p.id)}</span></span></span>
                 <span className={"pill " + rPill[r]}>{rLabel[r]}</span>
               </button>
             );

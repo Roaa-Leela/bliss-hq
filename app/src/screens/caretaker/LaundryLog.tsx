@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back } from "../../components/Icons";
+import { Back, LaundryIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 
 const nameKey: Record<string, string> = { l1: "ln.sheets", l2: "ln.pillow", l3: "ln.bath", l4: "ln.hand", l5: "ln.duvet" };
@@ -27,9 +27,12 @@ export default function LaundryLog() {
         <div style={{ marginTop: 20 }}>
           {laundryItems.map((it) => (
             <div className="counter" key={it.id}>
-              <div>
-                <div className="cn">{t(nameKey[it.id])}</div>
-                <div className="cs">{t(sizeKey[it.id])}</div>
+              <div className="li-left">
+                <span className="licon"><LaundryIcon id={it.id} size={20} /></span>
+                <div>
+                  <div className="cn">{t(nameKey[it.id])}</div>
+                  <div className="cs">{t(sizeKey[it.id])}</div>
+                </div>
               </div>
               <div className="stepper">
                 <button className="step" aria-label="-" onClick={() => set(it.id, -1)}>−</button>

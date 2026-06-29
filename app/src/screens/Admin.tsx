@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back } from "../components/Icons";
+import { Back, AdminIcon, Home, ClIcon } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
@@ -27,15 +27,15 @@ export default function Admin() {
 
         <div className="list" style={{ marginTop: 20 }}>
           <button className="li" onClick={() => nav("/inventory")}>
-            <span><span className="li-name">{t("adm.inventory")}</span><span className="li-sub">{t("inv.sub")}</span></span>
+            <span className="li-left"><span className="licon"><AdminIcon id="inventory" size={21} /></span><span><span className="li-name">{t("adm.inventory")}</span><span className="li-sub">{t("inv.sub")}</span></span></span>
             <span className="pill pill-go">{t("adm.open")}</span>
           </button>
           <button className="li" onClick={() => nav("/procurement")}>
-            <span><span className="li-name">{t("adm.procurement")}</span><span className="li-sub">{t("proc.sub")}</span></span>
+            <span className="li-left"><span className="licon"><AdminIcon id="procurement" size={21} /></span><span><span className="li-name">{t("adm.procurement")}</span><span className="li-sub">{t("proc.sub")}</span></span></span>
             <span className="pill pill-go">{t("adm.open")}</span>
           </button>
           <button className="li" onClick={() => nav("/vendors")}>
-            <span><span className="li-name">{t("adm.vendors")}</span><span className="li-sub">{t("vnd.sub")}</span></span>
+            <span className="li-left"><span className="licon"><AdminIcon id="vendors" size={21} /></span><span><span className="li-name">{t("adm.vendors")}</span><span className="li-sub">{t("vnd.sub")}</span></span></span>
             <span className="pill pill-go">{t("adm.open")}</span>
           </button>
         </div>
@@ -44,7 +44,7 @@ export default function Admin() {
         <div className="list">
           {managerProps.map((p) => (
             <div className="li" key={p.id}>
-              <span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{t("adm.propSub")}</span></span>
+              <span className="li-left"><span className="licon"><Home size={20} /></span><span><span className="li-name">{t("prop." + p.id)}</span><span className="li-sub">{t("adm.propSub")}</span></span></span>
               <span className="tag-info">{t(propCare[p.id])}</span>
             </div>
           ))}
@@ -54,7 +54,7 @@ export default function Admin() {
         <div className="list">
           {templateKeys.map((k) => (
             <div className="li" key={k}>
-              <span><span className="li-name">{t(k)}</span><span className="li-sub">{t("adm.tplSub")}</span></span>
+              <span className="li-left"><span className="licon"><ClIcon id={k.replace("tpl.", "")} size={21} /></span><span><span className="li-name">{t(k)}</span><span className="li-sub">{t("adm.tplSub")}</span></span></span>
               <span className="tag-info">{t("cl.checksN", { n: tplCount(k) })}</span>
             </div>
           ))}

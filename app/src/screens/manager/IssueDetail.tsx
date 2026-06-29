@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, CatIcon } from "../../components/Icons";
+import { Back, CatIcon, Person, TradeIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 import type { IssueStatus } from "../../data/mock";
 
@@ -52,13 +52,13 @@ export default function IssueDetail() {
           </button>
           {caretakers.map((c) => (
             <button key={c.id} className={"pickrow" + (isAssigned("caretaker", c.id) ? " sel" : "")} onClick={() => assignIssue(issue.id, { type: "caretaker", id: c.id })}>
-              <span><span className="pname" style={{ display: "block" }}>{t(c.nameKey)}</span><span className="ptag">{t("gen.caretaker")}</span></span>
+              <span className="pk-left"><span className="licon"><Person size={20} /></span><span><span className="pname" style={{ display: "block" }}>{t(c.nameKey)}</span><span className="ptag">{t("gen.caretaker")}</span></span></span>
               <span className="tick">{isAssigned("caretaker", c.id) && <Tick />}</span>
             </button>
           ))}
           {vendors.map((v) => (
             <button key={v.id} className={"pickrow" + (isAssigned("vendor", v.id) ? " sel" : "")} onClick={() => assignIssue(issue.id, { type: "vendor", id: v.id })}>
-              <span><span className="pname" style={{ display: "block" }}>{v.name}</span><span className="ptag">{t("trade." + v.trade)}</span></span>
+              <span className="pk-left"><span className="licon"><TradeIcon id={v.trade} size={20} /></span><span><span className="pname" style={{ display: "block" }}>{t(v.nameKey)}</span><span className="ptag">{t("trade." + v.trade)}</span></span></span>
               <span className="tick">{isAssigned("vendor", v.id) && <Tick />}</span>
             </button>
           ))}

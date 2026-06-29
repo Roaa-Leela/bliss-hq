@@ -1,6 +1,6 @@
 import { Fragment, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back } from "../components/Icons";
+import { Back, TradeIcon } from "../components/Icons";
 import { useStore } from "../lib/store";
 import type { PRStatus } from "../data/mock";
 
@@ -57,7 +57,7 @@ export default function RequestDetail() {
             <span className="flabel">{t("proc.chooseVendor")}</span>
             {supplyVendors.map((v) => (
               <button key={v.id} className={"pickrow" + (vendorId === v.id ? " sel" : "")} onClick={() => setVendorId(v.id)}>
-                <span><span className="pname" style={{ display: "block" }}>{t(v.nameKey)}</span><span className="ptag">{v.area}</span></span>
+                <span className="pk-left"><span className="licon"><TradeIcon id={v.trade} size={20} /></span><span><span className="pname" style={{ display: "block" }}>{t(v.nameKey)}</span><span className="ptag">{v.area}</span></span></span>
                 <span className="tick">{vendorId === v.id && <Tick />}</span>
               </button>
             ))}

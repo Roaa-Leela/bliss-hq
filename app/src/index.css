@@ -73,7 +73,7 @@ a{color:inherit;text-decoration:none}
 /* Reference + capture (task screen) */
 .ref{height:178px;border-radius:var(--r-card);background:linear-gradient(135deg,#9DBE6A,#415E27);position:relative;overflow:hidden}
 .ref .tag{position:absolute;left:16px;bottom:14px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px}
-.refart{height:148px;border-radius:var(--r-card);overflow:hidden;position:relative;border:1px solid var(--line);background:#F6F4EC}
+.refart{height:206px;border-radius:var(--r-card);overflow:hidden;position:relative;border:1px solid var(--line);background:#F6F4EC}
 .refart > svg{display:block}
 .refart .tag{position:absolute;left:14px;bottom:12px;background:rgba(255,255,255,.94);color:var(--forest);font-size:12px;font-weight:700;padding:7px 12px;border-radius:8px}
 .capture{height:150px;border-radius:var(--r-card);border:1.6px dashed #C5C9B8;background:var(--cloud);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;width:100%}
@@ -136,6 +136,7 @@ a{color:inherit;text-decoration:none}
 /* ---- Timeline (owner) ---- */
 .tl-item{display:flex;gap:14px;padding:18px 2px;border-top:1px solid var(--line)}
 .tl-dot{width:10px;height:10px;border-radius:50%;margin-top:6px;flex:0 0 10px}
+.tl-item .tlic{width:32px;height:32px;border-radius:9px;display:flex;align-items:center;justify-content:center;flex:0 0 32px;margin-top:2px}
 .tl-item .tt{font-size:15.5px;color:var(--ink);font-weight:600}
 .tl-item .ts{font-size:12.5px;color:var(--slate);margin-top:3px}
 
@@ -185,6 +186,8 @@ a{color:inherit;text-decoration:none}
 
 /* ---- Issue rows ---- */
 .irow{display:grid;grid-template-columns:10px 1fr auto;gap:12px;align-items:center;padding:16px 2px;border-top:1px solid var(--line);width:100%;text-align:left}
+.irow.iconrow{grid-template-columns:36px 1fr auto}
+.iicon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex:0 0 36px}
 .irow .idot{width:10px;height:10px;border-radius:50%}
 .irow .inm{font-size:16px;color:var(--ink);font-weight:600;display:block}
 .irow .isub{font-size:12.5px;color:var(--slate);margin-top:4px;display:block}
@@ -232,7 +235,7 @@ a{color:inherit;text-decoration:none}
 .taskcard .tchead{display:flex;align-items:center;gap:10px}
 .taskcard .idot{width:10px;height:10px;border-radius:50%;flex:0 0 10px}
 .taskcard .tcnm{font-size:16px;font-weight:700;color:var(--ink)}
-.taskcard .tcsub{font-size:12.5px;color:var(--slate);margin-top:6px;margin-left:20px}
+.taskcard .tcsub{font-size:12.5px;color:var(--slate);margin-top:6px;margin-left:46px}
 .taskcard .opt{padding:11px 8px;font-size:13px;min-width:0}
 
 /* ---- Task checklist (tickable items) ---- */
@@ -360,6 +363,7 @@ a{color:inherit;text-decoration:none}
 /* ---- Selectable assignee rows ---- */
 .pickrow{display:flex;align-items:center;justify-content:space-between;width:100%;padding:15px 16px;border:1.5px solid var(--line);border-radius:12px;margin-bottom:10px;background:var(--surface);text-align:left}
 .pickrow.sel{border-color:var(--forest);background:var(--mist)}
+.pickrow .pk-left{display:flex;align-items:center;gap:12px;min-width:0}
 .pickrow .pname{font-size:15.5px;color:var(--ink);font-weight:600}
 .pickrow .ptag{font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;color:var(--slate)}
 .pickrow .tick{width:22px;height:22px;border-radius:50%;border:2px solid var(--line);flex:0 0 22px}

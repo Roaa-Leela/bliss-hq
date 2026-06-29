@@ -143,8 +143,29 @@ const Washer = (p: P) => (
 const Eye = (p: P) => (
   <I {...p}><path d="M3 12s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" /><circle cx="12" cy="12" r="2.6" /></I>
 );
-const Cart = (p: P) => (
+export const Cart = (p: P) => (
   <I {...p}><path d="M4 5h2l1.6 9.5a1.5 1.5 0 001.5 1.3h7a1.5 1.5 0 001.5-1.2L19 8H7" /><circle cx="10" cy="19" r="1.3" /><circle cx="17" cy="19" r="1.3" /></I>
+);
+
+/* ---- Misc ---- */
+export const Home = (p: P) => (
+  <I {...p}><path d="M4 11l8-6 8 6" /><path d="M6 10v9h12v-9" /><path d="M10 19v-5h4v5" /></I>
+);
+const Clock = (p: P) => (
+  <I {...p}><circle cx="12" cy="12" r="8" /><path d="M12 7.5V12l3 2" /></I>
+);
+const Pillow = (p: P) => (
+  <I {...p}><rect x="4" y="7" width="16" height="10" rx="4" /><path d="M7 8.5c0 3 0 4 0 7M17 8.5c0 3 0 4 0 7" stroke-width="1.4" opacity="0.5" /></I>
+);
+const Linen = (p: P) => (
+  <I {...p}><rect x="4" y="6" width="16" height="5" rx="2" /><rect x="6" y="11" width="14" height="5" rx="2" /><path d="M8 8.5h3M10 13.5h3" stroke-width="1.4" opacity="0.6" /></I>
+);
+export const Signal = ({ size = 22, color = "currentColor", stroke = 1.8, level = 3 }: P & { level?: number }) => (
+  <svg {...base(size)} stroke={color} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round">
+    <rect x="4" y="13.5" width="4" height="6.5" rx="1.2" fill={level >= 1 ? color : "none"} />
+    <rect x="10" y="9.5" width="4" height="10.5" rx="1.2" fill={level >= 2 ? color : "none"} />
+    <rect x="16" y="5" width="4" height="15" rx="1.2" fill={level >= 3 ? color : "none"} />
+  </svg>
 );
 
 /* ---- Lookup helpers (keep iconography consistent across screens) ---- */
@@ -168,6 +189,10 @@ const notifMap: Record<string, (p: P) => ReactNode> = {
   review: Eye, issue: Alert, stock: Box, po: Cart, approved: Shield, laundry: Washer,
 };
 const quickMap: Record<string, (p: P) => ReactNode> = { checklists: List, tasks: CheckSquare, laundry: Washer };
+const adminMap: Record<string, (p: P) => ReactNode> = { inventory: Box, procurement: Cart, vendors: Wrench };
+const depMap: Record<string, (p: P) => ReactNode> = { damage: Alert, missing: Box, cleaning: Spray, late: Clock };
+const laundryMap: Record<string, (p: P) => ReactNode> = { l1: Linen, l2: Pillow, l3: Towel, l4: Towel, l5: Linen };
+const tlMap: Record<string, (p: P) => ReactNode> = { ok: Check, info: Wrench, warn: Alert };
 
 const pick = (m: Record<string, (p: P) => ReactNode>, id: string, p: P) => {
   const C = m[id];
@@ -181,3 +206,7 @@ export const TradeIcon = ({ id, ...p }: P & { id: string }) => <>{pick(tradeMap,
 export const ClIcon = ({ id, ...p }: P & { id: string }) => <>{pick(clMap, id, p)}</>;
 export const NotifIcon = ({ id, ...p }: P & { id: string }) => <>{pick(notifMap, id, p)}</>;
 export const QuickIcon = ({ id, ...p }: P & { id: string }) => <>{pick(quickMap, id, p)}</>;
+export const AdminIcon = ({ id, ...p }: P & { id: string }) => <>{pick(adminMap, id, p)}</>;
+export const DepIcon = ({ id, ...p }: P & { id: string }) => <>{pick(depMap, id, p)}</>;
+export const LaundryIcon = ({ id, ...p }: P & { id: string }) => <>{pick(laundryMap, id, p)}</>;
+export const TlIcon = ({ id, ...p }: P & { id: string }) => <>{pick(tlMap, id, p)}</>;

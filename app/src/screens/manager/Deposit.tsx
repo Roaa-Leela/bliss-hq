@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, Check } from "../../components/Icons";
+import { Back, Check, DepIcon } from "../../components/Icons";
 import { useStore } from "../../lib/store";
 import { bookingsData, DEPOSIT_AMOUNT, depositReasons } from "../../data/mock";
 
@@ -66,7 +66,7 @@ export default function Deposit() {
           <span className="flabel">{t("dep.reason")}</span>
           <div className="options">
             {depositReasons.map((r) => (
-              <button key={r} className={"opt" + (reason === r ? " sel" : "")} onClick={() => setReason(r)}>{t("dep.reason." + r)}</button>
+              <button key={r} className={"opt opt-ic" + (reason === r ? " sel" : "")} onClick={() => setReason(r)}><DepIcon id={r} size={21} /><span>{t("dep.reason." + r)}</span></button>
             ))}
           </div>
         </div>
