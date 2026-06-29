@@ -154,3 +154,13 @@ export const purchaseReqsData: PurchaseReq[] = [
   { id: "pr2", lines: [{ itemId: "iv7", qty: 2 }], status: "approved", vendorId: "vd7", poNum: null, whenKey: "when.yest" },
   { id: "pr3", lines: [{ itemId: "iv3", qty: 1 }, { itemId: "iv5", qty: 4 }], status: "ordered", vendorId: "vd8", poNum: "PO-2041", whenKey: "when.2d" },
 ];
+
+// Stock movements: every count, consumption or receipt is logged for an item.
+export type MoveType = "receipt" | "consumption" | "count";
+export type StockMove = { id: string; itemId: string; type: MoveType; delta: number; resulting: number; whenKey: string };
+export const stockMovesData: StockMove[] = [
+  { id: "sm1", itemId: "iv5", type: "consumption", delta: -4, resulting: 8, whenKey: "when.2d" },
+  { id: "sm2", itemId: "iv7", type: "consumption", delta: -2, resulting: 4, whenKey: "when.yest" },
+  { id: "sm3", itemId: "iv8", type: "consumption", delta: -2, resulting: 0, whenKey: "when.yest" },
+  { id: "sm4", itemId: "iv4", type: "receipt", delta: 4, resulting: 12, whenKey: "when.2d" },
+];

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
-  caretakers, issuesData, prefVendorByCat, purchaseReqsData,
+  caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData,
   type IssueRec, type IssueStatus, type Assignee,
-  type PurchaseReq, type PRLine,
+  type PurchaseReq, type PRLine, type StockMove, type MoveType,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -13,6 +13,8 @@ const DONE_KEY = "bliss.done.v1";
 const LANG_KEY = "bliss.lang.v1";
 const ISSUES_KEY = "bliss.issues.v1";
 const REQS_KEY = "bliss.reqs.v1";
+const STOCK_KEY = "bliss.stock.v1";
+const MOVES_KEY = "bliss.moves.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -52,6 +54,10 @@ type Store = {
   createPurchaseReq: (lines: PRLine[]) => string;
   approvePurchaseReq: (id: string) => void;
   orderPurchaseReq: (id: string, vendorId: string) => void;
+  // stock (interactive)
+  stockMoves: StockMove[];
+  currentItemId: string | null; setCurrentItem: (id: string | null) => void;
+  adjustStock: (itemId: string, type: MoveType, qty: number) => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -74,10 +80,15 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [currentIssueId, setCurrentIssue] = useState<string | null>(null);
   const [purchaseReqs, setPurchaseReqs] = useState<PurchaseReq[]>(() => load(REQS_KEY, purchaseReqsData));
   const [currentReqId, setCurrentReq] = useState<string | null>(null);
+  const [inv, setInv] = useState(() => load(STOCK_KEY, inventoryItems));
+  const [stockMoves, setStockMoves] = useState<StockMove[]>(() => load(MOVES_KEY, stockMovesData));
+  const [currentItemId, setCurrentItem] = useState<string | null>(null);
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
   useEffect(() => { try { localStorage.setItem(REQS_KEY, JSON.stringify(purchaseReqs)); } catch {} }, [purchaseReqs]);
+  useEffect(() => { try { localStorage.setItem(STOCK_KEY, JSON.stringify(inv)); } catch {} }, [inv]);
+  useEffect(() => { try { localStorage.setItem(MOVES_KEY, JSON.stringify(stockMoves)); } catch {} }, [stockMoves]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -95,9 +106,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return {
       role, setRole, lang, setLang, done,
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
-      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); },
+      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); },
       currentAreaId, setCurrentArea,
-      property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors, caretakers, prefVendorByCat,
+      property, managerProps, laundryItems, ownerTimeline, inventoryItems: inv, vendors, caretakers, prefVendorByCat,
       issues, currentIssueId, setCurrentIssue,
       setIssueStatus: (id, status) =>
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, status } : i))),
@@ -117,12 +128,28 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           const poNum = "PO-" + (2042 + orderedCount);
           return s.map((r) => (r.id === id ? { ...r, status: "ordered", vendorId, poNum } : r));
         }),
+      stockMoves, currentItemId, setCurrentItem,
+      adjustStock: (itemId, type, qty) => {
+        let resulting = 0;
+        setInv((s) => s.map((it) => {
+          if (it.id !== itemId) return it;
+          resulting = type === "count" ? qty : type === "receipt" ? it.stock + qty : Math.max(0, it.stock - qty);
+          return { ...it, stock: resulting };
+        }));
+        setStockMoves((m) => {
+          const prev = inv.find((it) => it.id === itemId)?.stock ?? 0;
+          const res = type === "count" ? qty : type === "receipt" ? prev + qty : Math.max(0, prev - qty);
+          const delta = res - prev;
+          const id = "sm-" + itemId + "-" + m.length;
+          return [{ id, itemId, type, delta, resulting: res, whenKey: "when.now" }, ...m];
+        });
+      },
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

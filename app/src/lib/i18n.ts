@@ -284,6 +284,24 @@ export const messages: Record<string, Entry> = {
   "when.now": { en: "Just now", hi: "अभी", te: "ఇప్పుడే" },
   "adm.procurement": { en: "Procurement", hi: "खरीद", te: "కొనుగోలు" },
 
+  // Stock movements
+  "stock.inStock": { en: "In stock", hi: "स्टॉक में", te: "స్టాక్‌లో" },
+  "stock.mustHave": { en: "Must have", hi: "ज़रूरी", te: "ఉండాల్సినవి" },
+  "stock.update": { en: "Update stock", hi: "स्टॉक अपडेट करें", te: "స్టాక్ నవీకరించండి" },
+  "stock.history": { en: "Recent movements", hi: "हाल के बदलाव", te: "ఇటీవలి మార్పులు" },
+  "stock.noHistory": { en: "No movements yet", hi: "अभी कोई बदलाव नहीं", te: "ఇంకా మార్పులు లేవు" },
+  "stock.qtyReceive": { en: "How many received?", hi: "कितने मिले?", te: "ఎన్ని వచ్చాయి?" },
+  "stock.qtyUse": { en: "How many used?", hi: "कितने इस्तेमाल हुए?", te: "ఎన్ని వాడారు?" },
+  "stock.qtyCount": { en: "New counted total", hi: "नई गिनती कुल", te: "కొత్త లెక్క మొత్తం" },
+  "stock.apply": { en: "Apply update", hi: "अपडेट लागू करें", te: "నవీకరణ వర్తించండి" },
+  "stock.resultingTo": { en: "to {n}", hi: "{n} तक", te: "{n}‌కు" },
+  "mv.receiptAction": { en: "Receive", hi: "मिला", te: "స్వీకరించు" },
+  "mv.consumptionAction": { en: "Use", hi: "इस्तेमाल", te: "వాడకం" },
+  "mv.countAction": { en: "Set count", hi: "गिनती सेट", te: "లెక్క సెట్" },
+  "mv.receipt": { en: "Received", hi: "मिला", te: "స్వీకరించబడింది" },
+  "mv.consumption": { en: "Used", hi: "इस्तेमाल हुआ", te: "వాడారు" },
+  "mv.count": { en: "Recounted", hi: "दोबारा गिना", te: "మళ్లీ లెక్కించారు" },
+
   // Condition
   "cond.good": { en: "Good", hi: "अच्छा", te: "బాగుంది" },
   "cond.fair": { en: "Fair", hi: "ठीक", te: "ఫర్వాలేదు" },

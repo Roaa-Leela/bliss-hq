@@ -63,10 +63,10 @@ DONE (showable now)
 - Vendor directory grouped by trade, rating, Call action.
 - Procurement flow: raise a purchase request from low stock (multi-select with suggested quantities), approve, then generate a purchase order to a chosen supplier. Status moves Requested to Approved to Ordered with a visual tracker and a PO number. Requests and statuses persist.
 - Preferred supplier shown on each low-stock inventory item, and the reorder banner taps straight into procurement.
+- Stock update actions: tap any item to Receive, Use or Set count. Each writes a movement to the item history (signed change and resulting total) and the new stock flows through the inventory urgency colours. Stock and history persist.
 
 UI-NEXT (no backend needed)
-- Stock update actions: manual count, consumption, receipt (with a movements history).
-- Low-stock surfaced as a notification.
+- Low-stock surfaced as a notification (part of the in-app notifications view).
 
 PENDING (needs backend or credentials)
 - Real notification delivery (web push now possible without an account; WhatsApp needs the BSP).

@@ -20,6 +20,7 @@ import Inventory from "./screens/Inventory";
 import Vendors from "./screens/Vendors";
 import Procurement from "./screens/Procurement";
 import RequestDetail from "./screens/RequestDetail";
+import InventoryItem from "./screens/InventoryItem";
 
 const router = createBrowserRouter([
   { path: "/", element: <RoleSelect /> },
@@ -36,6 +37,7 @@ const router = createBrowserRouter([
   { path: "/owner", element: <Owner /> },
   { path: "/admin", element: <Admin /> },
   { path: "/inventory", element: <Inventory /> },
+  { path: "/inventory/item", element: <InventoryItem /> },
   { path: "/vendors", element: <Vendors /> },
   { path: "/procurement", element: <Procurement /> },
   { path: "/procurement/request", element: <RequestDetail /> },

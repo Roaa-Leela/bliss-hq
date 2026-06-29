@@ -8,7 +8,7 @@ const cats = ["kitchen", "crockery", "linen", "toiletries", "consumables"];
 
 export default function Inventory() {
   const nav = useNavigate();
-  const { inventoryItems, vendors, prefVendorByCat, t } = useStore();
+  const { inventoryItems, vendors, prefVendorByCat, setCurrentItem, t } = useStore();
   const low = inventoryItems.filter((i) => i.stock < i.must).length;
   const prefName = (cat: string) => { const v = vendors.find((x) => x.id === prefVendorByCat[cat]); return v ? t(v.nameKey) : ""; };
 
@@ -62,7 +62,7 @@ export default function Inventory() {
                 const barColor = i.stock === 0 ? "var(--alert)" : isLow ? "var(--warn)" : "var(--ok)";
                 const cntColor = i.stock === 0 ? "var(--alert-text)" : isLow ? "var(--warn-text)" : "var(--ink)";
                 return (
-                  <div className="tbl-row" key={i.id}>
+                  <button className="tbl-row" key={i.id} onClick={() => { setCurrentItem(i.id); nav("/inventory/item"); }}>
                     <span className="bar" style={{ background: barColor }} />
                     <span className="nmwrap">
                       <span className="nm">{t("inv." + i.id)}</span>
@@ -70,7 +70,7 @@ export default function Inventory() {
                     </span>
                     <span className="cnt" style={{ color: cntColor }}>{i.stock}<small>/{i.must}</small></span>
                     <span className="cond" style={condStyle(i.condition)}>{t("cond." + i.condition)}</span>
-                  </div>
+                  </button>
                 );
               })}
             </div>
