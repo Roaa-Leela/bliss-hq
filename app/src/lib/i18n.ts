@@ -154,6 +154,8 @@ export const messages: Record<string, Entry> = {
   "tpl.adhoc": { en: "Ad-hoc", hi: "ज़रूरत अनुसार", te: "అవసరమైనప్పుడు" },
 
   // Issue example titles (demo)
+  "loc.bedroom2": { en: "Bedroom 2", hi: "बेडरूम 2", te: "బెడ్‌రూమ్ 2" },
+  "loc.restock": { en: "Restock", hi: "रीस्टॉक", te: "రీస్టాక్" },
   "ix.ac": { en: "AC not cooling", hi: "एसी ठंडा नहीं कर रहा", te: "ఏసీ చల్లబడటం లేదు" },
   "ix.towels": { en: "Towels short", hi: "टॉवल कम हैं", te: "తువ్వాళ్లు తక్కువ" },
   "when.2h": { en: "2h ago", hi: "2 घंटे पहले", te: "2 గం. క్రితం" },

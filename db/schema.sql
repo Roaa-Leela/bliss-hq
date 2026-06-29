@@ -323,3 +323,8 @@ create table if not exists staff_details (
   weekly_off text,
   accommodation text
 );
+
+-- Coverage fixes for Module 2/3:
+alter table checklist_runs add column if not exists review_note text;          -- PM comment on review
+alter table issues add column if not exists assignee_id uuid references profiles(id);  -- assign issue/task to a person
+alter table inventory_items add column if not exists preferred_vendor_id uuid references vendors(id);  -- preferred vendor per item

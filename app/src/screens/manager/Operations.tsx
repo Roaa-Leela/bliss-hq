@@ -6,6 +6,8 @@ import { useStore } from "../../lib/store";
 const chip = { ready: "pill-ok", active: "pill-go", todo: "pill-todo" } as const;
 const issueTitleKey: Record<string, string> = { i1: "ix.ac", i2: "ix.towels" };
 const issueWhenKey: Record<string, string> = { i1: "when.2h", i2: "when.today" };
+const issuePropId: Record<string, string> = { i1: "palm-grove", i2: "lake" };
+const issueLocKey: Record<string, string> = { i1: "loc.bedroom2", i2: "loc.restock" };
 
 export default function Operations() {
   const nav = useNavigate();
@@ -46,8 +48,8 @@ export default function Operations() {
             <div className="tl-item" key={i.id}>
               <span className="tl-dot" style={{ background: i.level === "alert" ? "var(--alert)" : "var(--warn)" }} />
               <div>
-                <div className="tt">{t(issueTitleKey[i.id])} · {i.where.split(" · ")[0]}</div>
-                <div className="ts">{i.where.split(" · ")[1]} · {t("mgr.flagged", { when: t(issueWhenKey[i.id]) })}</div>
+                <div className="tt">{t(issueTitleKey[i.id])} · {t("prop." + issuePropId[i.id])}</div>
+                <div className="ts">{t(issueLocKey[i.id])} · {t("mgr.flagged", { when: t(issueWhenKey[i.id]) })}</div>
               </div>
             </div>
           ))}
