@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
+import { NotifBell } from "../../components/NotifBell";
 import { useStore } from "../../lib/store";
 
 const chip = { ready: "pill-ok", active: "pill-go", todo: "pill-todo" } as const;
@@ -19,7 +20,7 @@ export default function Operations() {
 
   return (
     <div className="screen wide">
-      <div className="appbar"><Brand /><LangSwitch /></div>
+      <div className="appbar"><Brand /><div style={{ display: "flex", gap: 10, alignItems: "center" }}><NotifBell /><LangSwitch /></div></div>
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 14 }}>{t("mgr.dateline")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("mgr.ops")}</h1>

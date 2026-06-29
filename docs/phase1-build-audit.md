@@ -21,10 +21,12 @@ DONE (showable now)
 - Housekeeping and laundry count.
 - Submit and property-ready confirmation.
 
+DONE (added)
+- In-app notifications view: a bell with an unread badge on the operations bar opens a colour-coded feed (review, issue, stock, laundry, order, approved). Each item taps through to the right screen and marks itself read; mark-all-read clears the badge. State persists.
+
 UI-NEXT (no backend needed)
 - The other checklist types live: post-stay, daily, weekly, monthly, ad-hoc (add content).
 - Icon-led, image-led pass to cut reading further.
-- A simple in-app notifications view.
 
 PENDING (needs backend or device)
 - Real offline-first sync (work with no internet, then sync) via PowerSync.
@@ -65,8 +67,8 @@ DONE (showable now)
 - Preferred supplier shown on each low-stock inventory item, and the reorder banner taps straight into procurement.
 - Stock update actions: tap any item to Receive, Use or Set count. Each writes a movement to the item history (signed change and resulting total) and the new stock flows through the inventory urgency colours. Stock and history persist.
 
-UI-NEXT (no backend needed)
-- Low-stock surfaced as a notification (part of the in-app notifications view).
+DONE (added)
+- Low-stock surfaced as a notification (in the in-app notifications view).
 
 PENDING (needs backend or credentials)
 - Real notification delivery (web push now possible without an account; WhatsApp needs the BSP).

@@ -1,9 +1,9 @@
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import {
   property, managerProps, laundryItems, ownerTimeline, inventoryItems, vendors,
-  caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData,
+  caretakers, issuesData, prefVendorByCat, purchaseReqsData, stockMovesData, notificationsData,
   type IssueRec, type IssueStatus, type Assignee,
-  type PurchaseReq, type PRLine, type StockMove, type MoveType,
+  type PurchaseReq, type PRLine, type StockMove, type MoveType, type Notif,
   type Area, type RoleId, type Property,
 } from "../data/mock";
 import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
@@ -15,6 +15,7 @@ const ISSUES_KEY = "bliss.issues.v1";
 const REQS_KEY = "bliss.reqs.v1";
 const STOCK_KEY = "bliss.stock.v1";
 const MOVES_KEY = "bliss.moves.v1";
+const NOTIFS_KEY = "bliss.notifs.v1";
 
 function load<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? (JSON.parse(v) as T) : fallback; } catch { return fallback; }
@@ -58,6 +59,11 @@ type Store = {
   stockMoves: StockMove[];
   currentItemId: string | null; setCurrentItem: (id: string | null) => void;
   adjustStock: (itemId: string, type: MoveType, qty: number) => void;
+  // notifications (interactive)
+  notifications: Notif[];
+  unreadCount: () => number;
+  markNotifRead: (id: string) => void;
+  markAllNotifsRead: () => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -83,12 +89,14 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [inv, setInv] = useState(() => load(STOCK_KEY, inventoryItems));
   const [stockMoves, setStockMoves] = useState<StockMove[]>(() => load(MOVES_KEY, stockMovesData));
   const [currentItemId, setCurrentItem] = useState<string | null>(null);
+  const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
   useEffect(() => { try { localStorage.setItem(REQS_KEY, JSON.stringify(purchaseReqs)); } catch {} }, [purchaseReqs]);
   useEffect(() => { try { localStorage.setItem(STOCK_KEY, JSON.stringify(inv)); } catch {} }, [inv]);
   useEffect(() => { try { localStorage.setItem(MOVES_KEY, JSON.stringify(stockMoves)); } catch {} }, [stockMoves]);
+  useEffect(() => { try { localStorage.setItem(NOTIFS_KEY, JSON.stringify(notifications)); } catch {} }, [notifications]);
   const setLang = (l: Lang) => { setLangState(l); try { localStorage.setItem(LANG_KEY, l); } catch {} };
 
   const value = useMemo<Store>(() => {
@@ -106,7 +114,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
     return {
       role, setRole, lang, setLang, done,
       markDone: (id) => setDone((s) => ({ ...s, [id]: true })),
-      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); },
+      reset: () => { setDone(seedDone()); setIssues(issuesData); setPurchaseReqs(purchaseReqsData); setInv(inventoryItems); setStockMoves(stockMovesData); setNotifications(notificationsData); },
       currentAreaId, setCurrentArea,
       property, managerProps, laundryItems, ownerTimeline, inventoryItems: inv, vendors, caretakers, prefVendorByCat,
       issues, currentIssueId, setCurrentIssue,
@@ -144,12 +152,16 @@ export function StoreProvider({ children }: { children: ReactNode }) {
           return [{ id, itemId, type, delta, resulting: res, whenKey: "when.now" }, ...m];
         });
       },
+      notifications,
+      unreadCount: () => notifications.filter((n) => !n.read).length,
+      markNotifRead: (id) => setNotifications((s) => s.map((n) => (n.id === id ? { ...n, read: true } : n))),
+      markAllNotifsRead: () => setNotifications((s) => s.map((n) => ({ ...n, read: true }))),
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

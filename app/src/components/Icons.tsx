@@ -22,3 +22,6 @@ export const Bed = ({ size = 26, color = "#2D4A1A", stroke = 1.8 }: P) => (
 export const Person = ({ size = 26, color = "#2D4A1A", stroke = 1.8 }: P) => (
   <svg {...base(size)}><path d="M12 12a4 4 0 100-8 4 4 0 000 8zM5 20c1-4 13-4 14 0" stroke={color} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" /></svg>
 );
+export const Bell = ({ size = 22, color = "#2D4A1A", stroke = 1.9 }: P) => (
+  <svg {...base(size)}><path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 004 0" stroke={color} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" /></svg>
+);

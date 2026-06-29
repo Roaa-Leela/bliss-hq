@@ -155,6 +155,18 @@ export const purchaseReqsData: PurchaseReq[] = [
   { id: "pr3", lines: [{ itemId: "iv3", qty: 1 }, { itemId: "iv5", qty: 4 }], status: "ordered", vendorId: "vd8", poNum: "PO-2041", whenKey: "when.2d" },
 ];
 
+// In-app notifications, aggregated across the modules.
+export type NotifKind = "review" | "issue" | "stock" | "po" | "approved" | "laundry";
+export type Notif = { id: string; kind: NotifKind; titleKey: string; subKey: string; whenKey: string; route: string; read: boolean };
+export const notificationsData: Notif[] = [
+  { id: "n1", kind: "review", titleKey: "nt.review.t", subKey: "nt.review.s", whenKey: "when.today", route: "/manager/review", read: false },
+  { id: "n2", kind: "issue", titleKey: "nt.issue.t", subKey: "nt.issue.s", whenKey: "when.2h", route: "/manager/issues", read: false },
+  { id: "n3", kind: "stock", titleKey: "nt.stock.t", subKey: "nt.stock.s", whenKey: "when.today", route: "/procurement", read: false },
+  { id: "n4", kind: "laundry", titleKey: "nt.laundry.t", subKey: "nt.laundry.s", whenKey: "when.yest", route: "/manager", read: true },
+  { id: "n5", kind: "po", titleKey: "nt.po.t", subKey: "nt.po.s", whenKey: "when.2d", route: "/procurement", read: true },
+  { id: "n6", kind: "approved", titleKey: "nt.approved.t", subKey: "nt.approved.s", whenKey: "when.2d", route: "/owner", read: true },
+];
+
 // Stock movements: every count, consumption or receipt is logged for an item.
 export type MoveType = "receipt" | "consumption" | "count";
 export type StockMove = { id: string; itemId: string; type: MoveType; delta: number; resulting: number; whenKey: string };
