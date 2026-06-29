@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, CatIcon, Check } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { Empty } from "../../components/Empty";
+import { AllClear } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 import type { IssueStatus } from "../../data/mock";
 
@@ -40,7 +41,7 @@ export default function Issues() {
 
         <div style={{ marginTop: 8 }}>
           {shown.length === 0 && (
-            <Empty icon={<Check size={22} color="var(--ok)" />} title={t("iss.none")} sub={t("iss.noneSub")} />
+            <Empty art={<AllClear />} title={t("iss.none")} sub={t("iss.noneSub")} />
           )}
           {shown.map((i) => (
             <button className="irow iconrow" key={i.id} onClick={() => { setCurrentIssue(i.id); nav("/manager/issue"); }}>

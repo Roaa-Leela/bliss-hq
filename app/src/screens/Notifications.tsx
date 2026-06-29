@@ -1,8 +1,9 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, NotifIcon, Bell } from "../components/Icons";
+import { Back, NotifIcon } from "../components/Icons";
 import { Empty } from "../components/Empty";
+import { CalmBell } from "../components/EmptyArt";
 import { useStore } from "../lib/store";
 import type { NotifKind } from "../data/mock";
 
@@ -32,14 +33,16 @@ export default function Notifications() {
         <h1 className="h1" style={{ marginTop: 10 }}>{t("nt.title")}</h1>
         <p className="meta" style={{ marginTop: 8 }}>{t("nt.sub")}</p>
 
-        <div className="ntbar">
-          <span className="meta">{unread > 0 ? t("nt.unreadN", { n: unread }) : t("nt.allRead")}</span>
-          {unread > 0 && <button className="pill pill-go" onClick={markAllNotifsRead}>{t("nt.markAll")}</button>}
-        </div>
+        {notifications.length > 0 && (
+          <div className="ntbar">
+            <span className="meta">{unread > 0 ? t("nt.unreadN", { n: unread }) : t("nt.allRead")}</span>
+            {unread > 0 && <button className="pill pill-go" onClick={markAllNotifsRead}>{t("nt.markAll")}</button>}
+          </div>
+        )}
 
         <div>
           {notifications.length === 0 && (
-            <Empty icon={<Bell size={22} color="var(--slate)" />} title={t("nt.empty")} />
+            <Empty art={<CalmBell />} title={t("nt.empty")} />
           )}
           {notifications.map((n) => (
             <button className={"ntrow" + (n.read ? "" : " unread")} key={n.id}

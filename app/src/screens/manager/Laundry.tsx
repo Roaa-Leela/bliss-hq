@@ -3,6 +3,7 @@ import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
 import { Back, LaundryIcon } from "../../components/Icons";
 import { Empty } from "../../components/Empty";
+import { Basket } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 
 const nameKey: Record<string, string> = { l1: "ln.sheets", l2: "ln.pillow", l3: "ln.bath", l4: "ln.hand", l5: "ln.duvet" };
@@ -25,7 +26,7 @@ export default function Laundry() {
         <div className="kicker" style={{ marginTop: 12 }}>{t("mgr.ops")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{t("lnd.title")}</h1>
         {!sub ? (
-          <Empty icon={<LaundryIcon id="l3" size={22} color="var(--slate)" />} title={t("lnd.none")} />
+          <Empty art={<Basket />} title={t("lnd.none")} />
         ) : (
           <>
             <p className="meta" style={{ marginTop: 8 }}>{t("prop." + sub.propId)} · {t("lnd.sub")} · {t(sub.whenKey)}</p>

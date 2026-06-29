@@ -1,9 +1,10 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, CatIcon, QuickIcon } from "../../components/Icons";
+import { Back, CatIcon } from "../../components/Icons";
 import { StatusPicker } from "../../components/StatusPicker";
 import { Empty } from "../../components/Empty";
+import { AllClear } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
@@ -26,7 +27,7 @@ export default function MyTasks() {
         <p className="meta" style={{ marginTop: 8 }}>{t("ct.sub")}</p>
 
         {mine.length === 0 ? (
-          <Empty icon={<QuickIcon id="tasks" size={24} color="var(--slate)" />} title={t("ct.none")} />
+          <Empty art={<AllClear />} title={t("ct.none")} />
         ) : (
           <div style={{ marginTop: 18 }}>
             {mine.map((i) => (

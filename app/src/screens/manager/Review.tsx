@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Back, Check } from "../../components/Icons";
+import { ClipboardWait, ProgressRing } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 
 export default function Review() {
@@ -38,12 +39,11 @@ export default function Review() {
           <button className="iconbtn" onClick={() => nav("/manager")} aria-label={t("a.back")}><Back /></button>
           <span style={{ width: 42 }} />
         </div>
-        <div className="pad grow">
-          <div className="kicker" style={{ marginTop: 12 }}>{r === "active" ? t("rev.kActive") : t("rev.kTodo")}</div>
-          <h1 className="h1" style={{ marginTop: 10 }}>{name}</h1>
-          <p className="meta" style={{ marginTop: 14, lineHeight: 1.5 }}>
-            {r === "active" ? t("rev.emptyActive", { done: tp.done, total: tp.total }) : t("rev.emptyTodo")}
-          </p>
+        <div className="empty empty-full">
+          <div className="empty-art">{r === "active" ? <ProgressRing pct={tp.pct} /> : <ClipboardWait />}</div>
+          <div className="kicker">{r === "active" ? t("rev.kActive") : t("rev.kTodo")}</div>
+          <div className="empty-t" style={{ fontSize: 23, marginTop: 7 }}>{name}</div>
+          <div className="empty-s">{r === "active" ? t("rev.emptyActive", { done: tp.done, total: tp.total }) : t("rev.emptyTodo")}</div>
         </div>
         <div className="actions"><button className="btn btn-outline" onClick={() => nav("/manager")}>{t("act.backOps")}</button></div>
       </div>

@@ -4,6 +4,7 @@ import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
 import { Back, Cart } from "../components/Icons";
 import { Empty } from "../components/Empty";
+import { EmptyBox } from "../components/EmptyArt";
 import { useStore } from "../lib/store";
 import type { PRStatus } from "../data/mock";
 
@@ -80,7 +81,7 @@ export default function Procurement() {
         <div className="section-head"><div className="label">{t("proc.requests")}</div></div>
         <div>
           {purchaseReqs.length === 0 && (
-            <Empty icon={<Cart size={22} color="var(--slate)" />} title={t("proc.noReqs")} />
+            <Empty art={<EmptyBox />} title={t("proc.noReqs")} />
           )}
           {purchaseReqs.map((r) => (
             <button className="irow iconrow" key={r.id} onClick={() => { setCurrentReq(r.id); nav("/procurement/request"); }}>

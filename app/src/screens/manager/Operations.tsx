@@ -2,8 +2,9 @@ import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
 import { NotifBell } from "../../components/NotifBell";
-import { Calendar, Home, Check } from "../../components/Icons";
+import { Calendar, Home } from "../../components/Icons";
 import { Empty } from "../../components/Empty";
+import { AllClear } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
@@ -63,7 +64,7 @@ export default function Operations() {
           {open.length > 0 && <button className="pill pill-go" onClick={() => nav("/manager/issues")}>{t("iss.viewAll")}</button>}
         </div>
         {open.length === 0 ? (
-          <Empty icon={<Check size={22} color="var(--ok)" />} title={t("ops.noOpen")} sub={t("ops.noOpenSub")} />
+          <Empty art={<AllClear />} title={t("ops.noOpen")} sub={t("ops.noOpenSub")} />
         ) : (
           <div className="list">
             {open.slice(0, 3).map((i) => (

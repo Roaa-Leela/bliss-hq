@@ -2,8 +2,9 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../../components/Brand";
 import { LangSwitch } from "../../components/LangSwitch";
-import { Back, Calendar as CalIcon } from "../../components/Icons";
+import { Back } from "../../components/Icons";
 import { Empty } from "../../components/Empty";
+import { CalendarBlank } from "../../components/EmptyArt";
 import { useStore } from "../../lib/store";
 import { calMonth, bookingsData } from "../../data/mock";
 
@@ -71,7 +72,7 @@ export default function Calendar() {
 
         <div className="label" style={{ marginTop: 28 }}>{t("cal.upcoming")}</div>
         {bookings.length === 0 ? (
-          <Empty icon={<CalIcon size={22} color="var(--slate)" />} title={t("cal.noStays")} />
+          <Empty art={<CalendarBlank />} title={t("cal.noStays")} />
         ) : (
           <div>
             {bookings.map((b) => {
