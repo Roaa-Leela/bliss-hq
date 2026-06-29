@@ -223,3 +223,103 @@ create table if not exists audit_log (
   created_at timestamptz not null default now()
 );
 create index if not exists idx_audit_entity on audit_log(entity, entity_id);
+
+-- ===================================================================
+-- Additions to fully cover the call's Module 3 (procurement, stock
+-- movements), reference images (Module 1.3) and notifications.
+-- ===================================================================
+
+do $$ begin create type pr_status as enum ('open','approved','rejected','converted'); exception when duplicate_object then null; end $$;
+do $$ begin create type po_status as enum ('draft','requested','approved','ordered','received','cancelled'); exception when duplicate_object then null; end $$;
+do $$ begin create type movement_reason as enum ('count','consumption','receipt','adjustment'); exception when duplicate_object then null; end $$;
+
+-- Reference images: the "ideal state" a caretaker matches against
+create table if not exists reference_images (
+  id uuid primary key default gen_random_uuid(),
+  item_id uuid references checklist_items(id) on delete cascade,
+  room_type room_type,
+  property_id uuid references properties(id) on delete cascade,  -- null = applies to all properties
+  storage_path text not null,
+  caption text,
+  created_at timestamptz not null default now()
+);
+create index if not exists idx_refimg_item on reference_images(item_id);
+
+-- Stock movements: every change to stock (count, consumption, receipt, adjustment)
+create table if not exists stock_movements (
+  id uuid primary key default gen_random_uuid(),
+  inventory_item_id uuid not null references inventory_items(id) on delete cascade,
+  property_id uuid not null references properties(id) on delete cascade,
+  qty_delta numeric not null,
+  reason movement_reason not null,
+  run_id uuid references checklist_runs(id),
+  actor_id uuid references profiles(id),
+  created_at timestamptz not null default now()
+);
+create index if not exists idx_move_item on stock_movements(inventory_item_id);
+
+-- Purchase requests (PM raises when stock is low)
+create table if not exists purchase_requests (
+  id uuid primary key default gen_random_uuid(),
+  property_id uuid not null references properties(id) on delete cascade,
+  requested_by uuid references profiles(id),
+  status pr_status not null default 'open',
+  note text,
+  created_at timestamptz not null default now(),
+  approved_by uuid references profiles(id),
+  approved_at timestamptz
+);
+create table if not exists purchase_request_items (
+  id uuid primary key default gen_random_uuid(),
+  request_id uuid not null references purchase_requests(id) on delete cascade,
+  inventory_item_id uuid not null references inventory_items(id),
+  qty numeric not null
+);
+
+-- Purchase orders (one per property; can be grouped into a supplier order)
+create table if not exists purchase_orders (
+  id uuid primary key default gen_random_uuid(),
+  property_id uuid not null references properties(id) on delete cascade,
+  vendor_id uuid references vendors(id),
+  request_id uuid references purchase_requests(id),
+  status po_status not null default 'draft',
+  total numeric,
+  created_by uuid references profiles(id),
+  approved_by uuid references profiles(id),
+  ordered_at timestamptz,
+  received_at timestamptz,
+  created_at timestamptz not null default now()
+);
+create table if not exists purchase_order_items (
+  id uuid primary key default gen_random_uuid(),
+  po_id uuid not null references purchase_orders(id) on delete cascade,
+  inventory_item_id uuid not null references inventory_items(id),
+  qty numeric not null,
+  unit_price numeric
+);
+
+-- Notifications (in-app and push log)
+create table if not exists notifications (
+  id uuid primary key default gen_random_uuid(),
+  recipient_id uuid not null references profiles(id) on delete cascade,
+  kind text not null,
+  title text not null,
+  body text,
+  entity text,
+  entity_id uuid,
+  read boolean not null default false,
+  created_at timestamptz not null default now()
+);
+create index if not exists idx_notif_recipient on notifications(recipient_id, read);
+
+-- Staff details (from the Property Bible caretaker sheet)
+create table if not exists staff_details (
+  profile_id uuid primary key references profiles(id) on delete cascade,
+  emergency_contact_name text,
+  emergency_contact_phone text,
+  date_of_joining date,
+  salary numeric,
+  duty_hours text,
+  weekly_off text,
+  accommodation text
+);

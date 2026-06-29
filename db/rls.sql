@@ -83,3 +83,34 @@ create policy laundry_all on laundry_dispatch for all using (can_access_property
 alter table audit_log enable row level security;
 create policy audit_read on audit_log for select using (app_role() = 'admin');
 create policy audit_insert on audit_log for insert with check (auth.uid() is not null);
+
+-- ---- Policies for the procurement / reference / notification additions ----
+alter table reference_images enable row level security;
+create policy refimg_read on reference_images for select using (auth.uid() is not null);
+create policy refimg_write on reference_images for all using (app_role() in ('admin','manager')) with check (app_role() in ('admin','manager'));
+
+alter table stock_movements enable row level security;
+create policy move_all on stock_movements for all using (can_access_property(property_id)) with check (can_access_property(property_id));
+
+alter table purchase_requests enable row level security;
+create policy pr_all on purchase_requests for all using (can_access_property(property_id)) with check (can_access_property(property_id));
+
+alter table purchase_request_items enable row level security;
+create policy pri_all on purchase_request_items for all
+  using (exists (select 1 from purchase_requests r where r.id = request_id and can_access_property(r.property_id)))
+  with check (exists (select 1 from purchase_requests r where r.id = request_id and can_access_property(r.property_id)));
+
+alter table purchase_orders enable row level security;
+create policy po_all on purchase_orders for all using (can_access_property(property_id)) with check (can_access_property(property_id));
+
+alter table purchase_order_items enable row level security;
+create policy poi_all on purchase_order_items for all
+  using (exists (select 1 from purchase_orders o where o.id = po_id and can_access_property(o.property_id)))
+  with check (exists (select 1 from purchase_orders o where o.id = po_id and can_access_property(o.property_id)));
+
+alter table notifications enable row level security;
+create policy notif_self on notifications for all using (recipient_id = auth.uid()) with check (recipient_id = auth.uid());
+
+alter table staff_details enable row level security;
+create policy staff_self on staff_details for select using (profile_id = auth.uid() or app_role() in ('admin','manager'));
+create policy staff_write on staff_details for all using (app_role() in ('admin','manager')) with check (app_role() in ('admin','manager'));
