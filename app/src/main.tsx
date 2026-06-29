@@ -15,6 +15,7 @@ import Review from "./screens/manager/Review";
 import Issues from "./screens/manager/Issues";
 import IssueDetail from "./screens/manager/IssueDetail";
 import Calendar from "./screens/manager/Calendar";
+import Deposit from "./screens/manager/Deposit";
 import Owner from "./screens/Owner";
 import Admin from "./screens/Admin";
 import Inventory from "./screens/Inventory";
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
   { path: "/manager/issues", element: <Issues /> },
   { path: "/manager/issue", element: <IssueDetail /> },
   { path: "/manager/calendar", element: <Calendar /> },
+  { path: "/manager/deposit", element: <Deposit /> },
   { path: "/owner", element: <Owner /> },
   { path: "/admin", element: <Admin /> },
   { path: "/inventory", element: <Inventory /> },

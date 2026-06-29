@@ -49,8 +49,7 @@ DONE (added)
 - Issue status board: Open to In progress to Resolved, with assignment to a caretaker or vendor.
 - Availability calendar: a colour-coded month grid per property (check-in, booked, check-out, free) with today marked and a stays-this-month list. Sample June 2026 bookings.
 
-UI-NEXT (no backend needed)
-- Security deposit deduction request screen (lives with the guest module later, but the PM-side request is showable).
+- Security deposit deduction request: from a calendar stay, the PM raises a deduction with a reason and amount, the refundable balance updates live, and submission confirms the request to the owner. Indian-format currency.
 
 PENDING (needs backend or integration)
 - Real-time updates from caretakers in the field.

@@ -64,6 +64,8 @@ type Store = {
   unreadCount: () => number;
   markNotifRead: (id: string) => void;
   markAllNotifsRead: () => void;
+  // selected stay (for deposit deduction)
+  currentStayId: string | null; setCurrentStay: (id: string | null) => void;
   // derived
   areaProgress: (a: Area) => { done: number; total: number };
   areaState: (a: Area) => "done" | "active" | "todo";
@@ -90,6 +92,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [stockMoves, setStockMoves] = useState<StockMove[]>(() => load(MOVES_KEY, stockMovesData));
   const [currentItemId, setCurrentItem] = useState<string | null>(null);
   const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
+  const [currentStayId, setCurrentStay] = useState<string | null>(null);
 
   useEffect(() => { try { localStorage.setItem(DONE_KEY, JSON.stringify(done)); } catch {} }, [done]);
   useEffect(() => { try { localStorage.setItem(ISSUES_KEY, JSON.stringify(issues)); } catch {} }, [issues]);
@@ -156,12 +159,13 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       unreadCount: () => notifications.filter((n) => !n.read).length,
       markNotifRead: (id) => setNotifications((s) => s.map((n) => (n.id === id ? { ...n, read: true } : n))),
       markAllNotifsRead: () => setNotifications((s) => s.map((n) => ({ ...n, read: true }))),
+      currentStayId, setCurrentStay,
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
       tArea: (id) => translate(areaNames, id, lang),
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

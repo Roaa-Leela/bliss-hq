@@ -11,7 +11,7 @@ const dows = [0, 1, 2, 3, 4, 5, 6];
 
 export default function Calendar() {
   const nav = useNavigate();
-  const { managerProps, t } = useStore();
+  const { managerProps, setCurrentStay, t } = useStore();
   const [propId, setPropId] = useState("palm-grove");
   const bookings = bookingsData.filter((b) => b.propId === propId).sort((a, b) => a.start - b.start);
 
@@ -76,13 +76,14 @@ export default function Calendar() {
             {bookings.map((b) => {
               const nights = b.end - b.start;
               return (
-                <div className="bkrow" key={b.id}>
+                <button className="bkrow" key={b.id} onClick={() => { setCurrentStay(b.id); nav("/manager/deposit"); }}>
                   <span className="bkdate"><span className="bkd">{b.start}</span><span className="bkm">{t("cal.monShort")}</span></span>
                   <span className="bkbody">
                     <span className="bknm">{t(b.guestKey)}</span>
                     <span className="bksub">{t("cal.range", { s: b.start, e: b.end })} · {nights === 1 ? t("cal.night1") : t("cal.nights", { n: nights })}</span>
                   </span>
-                </div>
+                  <span className="bkgo">›</span>
+                </button>
               );
             })}
           </div>

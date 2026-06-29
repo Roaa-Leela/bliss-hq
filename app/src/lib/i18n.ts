@@ -355,6 +355,27 @@ export const messages: Record<string, Entry> = {
   "guest.mehta": { en: "Mehta family", hi: "मेहता परिवार", te: "మెహతా కుటుంబం" },
   "guest.iyer": { en: "Iyer family", hi: "अय्यर परिवार", te: "అయ్యర్ కుటుంబం" },
 
+  // Security deposit deduction
+  "dep.title": { en: "Security deposit", hi: "सिक्योरिटी डिपॉज़िट", te: "సెక్యూరిటీ డిపాజిట్" },
+  "dep.sub": { en: "Request a deduction for this stay", hi: "इस ठहराव के लिए कटौती का अनुरोध", te: "ఈ బసకు తగ్గింపును అభ్యర్థించండి" },
+  "dep.checkedOut": { en: "Checked out {date}", hi: "{date} चेक-आउट", te: "{date} చెక్-అవుట్" },
+  "dep.depositLabel": { en: "Security deposit", hi: "सिक्योरिटी डिपॉज़िट", te: "సెక్యూరిటీ డిపాజిట్" },
+  "dep.deductLabel": { en: "This deduction", hi: "यह कटौती", te: "ఈ తగ్గింపు" },
+  "dep.refundLabel": { en: "Refundable to guest", hi: "मेहमान को वापसी", te: "అతిథికి తిరిగి ఇవ్వదగినది" },
+  "dep.reason": { en: "Reason for deduction", hi: "कटौती का कारण", te: "తగ్గింపుకు కారణం" },
+  "dep.amount": { en: "Deduction amount", hi: "कटौती राशि", te: "తగ్గింపు మొత్తం" },
+  "dep.clear": { en: "Clear", hi: "साफ़ करें", te: "క్లియర్" },
+  "dep.note": { en: "Note (optional)", hi: "नोट (वैकल्पिक)", te: "గమనిక (ఐచ్ఛికం)" },
+  "dep.notePh": { en: "What is this deduction for?", hi: "यह कटौती किसलिए है?", te: "ఈ తగ్గింపు దేనికోసం?" },
+  "dep.evidence": { en: "Photo evidence", hi: "फोटो सबूत", te: "ఫోటో రుజువు" },
+  "dep.submit": { en: "Raise deduction request", hi: "कटौती अनुरोध भेजें", te: "తగ్గింపు అభ్యర్థన పంపండి" },
+  "dep.submittedT": { en: "Deduction request raised", hi: "कटौती अनुरोध भेजा गया", te: "తగ్గింపు అభ్యర్థన పంపబడింది" },
+  "dep.submittedS": { en: "{guest} · {amt} from the deposit. The owner has been notified for approval.", hi: "{guest} · डिपॉज़िट से {amt}। मंज़ूरी के लिए मालिक को सूचित किया गया।", te: "{guest} · డిపాజిట్ నుండి {amt}. ఆమోదం కోసం యజమానికి తెలియజేయబడింది." },
+  "dep.reason.damage": { en: "Damage", hi: "नुकसान", te: "నష్టం" },
+  "dep.reason.missing": { en: "Missing item", hi: "गायब सामान", te: "మిస్సింగ్ వస్తువు" },
+  "dep.reason.cleaning": { en: "Extra cleaning", hi: "अतिरिक्त सफाई", te: "అదనపు శుభ్రత" },
+  "dep.reason.late": { en: "Late checkout", hi: "देर से चेक-आउट", te: "ఆలస్య చెక్-అవుట్" },
+
   // Condition
   "cond.good": { en: "Good", hi: "अच्छा", te: "బాగుంది" },
   "cond.fair": { en: "Fair", hi: "ठीक", te: "ఫర్వాలేదు" },

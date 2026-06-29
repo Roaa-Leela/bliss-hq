@@ -158,6 +158,8 @@ export const purchaseReqsData: PurchaseReq[] = [
 // Availability calendar: sample bookings for June 2026 (demo month).
 export type Booking = { id: string; propId: string; start: number; end: number; guestKey: string };
 export const calMonth = { year: 2026, month: 6, days: 30, firstDow: 1, todayDate: 13 }; // June 2026 starts on Monday
+export const DEPOSIT_AMOUNT = 10000; // sample security deposit per stay (INR)
+export const depositReasons = ["damage", "missing", "cleaning", "late"] as const;
 export const bookingsData: Booking[] = [
   { id: "bk1", propId: "palm-grove", start: 6, end: 8, guestKey: "guest.sharma" },
   { id: "bk2", propId: "palm-grove", start: 13, end: 16, guestKey: "guest.rao" },

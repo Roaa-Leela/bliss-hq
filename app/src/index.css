@@ -190,6 +190,24 @@ a{color:inherit;text-decoration:none}
 .tbl-row .nmwrap{display:flex;flex-direction:column;min-width:0}
 .tbl-row .ivsub{font-size:11.5px;color:var(--slate);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+/* ---- Security deposit deduction ---- */
+.staycard{display:flex;flex-direction:column;gap:4px;border:1px solid var(--line);border-radius:var(--r-card);padding:16px 18px;margin-top:16px}
+.staycard .sgn{font-size:16px;font-weight:700;color:var(--ink)}
+.staycard .sgs{font-size:12.5px;color:var(--slate)}
+.depcard{border:1px solid var(--line);border-radius:var(--r-card);padding:16px 20px;margin-top:14px;background:var(--cloud)}
+.depcard .deprow{display:flex;justify-content:space-between;align-items:center;padding:7px 0;font-size:14.5px;color:var(--ink)}
+.depcard .deprow > span:first-child{color:var(--slate)}
+.depcard .deprow .minus{color:var(--alert-text);font-weight:700}
+.depcard .depdivider{height:1px;background:var(--line);margin:7px 0}
+.depcard .deprow.hero > span:first-child{color:var(--ink);font-weight:700}
+.depcard .deprow.hero .bignum{font-size:26px;font-weight:800;color:var(--forest);letter-spacing:-.6px}
+.amtbox{display:flex;align-items:center;justify-content:space-between;border:1px solid var(--line);border-radius:11px;padding:13px 16px}
+.amtbox .amtval{font-size:23px;font-weight:800;color:var(--ink);letter-spacing:-.5px}
+.amtbox .amtclear{font-size:12px;font-weight:700;color:var(--slate);padding:7px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+.amtchips{display:flex;gap:10px;margin-top:10px}
+.amtchips .amtchip{flex:1;border:1.5px solid var(--line);border-radius:11px;padding:12px 8px;font-size:14px;font-weight:700;color:var(--forest);background:var(--surface)}
+.amtchips .amtchip:active{background:var(--mist)}
+
 /* ---- Availability calendar ---- */
 .calhead{font-size:15px;font-weight:800;color:var(--forest);margin-top:24px;text-align:center}
 .calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
@@ -209,7 +227,8 @@ a{color:inherit;text-decoration:none}
 .callegend .lgsw.c-stay{background:var(--mist)}
 .callegend .lgsw.c-in{background:var(--forest)}
 .callegend .lgsw.c-out{background:var(--sage)}
-.bkrow{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:14px 2px;border-top:1px solid var(--line)}
+.bkrow{display:grid;grid-template-columns:48px 1fr auto;gap:14px;align-items:center;padding:14px 2px;border-top:1px solid var(--line);width:100%;text-align:left}
+.bkrow .bkgo{font-size:22px;color:var(--slate);font-weight:400;padding-right:4px}
 .bkdate{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--mist);border-radius:10px;padding:8px 0}
 .bkdate .bkd{font-size:18px;font-weight:800;color:var(--forest);line-height:1}
 .bkdate .bkm{font-size:10px;font-weight:800;color:var(--leaf-deep);text-transform:uppercase;margin-top:2px}
