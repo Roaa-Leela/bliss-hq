@@ -112,8 +112,30 @@ function Garden() {
   );
 }
 
+function Dining() {
+  return (
+    <Frame>
+      <path d="M30 131h280" stroke={INK} strokeWidth={1.4} opacity={0.35} />
+      <rect x="46" y="80" width="248" height="13" rx="5" fill={C.wood} />
+      <path d="M64 93v35M276 93v35" />
+      <ellipse cx="96" cy="80" rx="26" ry="7" fill={C.white} />
+      <ellipse cx="96" cy="80" rx="12" ry="3.5" fill={C.mist} />
+      <rect x="128" y="62" width="11" height="18" rx="2" fill={C.water} />
+      <ellipse cx="244" cy="80" rx="26" ry="7" fill={C.white} />
+      <ellipse cx="244" cy="80" rx="12" ry="3.5" fill={C.mist} />
+      <rect x="201" y="62" width="11" height="18" rx="2" fill={C.water} />
+      <path d="M150 58h40l-5 22h-30z" fill={C.mist} />
+      <ellipse cx="170" cy="58" rx="20" ry="4" fill={C.white} />
+      <path d="M155 68h30" stroke={INK} strokeWidth={1.5} opacity={0.5} />
+      <circle cx="162" cy="53" r="4" fill={C.leaf} />
+      <circle cx="170" cy="51" r="4" fill={C.band} />
+      <circle cx="178" cy="53" r="4" fill={C.sage} />
+    </Frame>
+  );
+}
+
 const map: Record<string, () => React.ReactNode> = {
-  "b1-1": Bed, "ba1-1": Bath, "lv-1": Sofa, "k-1": Kitchen, "p-1": Pool, "o-1": Garden,
+  bedroom: Bed, bathroom: Bath, living: Sofa, dining: Dining, kitchen: Kitchen, pool: Pool, outdoor: Garden,
 };
 
 export function RefImage({ id }: { id: string }) {

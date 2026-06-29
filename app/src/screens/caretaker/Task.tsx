@@ -33,13 +33,13 @@ export default function Task() {
       </div>
 
       <div className="pad grow" style={{ paddingTop: 18, paddingBottom: 14 }}>
-        <div style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.3, letterSpacing: "-.2px" }}>{tItem(item.id)}</div>
+        <div style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.3, letterSpacing: "-.2px" }}>{tItem(item.textKey)}</div>
 
         {item.requiresPhoto && (
           <>
             <div className="label" style={{ margin: "22px 0 10px" }}>{t("task.reference")}</div>
-            {hasRefImage(item.id) ? (
-              <div className="refart"><RefImage id={item.id} /><div className="tag">{t("task.idealSetup")}</div></div>
+            {hasRefImage(area.type) ? (
+              <div className="refart"><RefImage id={area.type} /><div className="tag">{t("task.idealSetup")}</div></div>
             ) : (
               <div className="ref" style={{ height: 148 }}><div className="tag">{t("task.idealSetup")}</div></div>
             )}

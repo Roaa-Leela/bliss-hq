@@ -1,12 +1,44 @@
 // Mock data for the demo, seeded from a real villa (Palm Grove Villa).
 // No backend. This stands in for what Supabase will later provide.
 
-export type Item = { id: string; text: string; requiresPhoto?: boolean };
-export type Area = { id: string; name: string; items: Item[] };
+export type AreaType = "bedroom" | "bathroom" | "living" | "dining" | "kitchen" | "pool" | "outdoor" | "safety";
+export type Item = { id: string; textKey: string; requiresPhoto?: boolean };
+export type Area = { id: string; type: AreaType; num?: number; items: Item[] };
 export type Property = {
   id: string; name: string; bhk: string; location: string;
   checklist: string; guestTime: string; areas: Area[];
 };
+
+// The client's real Pre Check-in Inspection: a single smart template whose
+// room-typed sets repeat per room and scale with villa size.
+const SET: Record<string, string[]> = {
+  bedroom: ["ci.bd1", "ci.bd2", "ci.bd3", "ci.bd4", "ci.bd5", "ci.bd6", "ci.bd7", "ci.bd8", "ci.bd9"],
+  bathroom: ["ci.ba1", "ci.ba2", "ci.ba3", "ci.ba4", "ci.ba5", "ci.ba6", "ci.ba7"],
+  living: ["ci.lv1", "ci.lv2", "ci.lv3", "ci.lv4", "ci.lv5", "ci.lv6"],
+  dining: ["ci.dn1", "ci.dn2", "ci.dn3", "ci.dn4", "ci.dn5", "ci.dn6", "ci.dn7", "ci.dn8", "ci.dn9", "ci.dn10", "ci.dn11", "ci.dn12"],
+  kitchen: ["ci.kt1", "ci.kt2", "ci.kt3", "ci.kt4", "ci.kt5", "ci.kt6"],
+  pool: ["ci.pl1", "ci.pl2", "ci.pl3", "ci.pl4"],
+  outdoor: ["ci.od1", "ci.od2", "ci.od3", "ci.od4", "ci.od5"],
+  safety: ["ci.sf1", "ci.sf2", "ci.sf3", "ci.sf4"],
+};
+const PRE: Record<string, string> = { bedroom: "bd", bathroom: "ba", living: "lv", dining: "dn", kitchen: "kt", pool: "pl", outdoor: "od", safety: "sf" };
+
+function area(id: string, type: AreaType, num?: number): Area {
+  const tag = num ? `${PRE[type]}${num}` : PRE[type];
+  return { id, type, num, items: SET[type].map((k, i) => ({ id: `${tag}-${i + 1}`, textKey: k, requiresPhoto: i === 0 })) };
+}
+
+// 4 BHK: bedrooms 1-4, bathrooms 1-4, plus the fixed sections.
+const palmAreas: Area[] = [
+  ...[1, 2, 3, 4].map((n) => area(`bedroom-${n}`, "bedroom", n)),
+  ...[1, 2, 3, 4].map((n) => area(`bathroom-${n}`, "bathroom", n)),
+  area("living", "living"),
+  area("dining", "dining"),
+  area("kitchen", "kitchen"),
+  area("pool", "pool"),
+  area("outdoor", "outdoor"),
+  area("safety", "safety"),
+];
 
 export const property: Property = {
   id: "palm-grove",
@@ -15,43 +47,7 @@ export const property: Property = {
   location: "Shamirpet",
   checklist: "Pre check-in",
   guestTime: "4:00 PM",
-  areas: [
-    { id: "bedroom-1", name: "Bedroom 1", items: [
-      { id: "b1-1", text: "Bed made neatly with fresh linen, pillow covers clean", requiresPhoto: true },
-      { id: "b1-2", text: "Water bottle and 2 glasses placed in the room" },
-      { id: "b1-3", text: "AC and fan are clean and working" },
-      { id: "b1-4", text: "All lights and switches working" },
-    ]},
-    { id: "bathroom-1", name: "Bathroom 1", items: [
-      { id: "ba1-1", text: "Toiletries refilled and bath towels placed", requiresPhoto: true },
-      { id: "ba1-2", text: "Toilet, basin and floor cleaned, no smell" },
-      { id: "ba1-3", text: "Geyser and lights working" },
-    ]},
-    { id: "living", name: "Living room", items: [
-      { id: "lv-1", text: "Cushions arranged and throws folded neatly on the sofa", requiresPhoto: true },
-      { id: "lv-2", text: "Floor swept and mopped, surfaces dusted" },
-      { id: "lv-3", text: "TV, AC and lights working" },
-      { id: "lv-4", text: "Wi-Fi card placed and working" },
-    ]},
-    { id: "kitchen", name: "Kitchen", items: [
-      { id: "k-1", text: "Counter and sink clean and dry", requiresPhoto: true },
-      { id: "k-2", text: "Fridge clean, switched on and empty of old food" },
-      { id: "k-3", text: "Gas, induction and chimney working" },
-      { id: "k-4", text: "Tea, coffee, sugar and water stocked" },
-    ]},
-    { id: "pool", name: "Pool area", items: [
-      { id: "p-1", text: "Pool water clean, no leaves floating", requiresPhoto: true },
-      { id: "p-2", text: "Pool deck swept, chairs arranged" },
-    ]},
-    { id: "outdoor", name: "Outdoor & garden", items: [
-      { id: "o-1", text: "Garden tidy, lawn presentable", requiresPhoto: true },
-      { id: "o-2", text: "Outdoor lights working" },
-    ]},
-    { id: "safety", name: "Safety & security", items: [
-      { id: "s-1", text: "Main door lock and latches working" },
-      { id: "s-2", text: "First aid kit and emergency numbers in place" },
-    ]},
-  ],
+  areas: palmAreas,
 };
 
 // Other checklist types beyond pre check-in. These run as simple tick lists

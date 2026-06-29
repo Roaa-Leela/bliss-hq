@@ -29,7 +29,7 @@ export default function Areas() {
             return (
               <button className="li" key={a.id} onClick={() => open(a.id)}>
                 <span className="li-left">
-                  <span className="licon"><AreaIcon id={a.id} size={22} /></span>
+                  <span className="licon"><AreaIcon id={a.type} size={22} /></span>
                   <span>
                     <span className="li-name">{tArea(a.id)}</span>
                     <span className="li-sub">{t("areas.checks", { done: p.done, total: p.total })}</span>

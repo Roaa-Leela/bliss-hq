@@ -171,7 +171,7 @@ export const Signal = ({ size = 22, color = "currentColor", stroke = 1.8, level 
 /* ---- Lookup helpers (keep iconography consistent across screens) ---- */
 const roleMap: Record<string, (p: P) => ReactNode> = { caretaker: Person, manager: Manager, owner: Owner, admin: Admin };
 const areaMap: Record<string, (p: P) => ReactNode> = {
-  "bedroom-1": Bed, "bathroom-1": Bath, living: Sofa, kitchen: Stove, pool: Pool, outdoor: Garden, safety: Shield,
+  bedroom: Bed, bathroom: Bath, living: Sofa, dining: Plate, kitchen: Stove, pool: Pool, outdoor: Garden, safety: Shield,
 };
 const catMap: Record<string, (p: P) => ReactNode> = {
   cleaning: Spray, damage: Alert, missing: Box, maintenance: Wrench, electronic: Bolt,

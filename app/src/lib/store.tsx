@@ -8,7 +8,7 @@ import {
   type Readiness, type LaundrySubmission,
   type Area, type RoleId, type Property,
 } from "../data/mock";
-import { messages, areaNames, itemTexts, translate, type Lang } from "./i18n";
+import { messages, itemTexts, translate, type Lang } from "./i18n";
 
 type Vars = Record<string, string | number>;
 const DONE_KEY = "bliss.done.v1";
@@ -221,7 +221,10 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       clearToast: () => setToast(null),
       areaProgress, areaState, totalProgress, firstOpenItem,
       t: (key, vars) => translate(messages, key, lang, vars),
-      tArea: (id) => translate(areaNames, id, lang),
+      tArea: (id) => {
+        const m = id.match(/^(bedroom|bathroom)-(\d+)$/);
+        return m ? `${translate(messages, "area." + m[1], lang)} ${m[2]}` : translate(messages, "area." + id, lang);
+      },
       tItem: (id) => translate(itemTexts, id, lang),
     };
   }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission, toast]);
