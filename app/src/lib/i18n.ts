@@ -221,6 +221,11 @@ export const messages: Record<string, Entry> = {
   "cond.poor": { en: "Poor", hi: "खराब", te: "బాగోలేదు" },
 
   // Inventory item names
+  "inv.colItem": { en: "Item", hi: "वस्तु", te: "వస్తువు" },
+  "inv.colStock": { en: "Stock", hi: "स्टॉक", te: "స్టాక్" },
+  "inv.colCondition": { en: "Condition", hi: "स्थिति", te: "పరిస్థితి" },
+  "inv.needReorder": { en: "{n} items need reordering", hi: "{n} वस्तुएं दोबारा मंगानी हैं", te: "{n} వస్తువులు మళ్లీ ఆర్డర్ చేయాలి" },
+  "inv.allStocked": { en: "All items stocked", hi: "सभी वस्तुएं स्टॉक में", te: "అన్ని వస్తువులు స్టాక్‌లో ఉన్నాయి" },
   "inv.iv1": { en: "Refrigerator", hi: "फ्रिज", te: "ఫ్రిజ్" },
   "inv.iv2": { en: "Microwave", hi: "माइक्रोवेव", te: "మైక్రోవేవ్" },
   "inv.iv3": { en: "Induction cooktop", hi: "इंडक्शन कुकटॉप", te: "ఇండక్షన్ కుక్‌టాప్" },

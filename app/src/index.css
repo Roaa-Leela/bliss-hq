@@ -147,3 +147,29 @@ a{color:inherit;text-decoration:none}
 
 /* Wider column for manager/owner/admin on desktop */
 @media(min-width:760px){.screen.wide{max-width:680px}}
+
+/* ---- Data table rows (prioritised: emphasis on the number, own columns) ---- */
+.tbl-head, .tbl-row { display: grid; grid-template-columns: 5px 1fr 64px 104px; gap: 12px; align-items: center; }
+.tbl-head { padding: 4px 2px 12px; }
+.tbl-head .h { font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--slate); font-weight: 700; }
+.tbl-head .h.r { text-align: right; }
+.tbl-row { padding: 15px 2px; border-top: 1px solid var(--line); }
+.tbl-row .bar { width: 5px; height: 30px; border-radius: 3px; align-self: center; }
+.tbl-row .nm { font-size: 16px; color: var(--ink); font-weight: 600; line-height: 1.25; }
+.tbl-row .cnt { text-align: right; font-size: 20px; font-weight: 800; letter-spacing: -.5px; }
+.tbl-row .cnt small { font-size: 12.5px; font-weight: 600; color: var(--slate); }
+.tbl-row .cond { justify-self: start; font-size: 11px; font-weight: 800; letter-spacing: .4px; text-transform: uppercase; padding: 5px 10px; border-radius: 8px; white-space: nowrap; }
+
+/* Summary banner (surfaces the thing that needs action) */
+.banner { display: flex; align-items: center; gap: 10px; border-radius: 12px; padding: 14px 16px; font-size: 14.5px; font-weight: 700; }
+.banner.warn { background: var(--warn-bg); color: var(--warn-text); }
+.banner.ok { background: var(--ok-bg); color: var(--ok-text); }
+.banner .dot { width: 9px; height: 9px; border-radius: 50%; }
+
+/* ---- Vendor rows ---- */
+.vrow{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:15px 2px;border-top:1px solid var(--line)}
+.vname{font-size:16.5px;font-weight:600;color:var(--ink)}
+.vmeta{font-size:12.5px;color:var(--slate);margin-top:4px}
+.stars{color:var(--leaf-deep);letter-spacing:1px}
+.stars .dim{color:#D5D8CC}
+.callbtn{display:inline-flex;align-items:center;gap:7px;background:var(--forest);color:#fff;font-size:13px;font-weight:700;padding:11px 16px;border-radius:11px;white-space:nowrap}

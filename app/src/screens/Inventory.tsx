@@ -9,6 +9,12 @@ const cats = ["kitchen", "crockery", "linen", "toiletries", "consumables"];
 export default function Inventory() {
   const nav = useNavigate();
   const { inventoryItems, t } = useStore();
+  const low = inventoryItems.filter((i) => i.stock < i.must).length;
+
+  const condStyle = (c: string) =>
+    c === "good" ? { background: "var(--cloud)", color: "var(--todo)" }
+    : c === "fair" ? { background: "var(--warn-bg)", color: "var(--warn-text)" }
+    : { background: "var(--alert-bg)", color: "var(--alert-text)" };
 
   return (
     <div className="screen wide">
@@ -22,28 +28,38 @@ export default function Inventory() {
         <h1 className="h1" style={{ marginTop: 10 }}>{t("inv.title")}</h1>
         <p className="meta" style={{ marginTop: 8 }}>{t("inv.sub")}</p>
 
+        {/* The thing a manager cares about first: what needs reordering */}
+        <div className={"banner " + (low ? "warn" : "ok")} style={{ marginTop: 18 }}>
+          <span className="dot" style={{ background: low ? "var(--warn)" : "var(--ok)" }} />
+          {low ? t("inv.needReorder", { n: low }) : t("inv.allStocked")}
+        </div>
+
+        <div className="tbl-head" style={{ marginTop: 22 }}>
+          <span /><span className="h">{t("inv.colItem")}</span>
+          <span className="h r">{t("inv.colStock")}</span><span className="h">{t("inv.colCondition")}</span>
+        </div>
+
         {cats.map((c) => {
-          const items = inventoryItems.filter((i) => i.cat === c);
+          const items = inventoryItems
+            .filter((i) => i.cat === c)
+            .sort((a, b) => (a.stock - a.must) - (b.stock - b.must)); // low stock first
           if (!items.length) return null;
           return (
             <div key={c}>
-              <div className="label" style={{ marginTop: 26 }}>{t("cat." + c)}</div>
-              <div className="list">
-                {items.map((i) => {
-                  const low = i.stock < i.must;
-                  const pill = i.stock === 0 ? "pill-alert" : low ? "pill-warn" : "pill-ok";
-                  const label = low ? t("inv.reorder") : t("inv.inStock");
-                  return (
-                    <div className="li" key={i.id}>
-                      <span>
-                        <span className="li-name">{t("inv." + i.id)}</span>
-                        <span className="li-sub">{i.stock} / {i.must} · {t("cond." + i.condition)}</span>
-                      </span>
-                      <span className={"pill " + pill}>{label}</span>
-                    </div>
-                  );
-                })}
-              </div>
+              <div className="label" style={{ marginTop: 20, marginBottom: 4 }}>{t("cat." + c)}</div>
+              {items.map((i) => {
+                const isLow = i.stock < i.must;
+                const barColor = i.stock === 0 ? "var(--alert)" : isLow ? "var(--warn)" : "var(--ok)";
+                const cntColor = i.stock === 0 ? "var(--alert-text)" : isLow ? "var(--warn-text)" : "var(--ink)";
+                return (
+                  <div className="tbl-row" key={i.id}>
+                    <span className="bar" style={{ background: barColor }} />
+                    <span className="nm">{t("inv." + i.id)}</span>
+                    <span className="cnt" style={{ color: cntColor }}>{i.stock}<small>/{i.must}</small></span>
+                    <span className="cond" style={condStyle(i.condition)}>{t("cond." + i.condition)}</span>
+                  </div>
+                );
+              })}
             </div>
           );
         })}
