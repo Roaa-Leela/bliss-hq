@@ -155,6 +155,21 @@ export const purchaseReqsData: PurchaseReq[] = [
   { id: "pr3", lines: [{ itemId: "iv3", qty: 1 }, { itemId: "iv5", qty: 4 }], status: "ordered", vendorId: "vd8", poNum: "PO-2041", whenKey: "when.2d" },
 ];
 
+// Availability calendar: sample bookings for June 2026 (demo month).
+export type Booking = { id: string; propId: string; start: number; end: number; guestKey: string };
+export const calMonth = { year: 2026, month: 6, days: 30, firstDow: 1, todayDate: 13 }; // June 2026 starts on Monday
+export const bookingsData: Booking[] = [
+  { id: "bk1", propId: "palm-grove", start: 6, end: 8, guestKey: "guest.sharma" },
+  { id: "bk2", propId: "palm-grove", start: 13, end: 16, guestKey: "guest.rao" },
+  { id: "bk3", propId: "palm-grove", start: 24, end: 27, guestKey: "guest.khan" },
+  { id: "bk4", propId: "misty", start: 2, end: 5, guestKey: "guest.reddy" },
+  { id: "bk5", propId: "misty", start: 18, end: 21, guestKey: "guest.mehta" },
+  { id: "bk6", propId: "lake", start: 10, end: 14, guestKey: "guest.iyer" },
+  { id: "bk7", propId: "lake", start: 27, end: 30, guestKey: "guest.sharma" },
+  { id: "bk8", propId: "fern", start: 7, end: 9, guestKey: "guest.rao" },
+  { id: "bk9", propId: "fern", start: 20, end: 23, guestKey: "guest.khan" },
+];
+
 // In-app notifications, aggregated across the modules.
 export type NotifKind = "review" | "issue" | "stock" | "po" | "approved" | "laundry";
 export type Notif = { id: string; kind: NotifKind; titleKey: string; subKey: string; whenKey: string; route: string; read: boolean };

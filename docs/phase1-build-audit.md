@@ -45,10 +45,11 @@ DONE (showable now)
 - Review a submission with photos by area, then Approve or Send back.
 - Open issues list.
 
+DONE (added)
+- Issue status board: Open to In progress to Resolved, with assignment to a caretaker or vendor.
+- Availability calendar: a colour-coded month grid per property (check-in, booked, check-out, free) with today marked and a stays-this-month list. Sample June 2026 bookings.
+
 UI-NEXT (no backend needed)
-- Issue status board: Open to In progress to Resolved, with a comment.
-- Assign an issue or task to a caretaker or a vendor.
-- Availability calendar as a clean view (with sample dates).
 - Security deposit deduction request screen (lives with the guest module later, but the PM-side request is showable).
 
 PENDING (needs backend or integration)

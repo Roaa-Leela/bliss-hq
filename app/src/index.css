@@ -190,6 +190,32 @@ a{color:inherit;text-decoration:none}
 .tbl-row .nmwrap{display:flex;flex-direction:column;min-width:0}
 .tbl-row .ivsub{font-size:11.5px;color:var(--slate);margin-top:3px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 
+/* ---- Availability calendar ---- */
+.calhead{font-size:15px;font-weight:800;color:var(--forest);margin-top:24px;text-align:center}
+.calgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-top:12px}
+.calgrid.caldow{margin-top:16px;margin-bottom:2px}
+.cdow{text-align:center;font-size:11px;font-weight:800;color:var(--slate);text-transform:uppercase;letter-spacing:.5px}
+.ccell{aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:10px;font-size:14px;font-weight:700}
+.ccell.empty{background:transparent}
+.ccell.c-free{background:var(--cloud);color:var(--slate);font-weight:600}
+.ccell.c-stay{background:var(--mist);color:var(--forest)}
+.ccell.c-in{background:var(--forest);color:#fff}
+.ccell.c-out{background:var(--sage);color:var(--forest)}
+.ccell.today{box-shadow:inset 0 0 0 2.5px var(--leaf-deep)}
+.callegend{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:16px}
+.callegend .lg{display:flex;align-items:center;gap:7px;font-size:12.5px;color:var(--slate);font-weight:600}
+.callegend .lgsw{width:14px;height:14px;border-radius:5px}
+.callegend .lgsw.c-free{background:var(--cloud)}
+.callegend .lgsw.c-stay{background:var(--mist)}
+.callegend .lgsw.c-in{background:var(--forest)}
+.callegend .lgsw.c-out{background:var(--sage)}
+.bkrow{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:center;padding:14px 2px;border-top:1px solid var(--line)}
+.bkdate{display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--mist);border-radius:10px;padding:8px 0}
+.bkdate .bkd{font-size:18px;font-weight:800;color:var(--forest);line-height:1}
+.bkdate .bkm{font-size:10px;font-weight:800;color:var(--leaf-deep);text-transform:uppercase;margin-top:2px}
+.bkbody .bknm{font-size:15.5px;font-weight:600;color:var(--ink);display:block}
+.bkbody .bksub{font-size:12.5px;color:var(--slate);margin-top:3px;display:block}
+
 /* ---- Notifications ---- */
 .iconbtn.bell{position:relative}
 .iconbtn.bell .badge{position:absolute;top:-5px;right:-5px;min-width:19px;height:19px;padding:0 5px;border-radius:10px;background:var(--alert);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;border:2px solid var(--surface)}

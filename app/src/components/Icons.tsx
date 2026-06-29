@@ -25,3 +25,6 @@ export const Person = ({ size = 26, color = "#2D4A1A", stroke = 1.8 }: P) => (
 export const Bell = ({ size = 22, color = "#2D4A1A", stroke = 1.9 }: P) => (
   <svg {...base(size)}><path d="M6 9a6 6 0 0112 0c0 5 2 6 2 6H4s2-1 2-6M10 20a2 2 0 004 0" stroke={color} strokeWidth={stroke} strokeLinecap="round" strokeLinejoin="round" /></svg>
 );
+export const Calendar = ({ size = 22, color = "#2D4A1A", stroke = 1.9 }: P) => (
+  <svg {...base(size)}><rect x="3.5" y="5" width="17" height="15" rx="2.5" stroke={color} strokeWidth={stroke} /><path d="M3.5 9.5h17M8 3v4M16 3v4" stroke={color} strokeWidth={stroke} strokeLinecap="round" /></svg>
+);
