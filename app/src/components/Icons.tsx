@@ -180,7 +180,10 @@ const invMap: Record<string, (p: P) => ReactNode> = {
   kitchen: Stove, crockery: Plate, linen: Towel, toiletries: Bottle, consumables: Drop,
 };
 const tradeMap: Record<string, (p: P) => ReactNode> = {
-  plumbing: Drop, electrical: Bolt, ac: Refresh, pool: Pool, laundry: Washer, pest: Bug, supplies: Box,
+  plumbing: Drop, electrical: Bolt, ac: Refresh, pool: Pool, laundry: Washer, pest: Bug, supplies: Box, carpentry: Wrench, painting: Spray,
+};
+const mtMap: Record<string, (p: P) => ReactNode> = {
+  plumbing: Drop, electrical: Bolt, ac: Refresh, appliance: Stove, pool: Pool, garden: Garden, carpentry: Wrench, painting: Spray, pest: Bug, housekeeping: Broom, structural: Home,
 };
 const clMap: Record<string, (p: P) => ReactNode> = {
   preCheckin: Door, postStay: Broom, daily: Sun, weekly: Calendar, monthly: Moon, adhoc: Flag,
@@ -203,6 +206,7 @@ export const AreaIcon = ({ id, ...p }: P & { id: string }) => <>{pick(areaMap, i
 export const CatIcon = ({ id, ...p }: P & { id: string }) => <>{pick(catMap, id, p)}</>;
 export const InvIcon = ({ id, ...p }: P & { id: string }) => <>{pick(invMap, id, p)}</>;
 export const TradeIcon = ({ id, ...p }: P & { id: string }) => <>{pick(tradeMap, id, p)}</>;
+export const MtIcon = ({ id, ...p }: P & { id: string }) => <>{pick(mtMap, id, p)}</>;
 export const ClIcon = ({ id, ...p }: P & { id: string }) => <>{pick(clMap, id, p)}</>;
 export const NotifIcon = ({ id, ...p }: P & { id: string }) => <>{pick(notifMap, id, p)}</>;
 export const QuickIcon = ({ id, ...p }: P & { id: string }) => <>{pick(quickMap, id, p)}</>;

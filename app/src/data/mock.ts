@@ -113,28 +113,40 @@ export const ownerTimeline = [
 ];
 
 // Inventory and vendors, drawn from the client's Property Bible.
-export const inventoryItems = [
-  { id: "iv1", cat: "kitchen", must: 1, stock: 1, condition: "good" as const },
-  { id: "iv2", cat: "kitchen", must: 1, stock: 1, condition: "fair" as const },
-  { id: "iv3", cat: "kitchen", must: 2, stock: 1, condition: "good" as const },
-  { id: "iv4", cat: "crockery", must: 12, stock: 12, condition: "good" as const },
-  { id: "iv5", cat: "crockery", must: 12, stock: 8, condition: "good" as const },
-  { id: "iv6", cat: "linen", must: 9, stock: 9, condition: "good" as const },
-  { id: "iv7", cat: "linen", must: 6, stock: 4, condition: "fair" as const },
-  { id: "iv8", cat: "toiletries", must: 2, stock: 0, condition: "good" as const },
-  { id: "iv9", cat: "consumables", must: 3, stock: 1, condition: "good" as const },
-  { id: "iv10", cat: "consumables", must: 3, stock: 3, condition: "good" as const },
+// Inventory, drawn from the client's Property Bible (must-have qty / stock /
+// condition, plus brand and Diversey code where the sheet tracks them).
+export type InvItem = { id: string; cat: string; must: number; stock: number; condition: "good" | "fair" | "poor"; brand?: string; code?: string };
+export const inventoryItems: InvItem[] = [
+  { id: "iv1", cat: "kitchen", must: 1, stock: 1, condition: "good", brand: "LG" },
+  { id: "iv2", cat: "kitchen", must: 1, stock: 1, condition: "fair", brand: "IFB" },
+  { id: "iv3", cat: "kitchen", must: 2, stock: 1, condition: "good", brand: "Prestige" },
+  { id: "iv11", cat: "kitchen", must: 1, stock: 1, condition: "good", brand: "Morphy Richards" },
+  { id: "iv12", cat: "kitchen", must: 1, stock: 1, condition: "good", brand: "Preethi" },
+  { id: "iv4", cat: "crockery", must: 12, stock: 12, condition: "good", brand: "Corelle" },
+  { id: "iv5", cat: "crockery", must: 12, stock: 8, condition: "good", brand: "Borosil" },
+  { id: "iv13", cat: "crockery", must: 12, stock: 10, condition: "good", brand: "Borosil" },
+  { id: "iv6", cat: "linen", must: 9, stock: 9, condition: "good" },
+  { id: "iv7", cat: "linen", must: 6, stock: 4, condition: "fair" },
+  { id: "iv14", cat: "linen", must: 6, stock: 6, condition: "good" },
+  { id: "iv8", cat: "toiletries", must: 2, stock: 0, condition: "good" },
+  { id: "iv15", cat: "toiletries", must: 2, stock: 1, condition: "good" },
+  { id: "iv9", cat: "consumables", must: 3, stock: 1, condition: "good", code: "R7" },
+  { id: "iv10", cat: "consumables", must: 3, stock: 3, condition: "good", code: "R6" },
+  { id: "iv16", cat: "consumables", must: 2, stock: 2, condition: "good", code: "R3" },
 ];
 
-export const vendors = [
-  { id: "vd1", trade: "plumbing", nameKey: "vend.vd1", name: "Sai Plumbing Works", area: "Shamirpet", rating: 5 },
-  { id: "vd2", trade: "electrical", nameKey: "vend.vd2", name: "Sri Lakshmi Electricals", area: "Medchal", rating: 4 },
-  { id: "vd3", trade: "ac", nameKey: "vend.vd3", name: "CoolCare AC Service", area: "Shamirpet", rating: 5 },
-  { id: "vd4", trade: "pool", nameKey: "vend.vd4", name: "AquaPure Pool Care", area: "Hyderabad", rating: 4 },
-  { id: "vd5", trade: "laundry", nameKey: "vend.vd5", name: "FreshFold Laundry", area: "Kompally", rating: 5 },
-  { id: "vd6", trade: "pest", nameKey: "vend.vd6", name: "GreenShield Pest Control", area: "Medchal", rating: 4 },
-  { id: "vd7", trade: "supplies", nameKey: "vend.vd7", name: "Banjara General Stores", area: "Banjara Hills", rating: 5 },
-  { id: "vd8", trade: "supplies", nameKey: "vend.vd8", name: "Hyderabad Hospitality Supplies", area: "Madhapur", rating: 4 },
+export type Vendor = { id: string; trade: string; nameKey: string; name: string; area: string; rating: number; phone?: string; rate?: string };
+export const vendors: Vendor[] = [
+  { id: "vd1", trade: "plumbing", nameKey: "vend.vd1", name: "Sai Plumbing Works", area: "Shamirpet", rating: 5, phone: "+91 98480 11234", rate: "₹400/visit" },
+  { id: "vd2", trade: "electrical", nameKey: "vend.vd2", name: "Sri Lakshmi Electricals", area: "Medchal", rating: 4, phone: "+91 91540 22345", rate: "₹350/visit" },
+  { id: "vd3", trade: "ac", nameKey: "vend.vd3", name: "CoolCare AC Service", area: "Shamirpet", rating: 5, phone: "+91 99590 33456", rate: "₹600/service" },
+  { id: "vd4", trade: "pool", nameKey: "vend.vd4", name: "AquaPure Pool Care", area: "Hyderabad", rating: 4, phone: "+91 90000 44567", rate: "₹2,500/month" },
+  { id: "vd5", trade: "laundry", nameKey: "vend.vd5", name: "FreshFold Laundry", area: "Kompally", rating: 5, phone: "+91 70320 55678", rate: "₹18/kg" },
+  { id: "vd6", trade: "pest", nameKey: "vend.vd6", name: "GreenShield Pest Control", area: "Medchal", rating: 4, phone: "+91 96660 66789", rate: "₹1,200/visit" },
+  { id: "vd9", trade: "carpentry", nameKey: "vend.vd9", name: "Sri Venkateswara Carpentry", area: "Shamirpet", rating: 4, phone: "+91 94400 77810", rate: "₹500/visit" },
+  { id: "vd10", trade: "painting", nameKey: "vend.vd10", name: "ColourKraft Painters", area: "Medchal", rating: 4, phone: "+91 81060 88921", rate: "₹450/visit" },
+  { id: "vd7", trade: "supplies", nameKey: "vend.vd7", name: "Banjara General Stores", area: "Banjara Hills", rating: 5, phone: "+91 99490 99032", rate: "—" },
+  { id: "vd8", trade: "supplies", nameKey: "vend.vd8", name: "Hyderabad Hospitality Supplies", area: "Madhapur", rating: 4, phone: "+91 93470 10143", rate: "—" },
 ];
 
 // Preferred supply vendor for each inventory category (used by procurement).
@@ -142,26 +154,37 @@ export const prefVendorByCat: Record<string, string> = {
   kitchen: "vd8", crockery: "vd8", linen: "vd7", toiletries: "vd7", consumables: "vd7",
 };
 
-// Caretakers (for assigning issues/tasks)
-export const caretakers = [
-  { id: "c1", nameKey: "name.ramesh" },
-  { id: "c2", nameKey: "name.lakshmi" },
-  { id: "c3", nameKey: "name.anil" },
+// Caretakers / staff record (from the Property Bible Caretaker Details sheet).
+// Aadhaar is stored masked — DPDP care for staff PII.
+export type Caretaker = {
+  id: string; nameKey: string; propId: string; phone: string; emergency: string;
+  age: number; genderKey: string; address: string; aadhaar: string; accommodationKey: string;
+  salary: number; dutyHours: string; weeklyOffKey: string; languages: string; dutiesKey: string; trained: boolean; joined: string;
+};
+export const caretakers: Caretaker[] = [
+  { id: "c1", nameKey: "name.ramesh", propId: "palm-grove", phone: "+91 98765 43210", emergency: "+91 98765 11111", age: 34, genderKey: "gen.male", address: "Shamirpet, Hyderabad", aadhaar: "XXXX XXXX 1234", accommodationKey: "acc.on", salary: 18000, dutyHours: "7:00 AM – 7:00 PM", weeklyOffKey: "day.tue", languages: "Telugu, Hindi", dutiesKey: "duty.full", trained: true, joined: "Jan 2024" },
+  { id: "c2", nameKey: "name.lakshmi", propId: "misty", phone: "+91 91234 56780", emergency: "+91 91234 22222", age: 29, genderKey: "gen.female", address: "Medchal, Hyderabad", aadhaar: "XXXX XXXX 5678", accommodationKey: "acc.off", salary: 17000, dutyHours: "8:00 AM – 6:00 PM", weeklyOffKey: "day.mon", languages: "Telugu", dutiesKey: "duty.house", trained: true, joined: "Mar 2024" },
+  { id: "c3", nameKey: "name.anil", propId: "lake", phone: "+91 99887 76655", emergency: "+91 99887 33333", age: 41, genderKey: "gen.male", address: "Kompally, Hyderabad", aadhaar: "XXXX XXXX 9012", accommodationKey: "acc.on", salary: 18500, dutyHours: "7:00 AM – 7:00 PM", weeklyOffKey: "day.wed", languages: "Telugu, Hindi", dutiesKey: "duty.full", trained: false, joined: "May 2024" },
 ];
 
 export type IssueStatus = "open" | "in_progress" | "resolved";
 export type Assignee = { type: "vendor" | "caretaker"; id: string } | null;
+// Maintenance Tracker taxonomy (from the Property Bible)
+export const maintenanceTypes = ["plumbing", "electrical", "ac", "appliance", "pool", "garden", "carpentry", "painting", "pest", "housekeeping", "structural"] as const;
+export const ownerships = ["PM", "CT", "VD", "OWN"] as const; // Manager, Caretaker, Vendor, Owner
 export type IssueRec = {
   id: string; propId: string; locKey: string; titleKey: string; title?: string;
   cat: string; sev: "low" | "medium" | "high"; status: IssueStatus; whenKey: string; assignee: Assignee;
+  type?: string; ownership?: string; amount?: number; // PM triage fields (Maintenance Tracker)
 };
 export const issuesData: IssueRec[] = [
-  { id: "i1", propId: "palm-grove", locKey: "loc.bedroom2", titleKey: "ix.ac", cat: "maintenance", sev: "high", status: "open", whenKey: "when.2h", assignee: null },
-  { id: "i2", propId: "lake", locKey: "loc.restock", titleKey: "ix.towels", cat: "missing", sev: "medium", status: "open", whenKey: "when.today", assignee: null },
-  { id: "i5", propId: "palm-grove", locKey: "loc.pool", titleKey: "ix.poolpump", cat: "maintenance", sev: "medium", status: "in_progress", whenKey: "when.today", assignee: { type: "caretaker", id: "c1" } },
-  { id: "i3", propId: "misty", locKey: "loc.bathroom1", titleKey: "ix.geyser", cat: "maintenance", sev: "high", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd1" } },
-  { id: "i6", propId: "fern", locKey: "loc.kitchen", titleKey: "ix.fridge", cat: "electronic", sev: "low", status: "in_progress", whenKey: "when.yest", assignee: { type: "caretaker", id: "c2" } },
-  { id: "i4", propId: "fern", locKey: "loc.living", titleKey: "ix.bulb", cat: "electronic", sev: "low", status: "resolved", whenKey: "when.2d", assignee: { type: "vendor", id: "vd2" } },
+  { id: "i1", propId: "palm-grove", locKey: "loc.bedroom2", titleKey: "ix.ac", cat: "maintenance", sev: "high", status: "open", whenKey: "when.2h", assignee: null, type: "ac", ownership: "VD", amount: 2500 },
+  { id: "i2", propId: "lake", locKey: "loc.restock", titleKey: "ix.towels", cat: "missing", sev: "medium", status: "open", whenKey: "when.today", assignee: null, type: "housekeeping", ownership: "CT" },
+  { id: "i5", propId: "palm-grove", locKey: "loc.pool", titleKey: "ix.poolpump", cat: "maintenance", sev: "medium", status: "in_progress", whenKey: "when.today", assignee: { type: "vendor", id: "vd4" }, type: "pool", ownership: "VD", amount: 1800 },
+  { id: "i3", propId: "misty", locKey: "loc.bathroom1", titleKey: "ix.geyser", cat: "maintenance", sev: "high", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd1" }, type: "plumbing", ownership: "VD", amount: 1200 },
+  { id: "i6", propId: "fern", locKey: "loc.kitchen", titleKey: "ix.fridge", cat: "electronic", sev: "low", status: "in_progress", whenKey: "when.yest", assignee: { type: "vendor", id: "vd3" }, type: "appliance", ownership: "VD", amount: 3000 },
+  { id: "i7", propId: "palm-grove", locKey: "loc.bathroom-1", titleKey: "ix.restock", cat: "missing", sev: "low", status: "in_progress", whenKey: "when.today", assignee: { type: "caretaker", id: "c1" }, type: "housekeeping", ownership: "CT" },
+  { id: "i4", propId: "fern", locKey: "loc.living", titleKey: "ix.bulb", cat: "electronic", sev: "low", status: "resolved", whenKey: "when.2d", assignee: { type: "vendor", id: "vd2" }, type: "electrical", ownership: "VD", amount: 150 },
 ];
 
 // Procurement: purchase requests move Requested -> Approved -> Ordered (PO to a supplier).

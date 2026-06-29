@@ -4,7 +4,7 @@ import { LangSwitch } from "../components/LangSwitch";
 import { Back, TradeIcon, Phone } from "../components/Icons";
 import { useStore } from "../lib/store";
 
-const trades = ["plumbing", "electrical", "ac", "pool", "laundry", "pest", "supplies"];
+const trades = ["plumbing", "electrical", "ac", "carpentry", "painting", "pool", "laundry", "pest", "supplies"];
 
 function Stars({ n }: { n: number }) {
   return <span className="stars">{"★".repeat(n)}<span className="dim">{"★".repeat(5 - n)}</span></span>;
@@ -36,6 +36,7 @@ export default function Vendors() {
                   <div>
                     <div className="vname">{t(v.nameKey)}</div>
                     <div className="vmeta">{v.area} · <Stars n={v.rating} /></div>
+                    {v.phone && <div className="vmeta">{v.phone}{v.rate && v.rate !== "—" ? ` · ${v.rate}` : ""}</div>}
                   </div>
                   <button className="callbtn">
                     <Phone size={16} color="#fff" />

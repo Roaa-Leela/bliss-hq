@@ -58,7 +58,9 @@ type Store = {
   currentIssueId: string | null; setCurrentIssue: (id: string | null) => void;
   setIssueStatus: (id: string, status: IssueStatus) => void;
   assignIssue: (id: string, assignee: Assignee) => void;
+  updateIssue: (id: string, patch: Partial<IssueRec>) => void;
   addIssue: (issue: IssueRec) => void;
+  currentStaffId: string | null; setCurrentStaff: (id: string | null) => void;
   // property readiness (caretaker -> manager -> owner)
   approved: Record<string, boolean>;
   propReadiness: (propId: string) => Readiness;
@@ -119,6 +121,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
   const [currentItemId, setCurrentItem] = useState<string | null>(null);
   const [notifications, setNotifications] = useState<Notif[]>(() => load(NOTIFS_KEY, notificationsData));
   const [currentStayId, setCurrentStay] = useState<string | null>(null);
+  const [currentStaffId, setCurrentStaff] = useState<string | null>(null);
   const [activeChecklistId, setActiveChecklist] = useState<string | null>(null);
   const [toast, setToast] = useState<{ text: string; id: number } | null>(null);
   const toastId = useRef(0);
@@ -163,7 +166,9 @@ export function StoreProvider({ children }: { children: ReactNode }) {
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, status } : i))),
       assignIssue: (id, assignee) =>
         setIssues((s) => s.map((i) => (i.id === id ? { ...i, assignee } : i))),
+      updateIssue: (id, patch) => setIssues((s) => s.map((i) => (i.id === id ? { ...i, ...patch } : i))),
       addIssue: (issue) => setIssues((s) => [issue, ...s]),
+      currentStaffId, setCurrentStaff,
       approved,
       propReadiness: (propId) => {
         if (approved[propId]) return "ready";
@@ -237,7 +242,7 @@ export function StoreProvider({ children }: { children: ReactNode }) {
       },
       tItem: (id) => translate(itemTexts, id, lang),
     };
-  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, activeChecklistId, approved, currentReviewId, laundrySubmission, deductions, toast]);
+  }, [role, lang, done, currentAreaId, issues, currentIssueId, purchaseReqs, currentReqId, inv, stockMoves, currentItemId, notifications, currentStayId, currentStaffId, activeChecklistId, approved, currentReviewId, laundrySubmission, deductions, toast]);
 
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;
 }

@@ -1,7 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import { Brand } from "../components/Brand";
 import { LangSwitch } from "../components/LangSwitch";
-import { Back, AdminIcon, Home, ClIcon } from "../components/Icons";
+import { Back, AdminIcon, Home, ClIcon, Person } from "../components/Icons";
 import { useStore } from "../lib/store";
 
 const templateKeys = ["tpl.preCheckin", "tpl.postStay", "tpl.daily", "tpl.weekly", "tpl.monthly", "tpl.adhoc"];
@@ -9,7 +9,7 @@ const propCare: Record<string, string> = { "palm-grove": "name.ramesh", misty: "
 
 export default function Admin() {
   const nav = useNavigate();
-  const { managerProps, property, taskChecklists, t } = useStore();
+  const { managerProps, property, taskChecklists, caretakers, setCurrentStaff, t } = useStore();
   const tplCount = (key: string) =>
     key === "tpl.preCheckin"
       ? property.areas.reduce((s, a) => s + a.items.length, 0)
@@ -57,6 +57,18 @@ export default function Admin() {
               <span className="li-left"><span className="licon"><ClIcon id={k.replace("tpl.", "")} size={21} /></span><span><span className="li-name">{t(k)}</span><span className="li-sub">{t("adm.tplSub")}</span></span></span>
               <span className="tag-info">{t("cl.checksN", { n: tplCount(k) })}</span>
             </div>
+          ))}
+        </div>
+
+        <div className="label" style={{ marginTop: 28 }}>{t("adm.staff")}</div>
+        <div className="list">
+          {caretakers.map((c) => (
+            <button className="li" key={c.id} onClick={() => { setCurrentStaff(c.id); nav("/admin/staff"); }}>
+              <span className="li-left"><span className="licon"><Person size={20} /></span>
+                <span><span className="li-name">{t(c.nameKey)}</span><span className="li-sub">{t("gen.caretaker")} · {t("prop." + c.propId)}</span></span>
+              </span>
+              <span className="pill pill-go">{t("adm.viewProfile")}</span>
+            </button>
           ))}
         </div>
 

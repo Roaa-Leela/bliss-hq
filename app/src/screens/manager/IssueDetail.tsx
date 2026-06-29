@@ -1,14 +1,16 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Back, CatIcon, Person, TradeIcon } from "../../components/Icons";
+import { Back, CatIcon, Person, TradeIcon, MtIcon } from "../../components/Icons";
 import { StatusPicker } from "../../components/StatusPicker";
 import { useStore } from "../../lib/store";
+import { maintenanceTypes, ownerships } from "../../data/mock";
 
 const sevColor: Record<string, string> = { high: "var(--alert)", medium: "var(--warn)", low: "var(--slate)" };
+const inr = (n: number) => "₹" + n.toLocaleString("en-IN");
 
 export default function IssueDetail() {
   const nav = useNavigate();
-  const { issues, currentIssueId, setIssueStatus, assignIssue, caretakers, vendors, showToast, t } = useStore();
+  const { issues, currentIssueId, setIssueStatus, assignIssue, updateIssue, caretakers, vendors, showToast, t } = useStore();
   const issue = issues.find((i) => i.id === currentIssueId);
 
   useEffect(() => { if (!issue) nav("/manager/issues"); }, [issue, nav]);
@@ -37,6 +39,39 @@ export default function IssueDetail() {
         <div className="field">
           <span className="flabel">{t("iss.statusLabel")}</span>
           <StatusPicker value={issue.status} onChange={(s) => { setIssueStatus(issue.id, s); showToast(t("toast.statusSaved")); }} />
+        </div>
+
+        <div className="field">
+          <span className="flabel">{t("iss.type")}</span>
+          <div className="options">
+            {maintenanceTypes.map((mt) => (
+              <button key={mt} className={"opt opt-ic" + (issue.type === mt ? " sel" : "")} onClick={() => { updateIssue(issue.id, { type: mt }); showToast(t("toast.statusSaved")); }}>
+                <MtIcon id={mt} size={19} /><span>{t("mt." + mt)}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="field">
+          <span className="flabel">{t("iss.ownership")}</span>
+          <div className="options">
+            {ownerships.map((o) => (
+              <button key={o} className={"opt" + (issue.ownership === o ? " sel" : "")} onClick={() => { updateIssue(issue.id, { ownership: o }); showToast(t("toast.statusSaved")); }}>{t("ow." + o)}</button>
+            ))}
+          </div>
+        </div>
+
+        <div className="field">
+          <span className="flabel">{t("iss.quote")}</span>
+          <div className="amtbox">
+            <span className="amtval">{issue.amount ? inr(issue.amount) : t("iss.noQuote")}</span>
+            {issue.amount ? <button className="amtclear" onClick={() => updateIssue(issue.id, { amount: 0 })}>{t("dep.clear")}</button> : null}
+          </div>
+          <div className="amtchips">
+            {[500, 1000, 5000].map((n) => (
+              <button key={n} className="amtchip" onClick={() => updateIssue(issue.id, { amount: (issue.amount ?? 0) + n })}>+{inr(n)}</button>
+            ))}
+          </div>
         </div>
 
         <div className="field">

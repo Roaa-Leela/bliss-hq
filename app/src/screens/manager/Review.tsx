@@ -59,7 +59,7 @@ export default function Review() {
       <div className="pad grow">
         <div className="kicker" style={{ marginTop: 12 }}>{t("rev.kReview")}</div>
         <h1 className="h1" style={{ marginTop: 10 }}>{name}</h1>
-        <div className="meta" style={{ marginTop: 8 }}>{t("rev.summary")}</div>
+        <div className="meta" style={{ marginTop: 8 }}>{t("rev.areasN", { n: property.areas.length })}</div>
 
         <div className="label" style={{ marginTop: 26 }}>{t("rev.byArea")}</div>
         {photoAreas.map((a) => (

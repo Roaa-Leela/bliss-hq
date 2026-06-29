@@ -30,6 +30,7 @@ import Procurement from "./screens/Procurement";
 import RequestDetail from "./screens/RequestDetail";
 import InventoryItem from "./screens/InventoryItem";
 import Notifications from "./screens/Notifications";
+import CaretakerProfile from "./screens/CaretakerProfile";
 
 function Layout() {
   return (<><Outlet /><RoleSwitcher /><Toast /></>);
@@ -58,6 +59,7 @@ const router = createBrowserRouter([
   { path: "/manager/laundry", element: <ManagerLaundry /> },
   { path: "/owner", element: <Owner /> },
   { path: "/admin", element: <Admin /> },
+  { path: "/admin/staff", element: <CaretakerProfile /> },
   { path: "/inventory", element: <Inventory /> },
   { path: "/inventory/item", element: <InventoryItem /> },
   { path: "/vendors", element: <Vendors /> },

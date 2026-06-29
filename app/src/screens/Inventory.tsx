@@ -66,7 +66,10 @@ export default function Inventory() {
                     <span className="bar" style={{ background: barColor }} />
                     <span className="nmwrap">
                       <span className="nm">{t("inv." + i.id)}</span>
-                      {isLow && <span className="ivsub">{t("proc.from", { vendor: prefName(i.cat) })}</span>}
+                      {isLow
+                        ? <span className="ivsub">{t("proc.from", { vendor: prefName(i.cat) })}</span>
+                        : i.brand ? <span className="ivsub">{i.brand}</span>
+                        : i.code ? <span className="ivsub">{t("inv.code", { c: i.code })}</span> : null}
                     </span>
                     <span className="cnt" style={{ color: cntColor }}>{i.stock}<small>/{i.must}</small></span>
                     <span className="cond" style={condStyle(i.condition)}>{t("cond." + i.condition)}</span>
